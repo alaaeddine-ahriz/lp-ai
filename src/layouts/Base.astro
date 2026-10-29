@@ -1,0 +1,70 @@
+---
+import { Font } from "astro:assets";
+import { site } from "@/config/site";
+import "@/styles/global.css";
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const {
+  title,
+  description = "On repère vos 3 processus les plus coûteux, on installe l'automatisation IA qui les règle, et on mesure le gain en euros. Diagnostic gratuit de 30 minutes.",
+} = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL("/og.png", Astro.site);
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Seule la police des titres (élément LCP) est préchargée. -->
+    <Font cssVariable="--font-bricolage" preload />
+    <Font cssVariable="--font-inter" />
+    <slot name="head" />
+
+    <!-- Active les animations d'apparition seulement quand le JS tourne. -->
+    <script is:inline>document.documentElement.classList.add("js")</script>
+
+    {
+      site.plausibleDomain && (
+        <>
+          <script is:inline>
+            window.plausible=window.plausible||function(){(window.plausible.q=window.plausible.q||[]).push(arguments)}
+          </script>
+          <script is:inline defer data-domain={site.plausibleDomain} src="https://plausible.io/js/script.js" />
+        </>
+      )
+    }
+  </head>
+  <body>
+    <slot />
+    <script>
+      import "@/scripts/enhancements";
+    </script>
+  </body>
+</html>

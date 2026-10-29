@@ -1,0 +1,56 @@
+---
+import { getImage } from "astro:assets";
+import Base from "@/layouts/Base.astro";
+import { site } from "@/config/site";
+import { Commitment } from "@/components/Commitment";
+import { Comparison } from "@/components/Comparison";
+import { Faq, faqs } from "@/components/Faq";
+import { FinalCta } from "@/components/FinalCta";
+import { Footer } from "@/components/Footer";
+import { Header } from "@/components/Header";
+import { Hero } from "@/components/Hero";
+import { MobileCta } from "@/components/MobileCta";
+import { Offer } from "@/components/Offer";
+import { Problems } from "@/components/Problems";
+import { Timeline } from "@/components/Timeline";
+import { ToolsMarquee } from "@/components/ToolsMarquee";
+import { UseCases } from "@/components/UseCases";
+
+// Photo du hero facultative : déposer src/assets/hero.jpg (horizontale, 2400 px de large minimum).
+// Sans photo, le hero affiche le schéma animé des outils connectés.
+const heroFiles = import.meta.glob<{ default: ImageMetadata }>("../assets/hero.{jpg,jpeg,png,webp}", { eager: true });
+const heroFile = Object.values(heroFiles)[0]?.default;
+const heroImage = heroFile
+  ? await getImage({ src: heroFile, widths: [640, 960, 1440, 1920, 2400], format: "avif" })
+  : undefined;
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+---
+
+<Base title={`${site.name} · L'IA qui rapporte aux PME`}>
+  {heroImage && <link slot="head" rel="preload" as="image" imagesrcset={heroImage.srcSet.attribute} imagesizes="(min-width: 1440px) 1440px, 100vw" fetchpriority="high" />}
+  <Header />
+  <main>
+    <Hero image={heroImage && { src: heroImage.src, srcSet: heroImage.srcSet.attribute }} />
+    <ToolsMarquee />
+    <Problems />
+    <Comparison />
+    <Offer />
+    <UseCases />
+    <Timeline />
+    <Commitment />
+    <Faq />
+    <FinalCta />
+  </main>
+  <Footer />
+  <MobileCta />
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+</Base>

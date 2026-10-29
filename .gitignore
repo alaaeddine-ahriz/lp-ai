@@ -1,0 +1,19 @@
+# dépendances
+node_modules/
+
+# build Astro
+dist/
+.astro/
+
+# Vercel
+.vercel/
+
+# variables d'environnement
+.env
+.env.*
+!.env.example
+
+# divers
+.DS_Store
+*.log
+*.tsbuildinfo

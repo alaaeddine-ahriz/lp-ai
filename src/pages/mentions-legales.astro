@@ -1,0 +1,62 @@
+---
+import { ArrowLeft } from "lucide-react";
+import Base from "@/layouts/Base.astro";
+import { site } from "@/config/site";
+
+/* Les champs entre crochets sont à compléter avec les informations de la société. */
+const sections = [
+  {
+    title: "Éditeur du site",
+    lines: [
+      `${site.name}, [forme juridique] au capital de [montant] €`,
+      "Siège social : [adresse]",
+      "RCS [ville] [numéro] · SIRET [numéro] · TVA intracommunautaire [numéro]",
+      `Contact : ${site.email}`,
+      "Directeur de la publication : [prénom nom]",
+    ],
+  },
+  {
+    title: "Hébergement",
+    lines: ["Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, États-Unis · vercel.com"],
+  },
+  {
+    title: "Données personnelles",
+    lines: [
+      "Les informations transmises lors de la prise de rendez-vous servent uniquement à organiser et préparer le diagnostic. Elles ne sont ni revendues ni cédées.",
+      `Conformément au RGPD, vous pouvez demander l'accès, la rectification ou la suppression de vos données en écrivant à ${site.email}.`,
+    ],
+  },
+  {
+    title: "Mesure d'audience",
+    lines: [
+      "Le site utilise Plausible Analytics, un outil de mesure d'audience sans cookie qui ne collecte aucune donnée personnelle. Aucun bandeau de consentement n'est donc nécessaire.",
+    ],
+  },
+  {
+    title: "Propriété intellectuelle",
+    lines: [
+      "Les contenus de ce site sont protégés. Les logos des outils cités appartiennent à leurs propriétaires respectifs et sont utilisés à titre d'illustration de compatibilité.",
+    ],
+  },
+];
+---
+
+<Base title={`Mentions légales · ${site.name}`}>
+  <main class="wrap max-w-[760px] py-16 sm:py-24">
+    <a href="/" class="inline-flex items-center gap-2 text-sm font-semibold text-muted hover:text-ink">
+      <ArrowLeft className="size-4" aria-hidden="true" />
+      Retour à l'accueil
+    </a>
+    <h1 class="mt-8 text-[clamp(2.25rem,5vw,3.25rem)] leading-tight font-bold">Mentions légales</h1>
+    <div class="mt-10 flex flex-col gap-10">
+      {
+        sections.map((s) => (
+          <section class="flex flex-col gap-3">
+            <h2 class="text-xl font-bold">{s.title}</h2>
+            {s.lines.map((l) => <p class="text-muted">{l}</p>)}
+          </section>
+        ))
+      }
+    </div>
+  </main>
+</Base>
