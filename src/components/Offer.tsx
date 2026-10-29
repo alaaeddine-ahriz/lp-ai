@@ -1,7 +1,6 @@
-import { ArrowRight, Gauge, Gift, GraduationCap, PlugZap, Route, ScanSearch, ShieldCheck } from "lucide-react";
-import { site } from "@/config/site";
+import { ArrowRight, Gauge, GraduationCap, PlugZap, Route, ScanSearch } from "lucide-react";
 
-/* L'offre complète en un seul bloc : ce qu'on fait et quand (le flux), ce qui est offert, la garantie. */
+/* L'offre en un seul bloc : ce qu'on fait et quand. */
 const steps = [
   {
     when: "Jour 0",
@@ -66,42 +65,6 @@ export function Offer() {
               </li>
             ))}
           </ol>
-
-          <div className="grid gap-5 lg:grid-cols-2">
-            <div className="relative flex flex-col gap-5 overflow-hidden rounded-[22px] bg-accent p-6 text-white sm:p-8" data-reveal>
-              <div aria-hidden="true" className="pointer-events-none absolute -top-24 -right-16 size-64 rounded-full bg-white/10 blur-2xl" />
-              <div className="flex items-center gap-3">
-                <span className="grid size-11 place-items-center rounded-full bg-white/15 ring-1 ring-white/25">
-                  <Gift className="size-5.5" strokeWidth={1.75} aria-hidden="true" />
-                </span>
-                <span className="text-sm font-bold tracking-[0.08em] uppercase">Offerts</span>
-              </div>
-              <ul className="flex flex-col gap-3 text-[15px] leading-relaxed">
-                <li>
-                  <strong>Bonus 1 :</strong> une charte d&apos;usage IA pour vos équipes (ce qu&apos;on confie à l&apos;IA, ce
-                  qu&apos;on ne lui confie jamais).
-                </li>
-                <li>
-                  <strong>Bonus 2 :</strong> 30 jours de support après la mise en production.
-                </li>
-              </ul>
-            </div>
-
-            <div className="flex flex-col gap-4 rounded-[22px] bg-white p-6 ring-1 ring-line sm:p-8" data-reveal style={{ "--i": 1 } as React.CSSProperties}>
-              <div className="flex items-center gap-3">
-                <span className="grid size-11 place-items-center rounded-full bg-pink">
-                  <ShieldCheck className="size-5.5 text-accent" strokeWidth={1.75} aria-hidden="true" />
-                </span>
-                <span className="text-sm font-bold tracking-[0.08em] text-accent-strong uppercase">Notre engagement</span>
-              </div>
-              <h3 className="text-[22px] leading-tight font-bold">Si on ne trouve rien qui vaille le coup, on vous le dit.</h3>
-              <p className="text-[15px] leading-relaxed text-muted">
-                Pendant l&apos;appel, si on ne voit aucun processus où l&apos;IA vous fait gagner au moins{" "}
-                {site.commitmentThreshold} par semaine, on vous le dit franchement et on ne vous propose rien. Et une fois
-                le déploiement lancé, on travaille jusqu&apos;à ce que l&apos;automatisation tourne, sans surcoût.
-              </p>
-            </div>
-          </div>
 
           <div className="flex flex-col items-center gap-3 text-center">
             <a href="#rdv" className="btn" data-cta="offer">

@@ -52,7 +52,7 @@ export function UseCases() {
     <section className="px-5 pb-20 sm:px-6 sm:pb-28">
       <div className="mx-auto flex max-w-[1180px] flex-col gap-12 border-t border-line pt-20 sm:gap-14 sm:pt-24">
         <h2 className="h2" data-reveal>
-          Ce qu&apos;on installe le plus souvent
+          Trois exemples de ce qu&apos;on peut construire
         </h2>
         <div className="grid gap-6 md:grid-cols-3 lg:gap-8">
           {cases.map((c, i) => (

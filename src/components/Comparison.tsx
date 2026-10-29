@@ -5,6 +5,7 @@ const rows = [
   ["« L'IA va transformer votre entreprise »", "Un gain chiffré en heures et en euros, avant de commencer"],
   ["Un projet de 6 mois au périmètre flou", "Une première automatisation en production en 30 jours"],
   ["Une formation, puis débrouillez-vous", "On construit, on branche, on forme. Vous validez."],
+  ["Des automatisations bricolées qui cassent au moindre changement", "Un outil construit pour votre façon de travailler, et maintenu"],
   ["Un TJM qui dérape", "Un prix fixe par cas d'usage, annoncé avant de signer"],
 ];
 

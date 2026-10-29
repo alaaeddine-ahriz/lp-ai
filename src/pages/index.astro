@@ -2,6 +2,7 @@
 import { getImage } from "astro:assets";
 import Base from "@/layouts/Base.astro";
 import { site } from "@/config/site";
+import { CompanyMap } from "@/components/CompanyMap";
 import { Comparison } from "@/components/Comparison";
 import { Faq, faqs } from "@/components/Faq";
 import { FinalCta } from "@/components/FinalCta";
@@ -41,6 +42,7 @@ const faqSchema = {
     <Hero image={heroImage && { src: heroImage.src, srcSet: heroImage.srcSet.attribute }} />
     <ToolsMarquee />
     <Problems />
+    <CompanyMap />
     <UseCases />
     <Comparison />
     <Offer />

@@ -1,11 +1,12 @@
-import { ArrowRight, CalendarDays, Clock } from "lucide-react";
-import { site } from "@/config/site";
+import { ArrowRight, Clock } from "lucide-react";
+
+const losses = ["des marchés.", "des clients.", "des devis.", "de la marge."];
 
 /** `image` : photo optionnelle (src/assets/hero.jpg), déjà optimisée par Astro. Sans photo : fond sombre uni. */
 export function Hero({ image }: { image?: { src: string; srcSet: string } }) {
   return (
     <section className="px-3 pt-3 sm:px-6 sm:pt-5">
-      <div className="relative mx-auto flex max-w-[1440px] overflow-hidden rounded-[22px] bg-dark sm:rounded-[28px] lg:min-h-[600px]">
+      <div className="relative mx-auto flex max-w-[1440px] overflow-hidden rounded-[22px] bg-dark sm:rounded-[28px] lg:min-h-[560px]">
         {image ? (
           <>
             <img
@@ -25,42 +26,33 @@ export function Hero({ image }: { image?: { src: string; srcSet: string } }) {
           </div>
         )}
 
-        <div className="relative mx-auto grid w-full max-w-[1180px] items-center gap-10 px-5 pt-10 pb-6 sm:px-6 sm:py-14 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-end lg:gap-16 lg:py-20">
-          <div className="flex min-w-0 flex-col gap-6">
-            <h1 className="text-[clamp(2.25rem,4.7vw,4rem)] leading-[1.02] font-bold text-white">
-              Vos équipes perdent des heures chaque semaine. On les récupère avec l&apos;IA en 30&nbsp;jours.
-            </h1>
-            <p className="max-w-[600px] text-[17px] leading-relaxed text-stone-200 sm:text-lg">
-              On repère vos 3 processus les plus coûteux, on installe l&apos;automatisation qui les règle, et on vous
-              montre le gain en euros. Vous ne touchez pas une ligne de code.
-            </p>
-            <div className="flex flex-wrap items-center gap-x-5 gap-y-3 pt-1">
-              <a href="#rdv" className="btn" data-cta="hero">
-                Réserver mon diagnostic gratuit
-                <ArrowRight className="size-4" aria-hidden="true" />
-              </a>
-              <span className="inline-flex items-center gap-1.5 text-sm text-stone-300">
-                <Clock className="size-4" aria-hidden="true" />
-                30 min · Sans engagement
-              </span>
-            </div>
-          </div>
-
-          <div className="flex justify-center lg:justify-end">
-            <div className="flex w-full max-w-[360px] flex-col gap-3 rounded-[20px] bg-white p-5 shadow-[0_24px_60px_-20px_rgb(0_0_0/0.55)] sm:p-6">
-              <span className="flex items-center gap-2 text-[13px] font-semibold text-muted">
-                <span className="relative flex size-2">
-                  <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-500 opacity-60 motion-reduce:hidden" />
-                  <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
+        <div className="relative mx-auto flex w-full max-w-[1180px] flex-col justify-end gap-7 px-5 pt-14 pb-10 sm:px-6 sm:py-20 lg:py-24">
+          <h1 className="max-w-[900px] text-[clamp(2.375rem,5.6vw,4.75rem)] leading-[1.02] font-bold text-white">
+            Vos équipes perdent des heures. Vous perdez{" "}
+            <span className="sr-only">des marchés.</span>
+            {/* Les fins de phrase défilent ; une seule est visible si les animations sont désactivées. */}
+            <span aria-hidden="true" className="rotator text-[#F59A9E]">
+              {losses.map((l, i) => (
+                <span key={l} style={{ "--n": i } as React.CSSProperties}>
+                  {l}
                 </span>
-                Prochain créneau disponible
-              </span>
-              <strong className="flex items-start gap-2.5 font-display text-[26px] leading-[1.1] font-bold tracking-tight text-balance">
-                <CalendarDays className="mt-1 size-6 shrink-0 text-accent" aria-hidden="true" />
-                {site.nextSlot}
-              </strong>
-              <span className="text-sm text-muted">3 diagnostics par mois. Chacun est préparé sur votre entreprise.</span>
-            </div>
+              ))}
+            </span>
+          </h1>
+          <p className="max-w-[640px] text-[17px] leading-relaxed text-stone-200 sm:text-lg">
+            On récupère ces heures avec l&apos;IA en 30&nbsp;jours. On repère vos 3 processus les plus coûteux, on
+            construit l&apos;outil qui les règle, et on vous montre le gain en euros. Vous ne touchez pas une ligne de
+            code.
+          </p>
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-3 pt-1">
+            <a href="#rdv" className="btn" data-cta="hero">
+              Réserver mon diagnostic gratuit
+              <ArrowRight className="size-4" aria-hidden="true" />
+            </a>
+            <span className="inline-flex items-center gap-1.5 text-sm text-stone-300">
+              <Clock className="size-4" aria-hidden="true" />
+              30 min · Sans engagement · 3 places par mois
+            </span>
           </div>
         </div>
       </div>

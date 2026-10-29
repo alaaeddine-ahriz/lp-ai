@@ -60,3 +60,32 @@ if (calEl) {
   );
   calObserver.observe(calEl);
 }
+
+/* Onglets de la carte des pôles (clic, flèches gauche/droite, Début/Fin). */
+document.querySelectorAll<HTMLElement>("[data-tabs]").forEach((root) => {
+  const tabs = [...root.querySelectorAll<HTMLButtonElement>('[role="tab"]')];
+  const select = (tab: HTMLButtonElement, focus = false) => {
+    for (const t of tabs) {
+      const on = t === tab;
+      t.setAttribute("aria-selected", String(on));
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute("aria-controls")!)!.hidden = !on;
+    }
+    if (focus) tab.focus();
+    tab.scrollIntoView({ block: "nearest", inline: "nearest", behavior: "smooth" });
+  };
+  tabs.forEach((tab, i) => {
+    tab.addEventListener("click", () => select(tab));
+    tab.addEventListener("keydown", (e) => {
+      const next =
+        e.key === "ArrowRight" ? tabs[(i + 1) % tabs.length]
+        : e.key === "ArrowLeft" ? tabs[(i - 1 + tabs.length) % tabs.length]
+        : e.key === "Home" ? tabs[0]
+        : e.key === "End" ? tabs[tabs.length - 1]
+        : null;
+      if (!next) return;
+      e.preventDefault();
+      select(next, true);
+    });
+  });
+});

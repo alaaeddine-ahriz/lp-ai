@@ -272,3 +272,29 @@ summary::-webkit-details-marker {
     animation: none;
   }
 }
+
+/* ---------- Fin de phrase qui défile dans le titre du hero ----------
+   Tous les mots occupent la même cellule de grille : la largeur suit le plus long, rien ne bouge autour. */
+.rotator {
+  display: inline-grid;
+  justify-items: start;
+}
+.rotator > span {
+  grid-area: 1 / 1;
+  white-space: nowrap;
+}
+.rotator > span:not(:first-child) {
+  opacity: 0;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .rotator > span {
+    opacity: 0;
+    animation: rotator 10s cubic-bezier(0.3, 0.7, 0.3, 1) infinite;
+    animation-delay: calc(var(--n) * 2.5s - 0.3s);
+  }
+}
+@keyframes rotator {
+  0% { opacity: 0; transform: translateY(0.3em); filter: blur(4px); }
+  3%, 22% { opacity: 1; transform: none; filter: none; }
+  25%, 100% { opacity: 0; transform: translateY(-0.3em); filter: blur(4px); }
+}

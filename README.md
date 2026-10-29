@@ -28,8 +28,6 @@ Tout est centralisé dans **`src/config/site.ts`** :
 | --- | --- |
 | `name` | Nom de la marque (logo, titre, pied de page, image OG) |
 | `email` | Contact affiché dans le pied de page et les mentions légales |
-| `nextSlot` | Prochain créneau affiché dans le hero |
-| `commitmentThreshold` | Seuil de l'engagement (« au moins [5 heures] par semaine ») |
 
 Puis compléter les champs entre crochets de `src/pages/mentions-legales.astro`.
 
@@ -63,12 +61,16 @@ Il faut déclarer ces deux objectifs (« Custom event goals ») dans Plausible.
 
 Construite sur les principes de Hormozi (*$100M Offers*) : une seule action possible (réserver le diagnostic), pas de menu, et un enchaînement qui monte la valeur perçue.
 
-1. **Hero** : le résultat promis, le délai (30 jours), l'effort nul (« vous ne touchez pas une ligne de code »), la rareté (3 diagnostics par mois).
-2. **Outils** : logos des outils connectés, pour montrer que rien ne change dans le quotidien.
-3. **Problème**, puis **ce qu'on installe** : la douleur, puis le résultat concret.
-4. **Comparaison** : ce qu'on vous vend d'habitude face à ce qu'on fait.
-5. **L'offre** : les 5 étapes avec leur délai, les bonus et la garantie dans le même bloc.
-6. **Qui est derrière**, **FAQ** (lève les objections), **CTA final**.
+1. **Hero** : la douleur (« Vos équipes perdent des heures. Vous perdez des marchés. », la fin de phrase défile : marchés, clients, devis, marge), puis le délai (30 jours), l'effort nul et la rareté (3 places par mois).
+2. **Outils** : logos des outils qu'on sait brancher (API publique ou export).
+3. **Problème** : savoir par où commencer.
+4. **La carte** : 8 pôles de l'entreprise en onglets ; pour chacun, où l'IA intervient et ce qui reste humain. Le visiteur se reconnaît dans son pôle. Se termine sur la méthode : un seul pôle d'abord, un socle, puis des modules.
+5. **Trois exemples** de ce qu'on peut construire (formulés comme des exemples, pas comme des réalisations).
+6. **Comparaison** : ce qu'on vous vend d'habitude face à ce qu'on fait.
+7. **L'offre** : les 5 étapes avec leur délai.
+8. **Qui est derrière**, **FAQ** (lève les objections), **CTA final**.
+
+Le contenu de la carte se modifie dans `src/components/CompanyMap.tsx` (tableau `poles`).
 
 ## Photo du hero
 
@@ -77,6 +79,14 @@ Sans photo, le hero est un fond sombre uni. Pour mettre une photo : déposer **`
 ## Logos des outils
 
 SVG dans `public/logos/`, issus des jeux d'icônes open source [Iconify Logos](https://github.com/gilbarbara/logos), [VS Code Icons](https://github.com/vscode-icons/vscode-icons) et [Simple Icons](https://simpleicons.org), plus la marque Qonto tirée de son paquet npm officiel `@qonto/login-button`.
+
+Chaque outil du bandeau a une API publique, avec trois nuances :
+
+- **Sage** : les versions cloud ont une API REST ; Sage 50 et Sage 100 France (installés en local) n'en ont pas d'officielle. On s'y branche par le SDK « Objets Métiers », la base SQL ou un connecteur tiers (Chift, Apideck).
+- **WhatsApp** : l'API est celle de la WhatsApp Business Platform (Cloud API de Meta, facturée au message), pas l'application gratuite WhatsApp Business.
+- **Excel** : l'API Microsoft Graph ne lit que les fichiers .xlsx stockés sur OneDrive Entreprise ou SharePoint, pas les fichiers sur un poste.
+
+Make et n8n ont été retirés : ce sont des outils d'automatisation, pas des logiciels métier du client, et la page explique justement qu'on ne bricole pas des enchaînements fragiles.
 
 Le bandeau n'affiche que des logos. Pennylane n'a pas de logo dans ces sources, il n'apparaît donc pas : pour l'ajouter, déposer `public/logos/pennylane.svg` et ajouter `{ name: "Pennylane", logo: "pennylane" }` dans `src/content/tools.ts`.
 

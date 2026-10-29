@@ -1,6 +1,7 @@
 /**
  * Outils du bandeau (logos seuls). `logo` = nom du fichier dans /public/logos (sans extension).
- * Pour ajouter un outil, déposer son SVG dans /public/logos puis l'ajouter ici.
+ * N'y mettre que des outils qu'on sait brancher (API publique ou export). Pour en ajouter un,
+ * déposer son SVG dans /public/logos puis l'ajouter ici.
  */
 export type Tool = { name: string; logo: string };
 
@@ -22,6 +23,4 @@ export const tools: Tool[] = [
   { name: "Trello", logo: "trello" },
   { name: "WhatsApp Business", logo: "whatsapp" },
   { name: "Shopify", logo: "shopify" },
-  { name: "Make", logo: "make" },
-  { name: "n8n", logo: "n8n" },
 ];
