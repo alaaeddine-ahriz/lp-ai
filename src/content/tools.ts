@@ -1,8 +1,8 @@
 /**
- * Outils du bandeau. `logo` = nom du fichier dans /public/logos (sans extension).
- * Sans logo, l'initiale de l'outil s'affiche à la place.
+ * Outils du bandeau (logos seuls). `logo` = nom du fichier dans /public/logos (sans extension).
+ * Pour ajouter un outil, déposer son SVG dans /public/logos puis l'ajouter ici.
  */
-export type Tool = { name: string; logo?: string };
+export type Tool = { name: string; logo: string };
 
 export const tools: Tool[] = [
   { name: "Gmail", logo: "gmail" },
@@ -14,7 +14,6 @@ export const tools: Tool[] = [
   { name: "Microsoft Teams", logo: "microsoft-teams" },
   { name: "HubSpot", logo: "hubspot" },
   { name: "Pipedrive", logo: "pipedrive" },
-  { name: "Pennylane" },
   { name: "Sage", logo: "sage" },
   { name: "Qonto", logo: "qonto" },
   { name: "Excel", logo: "excel" },

@@ -118,7 +118,7 @@ summary::-webkit-details-marker {
   display: none;
 }
 
-/* ---------- Flux d'étapes (offre + calendrier) ----------
+/* ---------- Flux d'étapes de l'offre ----------
    État par défaut = état final, pour que tout reste lisible sans JS.
    Avec JS, `.js [data-flow]:not([data-in])` fixe l'état de départ, puis la ligne se trace
    et chaque étape s'allume quand la ligne l'atteint. */
@@ -126,7 +126,6 @@ summary::-webkit-details-marker {
   --node: 3.5rem;
   --draw: 2.4s;
   --cols: 5;
-  --node-w: var(--node);
   position: relative;
   display: grid;
 }
@@ -145,20 +144,20 @@ summary::-webkit-details-marker {
   display: grid;
   flex-shrink: 0;
   place-items: center;
-  width: var(--node-w);
+  width: var(--node);
   height: var(--node);
   border-radius: 999px;
   background: var(--color-accent);
   color: #fff;
   box-shadow:
-    0 0 0 6px var(--flow-bg, var(--color-pink-soft)),
+    0 0 0 6px var(--color-pink-soft),
     0 12px 24px -10px rgb(217 54 62 / 0.7);
 }
 .flow-track {
   position: absolute;
   top: calc(var(--node) / 2);
   bottom: -3rem;
-  left: calc(var(--node-w) / 2 - 1px);
+  left: calc(var(--node) / 2 - 1px);
   width: 2px;
   overflow: hidden;
   background: linear-gradient(to bottom, #e7cdc9 55%, transparent 0) 0 0 / 2px 9px;
@@ -205,7 +204,7 @@ summary::-webkit-details-marker {
   .flow-track {
     top: calc(var(--node) / 2 - 1px);
     bottom: auto;
-    left: calc(var(--node-w) / 2);
+    left: calc(var(--node) / 2);
     right: -1.5rem;
     width: auto;
     height: 2px;
@@ -224,21 +223,6 @@ summary::-webkit-details-marker {
     height: auto;
     background: linear-gradient(to right, transparent, #ffd9d6, transparent);
   }
-}
-
-/* Variante calendrier : pastilles « JOUR X » au lieu des pictos. */
-.flow--days {
-  --node: 2.5rem;
-  --node-w: 5.75rem;
-  --cols: 3;
-  --flow-bg: #fff;
-}
-.flow--days .flow-node {
-  align-self: flex-start;
-  font-size: 0.8125rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  white-space: nowrap;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -261,7 +245,7 @@ summary::-webkit-details-marker {
     color: var(--color-muted);
     transform: scale(0.88);
     box-shadow:
-      0 0 0 6px var(--flow-bg, var(--color-pink-soft)),
+      0 0 0 6px var(--color-pink-soft),
       inset 0 0 0 1.5px var(--color-line);
   }
 }
@@ -272,30 +256,6 @@ summary::-webkit-details-marker {
 }
 .js [data-flow]:not([data-in]) .flow-dot {
   animation-play-state: paused;
-}
-
-/* ---------- Schéma du hero ---------- */
-.hf-dash {
-  animation: hf-dash 1.1s linear infinite;
-}
-@keyframes hf-dash {
-  to { stroke-dashoffset: -12; }
-}
-.hf-ring {
-  animation: hf-ring 2.6s cubic-bezier(0, 0, 0.2, 1) infinite;
-}
-@keyframes hf-ring {
-  from { transform: scale(1); opacity: 0.9; }
-  to { transform: scale(1.9); opacity: 0; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .hf-dash,
-  .hf-ring {
-    animation: none;
-  }
-  .hf-pulse {
-    display: none;
-  }
 }
 
 /* ---------- Fils animés des cas d'usage ---------- */

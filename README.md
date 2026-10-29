@@ -54,22 +54,31 @@ Tous les boutons de la page pointent vers la section `#rdv`.
 
 Avec Plausible activé :
 
-- `cta_click` avec la propriété `location` (`header`, `hero`, `hero_slot`, `offer`, `use_case_1..3`, `mobile_sticky`, `final`) ;
+- `cta_click` avec la propriété `location` (`header`, `hero`, `use_cases`, `offer`, `mobile_sticky`, `final`) ;
 - `booking_completed` quand une réservation Cal.com aboutit.
 
 Il faut déclarer ces deux objectifs (« Custom event goals ») dans Plausible.
 
+## Structure de la page
+
+Construite sur les principes de Hormozi (*$100M Offers*) : une seule action possible (réserver le diagnostic), pas de menu, et un enchaînement qui monte la valeur perçue.
+
+1. **Hero** : le résultat promis, le délai (30 jours), l'effort nul (« vous ne touchez pas une ligne de code »), la rareté (3 diagnostics par mois).
+2. **Outils** : logos des outils connectés, pour montrer que rien ne change dans le quotidien.
+3. **Problème**, puis **ce qu'on installe** : la douleur, puis le résultat concret.
+4. **Comparaison** : ce qu'on vous vend d'habitude face à ce qu'on fait.
+5. **L'offre** : les 5 étapes avec leur délai, les bonus et la garantie dans le même bloc.
+6. **Qui est derrière**, **FAQ** (lève les objections), **CTA final**.
+
 ## Photo du hero
 
-Sans photo, le hero affiche un schéma animé : les outils d'entrée (Gmail, Outlook, Drive) passent par l'IA et alimentent la facturation, le CRM et le tableau de suivi.
-
-Pour mettre une photo : déposer **`src/assets/hero.jpg`** (horizontale, 2400 px de large minimum). Astro génère automatiquement 5 tailles en AVIF et la précharge. Le voile sombre est conservé pour la lisibilité.
+Sans photo, le hero est un fond sombre uni. Pour mettre une photo : déposer **`src/assets/hero.jpg`** (horizontale, 2400 px de large minimum). Astro génère automatiquement 5 tailles en AVIF et la précharge. Le voile sombre est conservé pour la lisibilité.
 
 ## Logos des outils
 
 SVG dans `public/logos/`, issus des jeux d'icônes open source [Iconify Logos](https://github.com/gilbarbara/logos), [VS Code Icons](https://github.com/vscode-icons/vscode-icons) et [Simple Icons](https://simpleicons.org), plus la marque Qonto tirée de son paquet npm officiel `@qonto/login-button`.
 
-Pennylane n'a pas de logo dans ces sources : son initiale s'affiche à la place. Pour ajouter un logo, déposer `public/logos/pennylane.svg` et ajouter `logo: "pennylane"` dans `src/content/tools.ts`.
+Le bandeau n'affiche que des logos. Pennylane n'a pas de logo dans ces sources, il n'apparaît donc pas : pour l'ajouter, déposer `public/logos/pennylane.svg` et ajouter `{ name: "Pennylane", logo: "pennylane" }` dans `src/content/tools.ts`.
 
 Les logos restent la propriété de leurs marques ; ils illustrent ici la compatibilité.
 

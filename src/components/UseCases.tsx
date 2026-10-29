@@ -49,8 +49,8 @@ function Wire() {
 
 export function UseCases() {
   return (
-    <section className="px-5 py-20 sm:px-6 sm:py-28">
-      <div className="mx-auto flex max-w-[1180px] flex-col gap-12 sm:gap-14">
+    <section className="px-5 pb-20 sm:px-6 sm:pb-28">
+      <div className="mx-auto flex max-w-[1180px] flex-col gap-12 border-t border-line pt-20 sm:gap-14 sm:pt-24">
         <h2 className="h2" data-reveal>
           Ce qu&apos;on installe le plus souvent
         </h2>
@@ -58,7 +58,7 @@ export function UseCases() {
           {cases.map((c, i) => (
             <article
               key={c.title}
-              className="group flex flex-col gap-4 rounded-[22px] border border-line p-3 pb-7 transition-shadow duration-300 hover:shadow-[0_24px_48px_-28px_rgb(43_37_35/0.35)]"
+              className="group flex flex-col gap-4 rounded-[22px] border border-line p-3 pb-7"
               data-reveal
               style={{ "--i": i } as React.CSSProperties}
             >
@@ -76,18 +76,16 @@ export function UseCases() {
               </div>
               <div className="flex flex-1 flex-col gap-3 px-4">
                 <h3 className="text-[22px] leading-tight font-bold">{c.title}</h3>
-                <p className="flex-1 text-muted">{c.text}</p>
-                <a
-                  href="#rdv"
-                  data-cta={`use_case_${i + 1}`}
-                  className="mt-2 inline-flex items-center gap-1.5 self-start font-semibold text-ink underline decoration-accent/40 decoration-2 underline-offset-4 transition-colors hover:text-accent hover:decoration-accent"
-                >
-                  Réserver mon diagnostic
-                  <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
-                </a>
+                <p className="text-muted">{c.text}</p>
               </div>
             </article>
           ))}
+        </div>
+        <div className="flex justify-center">
+          <a href="#rdv" className="btn" data-cta="use_cases">
+            Réserver mon diagnostic
+            <ArrowRight className="size-4" aria-hidden="true" />
+          </a>
         </div>
       </div>
     </section>
