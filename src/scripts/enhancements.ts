@@ -61,21 +61,36 @@ if (calEl) {
   calObserver.observe(calEl);
 }
 
-/* Onglets de la carte des pôles (clic, flèches gauche/droite, Début/Fin). */
-document.querySelectorAll<HTMLElement>("[data-tabs]").forEach((root) => {
+/* La carte des pôles.
+   Ordinateur : l'organigramme fonctionne en onglets (clic, flèches, Début/Fin).
+   Mobile : les pastilles font défiler le carrousel, et le carrousel allume la bonne pastille. */
+document.querySelectorAll<HTMLElement>("[data-map]").forEach((root) => {
   const tabs = [...root.querySelectorAll<HTMLButtonElement>('[role="tab"]')];
-  const select = (tab: HTMLButtonElement, focus = false) => {
+  const panels = [...root.querySelectorAll<HTMLElement>('[role="tabpanel"]')];
+  const chips = [...root.querySelectorAll<HTMLButtonElement>("[data-target]")];
+  const chipRow = root.querySelector<HTMLElement>("[data-map-chips]");
+  const track = root.querySelector<HTMLElement>("[data-map-track]");
+
+  const activate = (id: string) => {
+    for (const p of panels) p.toggleAttribute("data-active", p.id === id);
     for (const t of tabs) {
-      const on = t === tab;
+      const on = t.getAttribute("aria-controls") === id;
       t.setAttribute("aria-selected", String(on));
       t.tabIndex = on ? 0 : -1;
-      document.getElementById(t.getAttribute("aria-controls")!)!.hidden = !on;
     }
-    if (focus) tab.focus();
-    tab.scrollIntoView({ block: "nearest", inline: "nearest", behavior: "smooth" });
+    for (const c of chips) {
+      const on = c.dataset.target === id;
+      if (on) c.setAttribute("aria-current", "true");
+      else c.removeAttribute("aria-current");
+      if (on && chipRow) {
+        const li = c.parentElement!;
+        chipRow.scrollTo({ left: li.offsetLeft - (chipRow.clientWidth - li.clientWidth) / 2, behavior: "smooth" });
+      }
+    }
   };
+
   tabs.forEach((tab, i) => {
-    tab.addEventListener("click", () => select(tab));
+    tab.addEventListener("click", () => activate(tab.getAttribute("aria-controls")!));
     tab.addEventListener("keydown", (e) => {
       const next =
         e.key === "ArrowRight" ? tabs[(i + 1) % tabs.length]
@@ -85,7 +100,29 @@ document.querySelectorAll<HTMLElement>("[data-tabs]").forEach((root) => {
         : null;
       if (!next) return;
       e.preventDefault();
-      select(next, true);
+      activate(next.getAttribute("aria-controls")!);
+      next.focus();
     });
   });
+
+  if (!track) return;
+  let lockedUntil = 0; // pendant un défilement lancé par une pastille, on ignore les cartes traversées
+  chips.forEach((chip) =>
+    chip.addEventListener("click", () => {
+      const panel = document.getElementById(chip.dataset.target!)!;
+      lockedUntil = Date.now() + 700;
+      track.scrollTo({ left: panel.offsetLeft - (track.clientWidth - panel.clientWidth) / 2, behavior: "smooth" });
+      activate(panel.id);
+    }),
+  );
+  // La carte la plus visible dans le carrousel devient la carte active.
+  const seen = new IntersectionObserver(
+    (entries) => {
+      if (Date.now() < lockedUntil || !window.matchMedia("(max-width: 1023px)").matches) return;
+      const best = entries.filter((e) => e.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (best) activate(best.target.id);
+    },
+    { root: track, threshold: [0.6] },
+  );
+  panels.forEach((p) => seen.observe(p));
 });
