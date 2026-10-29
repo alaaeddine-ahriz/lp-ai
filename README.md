@@ -67,7 +67,7 @@ Construite sur les principes de Hormozi (*$100M Offers*) : une seule action poss
 4. **La carte** : un organigramme cliquable et animé (la direction en haut, 7 pôles en dessous). Pour chaque pôle : une carte visuelle, les leviers en liste et ce qui reste humain. Se termine sur la méthode (un seul pôle, un socle, puis des modules) et un bouton.
 5. **La différence** : ce qu'on vous vend d'habitude face à ce que fait Socle, ligne par ligne.
 6. **L'offre** : les 5 étapes avec leur délai.
-7. **Qui est derrière**, **FAQ** (lève les objections), **CTA final**.
+7. **Qui est derrière** (avec un bandeau défilant des écoles des ingénieurs : ESSEC, Institut Polytechnique de Paris, Groupe INSA), **FAQ** (lève les objections), **CTA final**.
 
 Le vocabulaire est le même partout : on parle d'« outil » (ce qu'on construit), pas d'« automatisation ».
 
@@ -94,6 +94,8 @@ Make et n8n ont été retirés : ce sont des outils d'automatisation, pas des lo
 Le bandeau n'affiche que des logos. Pennylane n'a pas de logo dans ces sources, il n'apparaît donc pas : pour l'ajouter, déposer `public/logos/pennylane.svg` et ajouter `{ name: "Pennylane", logo: "pennylane" }` dans `src/content/tools.ts`.
 
 Les logos restent la propriété de leurs marques ; ils illustrent ici la compatibilité.
+
+Logos des écoles : `public/logos/schools/` (PNG transparents de 160 px de haut). La liste et la hauteur affichée de chaque logo se règlent dans `src/components/Team.tsx`.
 
 ## Structure
 

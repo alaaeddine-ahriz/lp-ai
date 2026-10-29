@@ -18,4 +18,4 @@ Un fichier absent ne casse rien : la section garde son visuel par défaut.
 
 Les photos des pôles reçoivent le même traitement que les visuels sans photo (couleurs adoucies, halo rouge, dégradé sombre en bas) pour que la carte reste homogène.
 
-Fournies : finance, juridique, production, rh, vente. Manquent : direction, marketing, prospection.
+Les 8 photos de pôles sont fournies.
