@@ -298,3 +298,97 @@ summary::-webkit-details-marker {
   3%, 22% { opacity: 1; transform: none; filter: none; }
   25%, 100% { opacity: 0; transform: translateY(-0.3em); filter: blur(4px); }
 }
+
+/* ---------- La carte : organigramme des pôles ---------- */
+.map-chart {
+  --wire: var(--color-line);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.map-branches {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+@media (min-width: 1024px) {
+  .map-chart {
+    gap: 0;
+  }
+  .map-root {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 2rem;
+  }
+  /* Trait vertical sous la direction */
+  .map-root::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 2px;
+    height: 2rem;
+    margin-left: -1px;
+    background: var(--wire);
+  }
+  .map-branches {
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+  .map-leaf {
+    position: relative;
+    padding-top: 1.5rem;
+  }
+  /* Trait vertical vers chaque pôle */
+  .map-leaf::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 2px;
+    height: 1.5rem;
+    margin-left: -1px;
+    background: var(--wire);
+    transition: background-color 0.3s;
+  }
+  /* Bus horizontal qui relie les pôles */
+  .map-leaf::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -0.375rem;
+    right: -0.375rem;
+    height: 2px;
+    background: var(--wire);
+  }
+  .map-leaf:first-child::after {
+    left: 50%;
+  }
+  .map-leaf:last-child::after {
+    right: 50%;
+  }
+  .map-leaf:has([aria-selected="true"])::before {
+    background: var(--color-accent);
+  }
+  .map-leaf .map-node {
+    height: 100%;
+  }
+}
+
+/* Changement de pôle : le panneau et ses cartes apparaissent en douceur. */
+@media (prefers-reduced-motion: no-preference) {
+  .map-panel:not([hidden]) {
+    animation: map-in 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .map-panel:not([hidden]) .map-card {
+    animation: map-in 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+    animation-delay: calc(var(--k) * 60ms + 80ms);
+  }
+}
+@keyframes map-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}

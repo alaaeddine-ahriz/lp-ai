@@ -13,38 +13,50 @@ const them = "Ce qu'on vous vend d'habitude";
 const us = "Ce qu'on fait";
 
 export function Comparison() {
+  const last = rows.length - 1;
   return (
     <section className="px-5 pb-20 sm:px-6 sm:pb-28">
-      <div className="mx-auto flex max-w-[1180px] flex-col gap-10 border-t border-line pt-20 sm:gap-12 sm:pt-24">
-        <h2 className="h2" data-reveal>
-          Pourquoi la plupart des projets IA en PME ne rapportent rien
-        </h2>
+      <div className="mx-auto flex max-w-[1180px] flex-col gap-10 border-t border-line pt-20 sm:gap-14 sm:pt-24">
+        <div className="flex flex-col items-center gap-4 text-center" data-reveal>
+          <span className="pill bg-pink!">Avant / après</span>
+          <h2 className="h2">Pourquoi la plupart des projets IA en PME ne rapportent rien</h2>
+        </div>
 
-        {/* Tableau (tablette et ordinateur) */}
-        <div className="hidden overflow-hidden rounded-[24px] border border-line md:block" data-reveal>
-          <table className="w-full border-collapse text-left">
+        {/* Deux colonnes face à face (tablette et ordinateur) : « d'habitude » en retrait, « ce qu'on fait » en avant. */}
+        <div className="relative hidden md:block" data-reveal>
+          <span
+            aria-hidden="true"
+            className="absolute top-6 left-1/2 z-10 grid size-11 -translate-x-1/2 place-items-center rounded-full bg-white font-display text-sm font-bold text-ink shadow-[0_6px_20px_-6px_rgb(28_25_23/0.35)] ring-1 ring-line"
+          >
+            VS
+          </span>
+          <table className="w-full table-fixed border-separate border-spacing-x-3 border-spacing-y-0 text-left">
             <caption className="sr-only">Comparaison entre l&apos;approche habituelle et celle de {site.name}</caption>
             <thead>
               <tr>
-                <th scope="col" className="w-1/2 px-8 py-5 text-sm font-semibold tracking-wide text-muted uppercase">
-                  {them}
+                <th scope="col" className="rounded-t-[24px] bg-stone-100 px-8 pt-8 pb-5 align-top">
+                  <span className="text-sm font-semibold tracking-wide text-muted uppercase">{them}</span>
                 </th>
-                <th scope="col" className="w-1/2 bg-pink-soft px-8 py-5 text-sm font-semibold tracking-wide text-accent-strong uppercase">
-                  {us}
+                <th scope="col" className="rounded-t-[24px] bg-dark bg-[radial-gradient(60%_140%_at_85%_0%,rgb(217_54_62/0.4),transparent_70%)] px-8 pt-8 pb-5 align-top">
+                  <span className="text-sm font-semibold tracking-wide text-[#F59A9E] uppercase">
+                    {us}
+                  </span>
                 </th>
               </tr>
             </thead>
             <tbody>
-              {rows.map(([a, b]) => (
-                <tr key={a} className="border-t border-line">
-                  <td className="px-8 py-6 text-muted">
-                    <span className="flex items-start gap-3">
-                      <X className="mt-0.5 size-5 shrink-0 text-stone-400" aria-hidden="true" />
-                      {a}
+              {rows.map(([a, b], i) => (
+                <tr key={a}>
+                  <td className={`bg-stone-100 px-8 ${i === last ? "rounded-b-[24px] pb-8" : ""}`}>
+                    <span className="flex items-start gap-3 border-t border-stone-200 py-5 text-stone-600">
+                      <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-stone-200">
+                        <X className="size-3 text-stone-600" strokeWidth={3} aria-hidden="true" />
+                      </span>
+                      <span className="line-through decoration-stone-300">{a}</span>
                     </span>
                   </td>
-                  <td className="bg-pink-soft px-8 py-6 text-[17px] font-semibold">
-                    <span className="flex items-start gap-3">
+                  <td className={`bg-dark px-8 ${i === last ? "rounded-b-[24px] pb-8" : ""}`}>
+                    <span className="flex items-start gap-3 border-t border-white/10 py-5 text-[17px] font-semibold text-white">
                       <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-accent text-white">
                         <Check className="size-3.5" strokeWidth={3} aria-hidden="true" />
                       </span>
@@ -60,15 +72,17 @@ export function Comparison() {
         {/* Version empilée (mobile) */}
         <ul className="flex flex-col gap-3 md:hidden">
           {rows.map(([a, b]) => (
-            <li key={a} className="overflow-hidden rounded-[18px] border border-line" data-reveal>
-              <p className="flex items-start gap-3 px-5 py-4 text-[15px] text-muted">
-                <X className="mt-0.5 size-4.5 shrink-0 text-stone-400" aria-hidden="true" />
-                <span>
+            <li key={a} className="overflow-hidden rounded-[20px]" data-reveal>
+              <p className="flex items-start gap-3 bg-stone-100 px-5 py-4 text-[15px] text-stone-600">
+                <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-stone-200">
+                  <X className="size-3 text-stone-600" strokeWidth={3} aria-hidden="true" />
+                </span>
+                <span className="line-through decoration-stone-300">
                   <span className="sr-only">{them} : </span>
                   {a}
                 </span>
               </p>
-              <p className="flex items-start gap-3 bg-pink-soft px-5 py-4 font-semibold">
+              <p className="flex items-start gap-3 bg-dark px-5 py-4 font-semibold text-white">
                 <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-accent text-white">
                   <Check className="size-3.5" strokeWidth={3} aria-hidden="true" />
                 </span>

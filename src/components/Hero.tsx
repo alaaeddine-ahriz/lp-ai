@@ -1,9 +1,10 @@
 import { ArrowRight, Clock } from "lucide-react";
+import type { Photo } from "@/lib/photos";
 
 const losses = ["des marchés.", "des clients.", "des devis.", "de la marge."];
 
-/** `image` : photo optionnelle (src/assets/hero.jpg), déjà optimisée par Astro. Sans photo : fond sombre uni. */
-export function Hero({ image }: { image?: { src: string; srcSet: string } }) {
+/** `image` : photo facultative (src/assets/photos/hero.jpg). Sans photo : fond sombre uni. */
+export function Hero({ image }: { image?: Photo }) {
   return (
     <section className="px-3 pt-3 sm:px-6 sm:pt-5">
       <div className="relative mx-auto flex max-w-[1440px] overflow-hidden rounded-[22px] bg-dark sm:rounded-[28px] lg:min-h-[560px]">

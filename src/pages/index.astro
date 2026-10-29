@@ -2,6 +2,7 @@
 import { getImage } from "astro:assets";
 import Base from "@/layouts/Base.astro";
 import { site } from "@/config/site";
+import type { Photos } from "@/lib/photos";
 import { CompanyMap } from "@/components/CompanyMap";
 import { Comparison } from "@/components/Comparison";
 import { Faq, faqs } from "@/components/Faq";
@@ -16,13 +17,17 @@ import { Team } from "@/components/Team";
 import { ToolsMarquee } from "@/components/ToolsMarquee";
 import { UseCases } from "@/components/UseCases";
 
-// Photo du hero facultative : déposer src/assets/hero.jpg (horizontale, 2400 px de large minimum).
-// Sans photo, le hero garde son fond sombre uni.
-const heroFiles = import.meta.glob<{ default: ImageMetadata }>("../assets/hero.{jpg,jpeg,png,webp}", { eager: true });
-const heroFile = Object.values(heroFiles)[0]?.default;
-const heroImage = heroFile
-  ? await getImage({ src: heroFile, widths: [640, 960, 1440, 1920, 2400], format: "avif" })
-  : undefined;
+// Photos facultatives : déposer les fichiers dans src/assets/photos (voir le README de ce dossier).
+// Chaque photo est convertie en AVIF à plusieurs tailles ; une photo absente laisse place au visuel par défaut.
+const photoFiles = import.meta.glob<{ default: ImageMetadata }>("../assets/photos/*.{jpg,jpeg,png,webp}", { eager: true });
+const photos: Photos = {};
+for (const [path, mod] of Object.entries(photoFiles)) {
+  const name = path.split("/").pop()!.replace(/\.[^.]+$/, "");
+  const widths = name === "hero" ? [640, 960, 1440, 1920, 2400] : [480, 800, 1200];
+  const img = await getImage({ src: mod.default, widths, format: "avif" });
+  photos[name] = { src: img.src, srcSet: img.srcSet.attribute };
+}
+const heroImage = photos.hero;
 
 const faqSchema = {
   "@context": "https://schema.org",
@@ -36,17 +41,17 @@ const faqSchema = {
 ---
 
 <Base title={`${site.name} · L'IA qui rapporte aux PME`}>
-  {heroImage && <link slot="head" rel="preload" as="image" imagesrcset={heroImage.srcSet.attribute} imagesizes="(min-width: 1440px) 1440px, 100vw" fetchpriority="high" />}
+  {heroImage && <link slot="head" rel="preload" as="image" imagesrcset={heroImage.srcSet} imagesizes="(min-width: 1440px) 1440px, 100vw" fetchpriority="high" />}
   <Header />
   <main>
-    <Hero image={heroImage && { src: heroImage.src, srcSet: heroImage.srcSet.attribute }} />
+    <Hero image={heroImage} />
     <ToolsMarquee />
     <Problems />
-    <CompanyMap />
+    <CompanyMap photos={photos} />
     <UseCases />
     <Comparison />
     <Offer />
-    <Team />
+    <Team photo={photos.team} />
     <Faq />
     <FinalCta />
   </main>

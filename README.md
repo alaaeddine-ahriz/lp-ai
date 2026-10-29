@@ -64,7 +64,7 @@ Construite sur les principes de Hormozi (*$100M Offers*) : une seule action poss
 1. **Hero** : la douleur (« Vos équipes perdent des heures. Vous perdez des marchés. », la fin de phrase défile : marchés, clients, devis, marge), puis le délai (30 jours), l'effort nul et la rareté (3 places par mois).
 2. **Outils** : logos des outils qu'on sait brancher (API publique ou export).
 3. **Problème** : savoir par où commencer.
-4. **La carte** : 8 pôles de l'entreprise en onglets ; pour chacun, où l'IA intervient et ce qui reste humain. Le visiteur se reconnaît dans son pôle. Se termine sur la méthode : un seul pôle d'abord, un socle, puis des modules.
+4. **La carte** : un organigramme cliquable (la direction en haut, 7 pôles en dessous) ; pour chacun, où l'IA intervient et ce qui reste humain. Le visiteur se reconnaît dans son pôle. Se termine sur la méthode : un seul pôle d'abord, un socle, puis des modules.
 5. **Trois exemples** de ce qu'on peut construire (formulés comme des exemples, pas comme des réalisations).
 6. **Comparaison** : ce qu'on vous vend d'habitude face à ce qu'on fait.
 7. **L'offre** : les 5 étapes avec leur délai.
@@ -72,9 +72,11 @@ Construite sur les principes de Hormozi (*$100M Offers*) : une seule action poss
 
 Le contenu de la carte se modifie dans `src/components/CompanyMap.tsx` (tableau `poles`).
 
-## Photo du hero
+## Photos
 
-Sans photo, le hero est un fond sombre uni. Pour mettre une photo : déposer **`src/assets/hero.jpg`** (horizontale, 2400 px de large minimum). Astro génère automatiquement 5 tailles en AVIF et la précharge. Le voile sombre est conservé pour la lisibilité.
+Toutes les photos vont dans **`src/assets/photos/`** : `hero.jpg`, `team.jpg` et une par pôle de la carte (`pole-vente.jpg`, etc.). La liste complète et les formats conseillés sont dans `src/assets/photos/README.md`.
+
+Astro les convertit en AVIF à plusieurs tailles au build. Une photo absente ne casse rien : la section garde son visuel par défaut (fond sombre pour le hero, carte graphique pour les pôles, texte centré pour l'équipe).
 
 ## Logos des outils
 
