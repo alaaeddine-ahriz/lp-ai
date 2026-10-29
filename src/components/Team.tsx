@@ -10,7 +10,7 @@ export function Team({ photo }: { photo?: Photo }) {
       </h2>
       <p className="max-w-[680px] text-lg text-muted">
         Une équipe d&apos;ingénieurs issus des meilleures écoles, qui a mis en production des infrastructures et des
-        chaînes d&apos;automatisation pour de grands groupes. On applique la même rigueur aux PME : des systèmes qui
+        chaînes d&apos;automatisation pour de grands groupes. On applique la même rigueur aux PME : des systèmes qui
         tournent, mesurés, maintenus.
       </p>
     </>

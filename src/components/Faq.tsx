@@ -2,23 +2,23 @@ import { Plus } from "lucide-react";
 
 export const faqs = [
   {
-    q: "Je n'ai pas d'équipe technique. C'est un problème ?",
-    a: "Non, c'est même le cas de la plupart des PME. On s'occupe de toute la partie technique. Votre rôle : nous expliquer comment vous travaillez et valider le résultat.",
+    q: "Je n'ai pas d'équipe technique. C'est un problème ?",
+    a: "Non, c'est même le cas de la plupart des PME. On s'occupe de toute la partie technique. Votre rôle : nous expliquer comment vous travaillez et valider le résultat.",
   },
   {
-    q: "Combien ça coûte ?",
+    q: "Combien ça coûte ?",
     a: "Le diagnostic est gratuit. Ensuite, chaque cas d'usage a un prix fixe annoncé avant de signer, calculé pour être remboursé par le temps gagné en quelques mois. Pas de TJM, pas de mauvaise surprise.",
   },
   {
-    q: "Mes données sont-elles en sécurité ?",
+    q: "Mes données sont-elles en sécurité ?",
     a: "On choisit avec vous des outils conformes au RGPD, on limite les accès au strict nécessaire et on documente où vont vos données. Les informations sensibles ne partent pas dans un outil public.",
   },
   {
-    q: "Et si mes équipes ne s'en servent pas ?",
-    a: "C'est pour ça qu'on part de leur travail réel et qu'on les forme sur leurs propres dossiers. Une automatisation que personne n'utilise ne rapporte rien, on le mesure à J+30.",
+    q: "Et si mes équipes ne s'en servent pas ?",
+    a: "C'est pour ça qu'on part de leur travail réel et qu'on les forme sur leurs propres dossiers. Un outil que personne n'utilise ne rapporte rien, on le mesure à J+30.",
   },
   {
-    q: "Pourquoi seulement 3 diagnostics par mois ?",
+    q: "Pourquoi seulement 3 diagnostics par mois ?",
     a: "Parce que chaque diagnostic est préparé à la main, sur votre entreprise. Au-delà, on ne pourrait plus tenir le délai de 30 jours pour les clients en cours.",
   },
 ];
@@ -27,9 +27,10 @@ export function Faq() {
   return (
     <section id="faq" className="px-5 pb-20 sm:px-6 sm:pb-28">
       <div className="mx-auto max-w-[860px]">
-        <h2 className="h2 mb-8" data-reveal>
-          Vos questions
-        </h2>
+        <div className="mb-8 flex flex-col items-center gap-4 text-center" data-reveal>
+          <span className="pill bg-pink!">Questions</span>
+          <h2 className="h2">Vos questions</h2>
+        </div>
         <div className="border-t border-line">
           {faqs.map((f) => (
             <details key={f.q} name="faq" className="group border-b border-line">

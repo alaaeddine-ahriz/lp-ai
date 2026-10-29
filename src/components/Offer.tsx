@@ -18,7 +18,7 @@ const steps = [
     when: "Jour 7 → 30",
     icon: PlugZap,
     title: "Déploiement clé en main",
-    text: "On construit l'automatisation, on la branche sur vos outils actuels, on la teste avec vous.",
+    text: "On construit l'outil, on le branche sur vos logiciels actuels, on le teste avec vous.",
   },
   {
     when: "Jour 30",
@@ -43,7 +43,7 @@ export function Offer() {
             <span className="pill">L&apos;offre</span>
             <h2 className="text-[clamp(2.125rem,4.6vw,3.375rem)] leading-[1.04] font-bold">Le Programme Premier Gain</h2>
             <p className="max-w-[620px] text-lg text-muted">
-              Une automatisation IA qui tourne dans votre entreprise, mesurée, en 30 jours.
+              Un outil IA qui tourne dans votre entreprise, mesuré, en 30 jours.
             </p>
           </div>
 

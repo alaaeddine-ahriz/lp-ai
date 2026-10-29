@@ -52,7 +52,7 @@ Tous les boutons de la page pointent vers la section `#rdv`.
 
 Avec Plausible activé :
 
-- `cta_click` avec la propriété `location` (`header`, `hero`, `use_cases`, `offer`, `mobile_sticky`, `final`) ;
+- `cta_click` avec la propriété `location` (`header`, `hero`, `map`, `offer`, `mobile_sticky`, `final`) ;
 - `booking_completed` quand une réservation Cal.com aboutit.
 
 Il faut déclarer ces deux objectifs (« Custom event goals ») dans Plausible.
@@ -63,12 +63,13 @@ Construite sur les principes de Hormozi (*$100M Offers*) : une seule action poss
 
 1. **Hero** : la douleur (« Vos équipes perdent des heures. Vous perdez des marchés. », la fin de phrase défile : marchés, clients, devis, marge), puis le délai (30 jours), l'effort nul et la rareté (3 places par mois).
 2. **Outils** : logos des outils qu'on sait brancher (API publique ou export).
-3. **Problème** : savoir par où commencer.
-4. **La carte** : un organigramme cliquable (la direction en haut, 7 pôles en dessous) ; pour chacun, où l'IA intervient et ce qui reste humain. Le visiteur se reconnaît dans son pôle. Se termine sur la méthode : un seul pôle d'abord, un socle, puis des modules.
-5. **Trois exemples** de ce qu'on peut construire (formulés comme des exemples, pas comme des réalisations).
-6. **Comparaison** : ce qu'on vous vend d'habitude face à ce qu'on fait.
-7. **L'offre** : les 5 étapes avec leur délai.
-8. **Qui est derrière**, **FAQ** (lève les objections), **CTA final**.
+3. **Le constat** : le problème n'est pas l'IA, c'est de savoir par où commencer.
+4. **La carte** : un organigramme cliquable et animé (la direction en haut, 7 pôles en dessous). Pour chaque pôle : une carte visuelle, les leviers en liste et ce qui reste humain. Se termine sur la méthode (un seul pôle, un socle, puis des modules) et un bouton.
+5. **La différence** : ce qu'on vous vend d'habitude face à ce que fait Socle, ligne par ligne.
+6. **L'offre** : les 5 étapes avec leur délai.
+7. **Qui est derrière**, **FAQ** (lève les objections), **CTA final**.
+
+Le vocabulaire est le même partout : on parle d'« outil » (ce qu'on construit), pas d'« automatisation ».
 
 Le contenu de la carte se modifie dans `src/components/CompanyMap.tsx` (tableau `poles`).
 

@@ -41,7 +41,7 @@ const problems: { title: string; text: string; notifs: [Notif, Notif] }[] = [
     text: "La bonne version du document est quelque part sur un drive. Il faut demander à la seule personne qui sait où elle est.",
     notifs: [
       { logo: "google-drive", app: "Google Drive", children: "Procedure_v3_FINAL_bis.docx" },
-      { logo: "microsoft-teams", app: "Teams", children: "« Tu sais où est la dernière version ? »" },
+      { logo: "microsoft-teams", app: "Teams", children: "« Tu sais où est la dernière version ? »" },
     ],
   },
 ];
@@ -55,7 +55,7 @@ function Notification({ logo, app, children, alert, className }: Notif & { class
         <Logo name={app} logo={logo} size={18} />
       </span>
       <span className="min-w-0 flex-1">{children}</span>
-      {alert ? <span className="size-2 shrink-0 rounded-full bg-accent" /> : null}
+      {alert ? <span className="size-2 shrink-0 rounded-full bg-accent" /> : null}
     </div>
   );
 }
@@ -64,9 +64,10 @@ export function Problems() {
   return (
     <section className="px-5 py-20 sm:px-6 sm:py-28">
       <div className="mx-auto flex max-w-[1180px] flex-col gap-12 sm:gap-14">
-        <h2 className="h2" data-reveal>
-          Le problème n&apos;est pas l&apos;IA. C&apos;est de savoir par où commencer.
-        </h2>
+        <div className="flex flex-col items-center gap-4 text-center" data-reveal>
+          <span className="pill bg-pink!">Le constat</span>
+          <h2 className="h2">Le problème n&apos;est pas l&apos;IA. C&apos;est de savoir par où commencer.</h2>
+        </div>
         <div className="grid gap-10 md:grid-cols-3 md:gap-8 lg:gap-10">
           {problems.map((p, i) => (
             <article key={p.title} className="group flex flex-col gap-4" data-reveal style={{ "--i": i } as React.CSSProperties}>

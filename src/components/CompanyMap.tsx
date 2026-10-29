@@ -25,7 +25,7 @@ const poles: Pole[] = [
     points: [
       {
         title: "Le cockpit du dirigeant",
-        text: "Chiffre d'affaires, trésorerie, devis en cours : tout sur votre téléphone, branché sur votre compta et votre CRM. Et vous pouvez lui poser vos questions.",
+        text: "Chiffre d'affaires, trésorerie, devis en cours : tout sur votre téléphone, branché sur votre compta et votre CRM. Et vous pouvez lui poser vos questions.",
       },
       {
         title: "L'assistant email",
@@ -46,7 +46,7 @@ const poles: Pole[] = [
       },
       {
         title: "Production de contenu",
-        text: "Posts, articles, pages : un outil qui connaît votre offre et votre ton, pas du texte générique.",
+        text: "Posts, articles, pages : un outil qui connaît votre offre et votre ton, pas du texte générique.",
       },
       {
         title: "Reporting des campagnes",
@@ -78,7 +78,7 @@ const poles: Pole[] = [
         text: "Il répond, qualifie la demande et prend rendez-vous quand personne n'est disponible.",
       },
     ],
-    human: "Les appels de prospection : pas de voix robot qui démarche vos prospects.",
+    human: "Les appels de prospection : pas de voix robot qui démarche vos prospects.",
   },
   {
     id: "vente",
@@ -88,7 +88,7 @@ const poles: Pole[] = [
     points: [
       {
         title: "Préparation des rendez-vous",
-        text: "Une fiche prête avant chaque rendez-vous : chiffres, équipe, actualités, questions à poser.",
+        text: "Une fiche prête avant chaque rendez-vous : chiffres, équipe, actualités, questions à poser.",
       },
       {
         title: "Chiffrage assisté",
@@ -100,7 +100,7 @@ const poles: Pole[] = [
       },
       {
         title: "Relances et démarrage client",
-        text: "Relance des devis non signés ; contrat, signature et appel de lancement pour ceux qui signent.",
+        text: "Relance des devis non signés ; contrat, signature et appel de lancement pour ceux qui signent.",
       },
     ],
     human: "La relation et la négociation.",
@@ -121,7 +121,7 @@ const poles: Pole[] = [
       },
       {
         title: "Outils métier sur mesure",
-        text: "Fiches de mesure, briefs atelier, plannings, suivi du stock : faits pour votre façon de travailler.",
+        text: "Fiches de mesure, briefs atelier, plannings, suivi du stock : faits pour votre façon de travailler.",
       },
     ],
     human: "Votre savoir-faire et la livraison.",
@@ -159,7 +159,7 @@ const poles: Pole[] = [
       },
       {
         title: "Suivi budgétaire",
-        text: "Ce qui rentre, ce qui sort, ce qui est rentable : directement dans votre cockpit.",
+        text: "Ce qui rentre, ce qui sort, ce qui est rentable : directement dans votre cockpit.",
       },
     ],
     human: "Les décisions financières.",
@@ -184,11 +184,7 @@ const poles: Pole[] = [
 ];
 
 const total = poles.reduce((n, p) => n + p.points.length, 0);
-const method = [
-  "On commence par un seul pôle",
-  "On pose un socle qui connaît vos données",
-  "On ajoute des modules quand le premier rapporte",
-];
+const center = 3; // index du pôle sous la direction : les pulsations partent de là vers les côtés
 
 function Node({ pole, selected, root }: { pole: Pole; selected: boolean; root?: boolean }) {
   return (
@@ -199,7 +195,7 @@ function Node({ pole, selected, root }: { pole: Pole; selected: boolean; root?: 
       aria-controls={`panel-${pole.id}`}
       aria-selected={selected}
       tabIndex={selected ? 0 : -1}
-      className={`map-node group/node flex w-full items-center gap-3 rounded-2xl border border-line bg-white p-2.5 pr-3 text-left transition duration-200 hover:-translate-y-0.5 hover:border-ink/15 hover:shadow-[0_12px_28px_-16px_rgb(43_37_35/0.35)] aria-selected:border-ink aria-selected:bg-ink aria-selected:text-white aria-selected:shadow-[0_16px_36px_-16px_rgb(28_25_23/0.6)] ${root ? "lg:w-[260px] lg:p-3" : "lg:flex-col lg:items-start lg:p-3"}`}
+      className={`map-node group/node relative flex w-full items-center gap-3 rounded-2xl border border-line bg-white p-2.5 pr-3 text-left transition duration-200 hover:-translate-y-0.5 hover:border-ink/15 hover:shadow-[0_12px_28px_-16px_rgb(43_37_35/0.35)] aria-selected:border-ink aria-selected:bg-ink aria-selected:text-white aria-selected:shadow-[0_16px_36px_-16px_rgb(28_25_23/0.6)] ${root ? "lg:w-[260px] lg:p-3" : "lg:flex-col lg:items-start lg:p-3"}`}
     >
       <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-pink text-accent transition-colors group-aria-selected/node:bg-accent group-aria-selected/node:text-white">
         <pole.icon className="size-5" strokeWidth={1.75} aria-hidden="true" />
@@ -223,7 +219,7 @@ export function CompanyMap({ photos = {} }: { photos?: Photos }) {
           <span className="pill bg-pink!">La carte · {total} leviers</span>
           <h2 className="h2">Où l&apos;IA peut intervenir dans votre entreprise</h2>
           <p className="max-w-[680px] text-lg text-muted">
-            On n&apos;invente rien : chaque point est une tâche que quelqu&apos;un fait déjà chez vous, souvent à la
+            On n&apos;invente rien : chaque point est une tâche que quelqu&apos;un fait déjà chez vous, souvent à la
             main. Et que vous payez déjà. Cliquez sur votre pôle.
           </p>
         </div>
@@ -234,8 +230,13 @@ export function CompanyMap({ photos = {} }: { photos?: Photos }) {
               <Node pole={root} selected root />
             </div>
             <div className="map-branches">
-              {branches.map((p) => (
-                <div key={p.id} className="map-leaf">
+              {branches.map((p, i) => (
+                <div
+                  key={p.id}
+                  className="map-leaf"
+                  data-side={i < center ? "left" : i > center ? "right" : "center"}
+                  style={{ "--d": Math.abs(i - center) } as React.CSSProperties}
+                >
                   <Node pole={p} selected={false} />
                 </div>
               ))}
@@ -251,60 +252,51 @@ export function CompanyMap({ photos = {} }: { photos?: Photos }) {
                 id={`panel-${p.id}`}
                 aria-labelledby={`tab-${p.id}`}
                 hidden={i !== 0}
-                className="map-panel grid gap-4 lg:grid-cols-[minmax(0,380px)_minmax(0,1fr)] lg:gap-5"
+                className="map-panel grid items-center gap-8 lg:grid-cols-[minmax(0,420px)_minmax(0,1fr)] lg:gap-14"
               >
-                <div className="relative flex min-h-[260px] flex-col justify-end overflow-hidden rounded-[24px] bg-dark p-6 text-white sm:p-8 lg:min-h-[400px]">
+                {/* Photo et visuel par défaut reçoivent le même traitement (halo rouge, dégradé sombre) pour rester homogènes. */}
+                <div className="relative flex min-h-[280px] flex-col justify-end overflow-hidden rounded-[24px] bg-dark p-6 text-white sm:p-8 lg:min-h-[420px]">
                   {photo ? (
-                    <>
-                      <img
-                        src={photo.src}
-                        srcSet={photo.srcSet}
-                        sizes="(min-width: 1024px) 380px, 100vw"
-                        alt=""
-                        loading="lazy"
-                        decoding="async"
-                        className="absolute inset-0 size-full object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#14100f]/90 via-[#14100f]/40 to-transparent" />
-                    </>
+                    <img
+                      src={photo.src}
+                      srcSet={photo.srcSet}
+                      sizes="(min-width: 1024px) 420px, 100vw"
+                      alt=""
+                      loading="lazy"
+                      decoding="async"
+                      className="absolute inset-0 size-full object-cover saturate-[0.75]"
+                    />
                   ) : (
                     <div aria-hidden="true" className="absolute inset-0">
-                      <div className="absolute inset-0 bg-[radial-gradient(80%_70%_at_100%_0%,rgb(217_54_62/0.55),transparent_70%)]" />
                       <div className="absolute inset-0 bg-[radial-gradient(circle,rgb(255_255_255/0.08)_1px,transparent_1px)] bg-size-[18px_18px] mask-[linear-gradient(to_bottom,#000,transparent_75%)]" />
-                      <p.icon className="absolute -top-6 -right-6 size-48 text-white/[0.07]" strokeWidth={1} />
+                      <p.icon className="absolute -top-6 -right-6 size-52 text-white/[0.07]" strokeWidth={1} />
                     </div>
                   )}
+                  <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(80%_60%_at_100%_0%,rgb(217_54_62/0.45),transparent_70%),linear-gradient(to_top,rgb(20_16_15/0.92),rgb(20_16_15/0.35)_55%,rgb(20_16_15/0.1))]" />
                   <div className="relative flex flex-col gap-3">
                     <span className="grid size-12 place-items-center rounded-2xl bg-accent text-white shadow-[0_8px_24px_-8px_rgb(217_54_62/0.8)]">
                       <p.icon className="size-6" strokeWidth={1.75} aria-hidden="true" />
                     </span>
-                    <h3 className="text-[30px] leading-tight font-bold">{p.name}</h3>
-                    <p className="max-w-[320px] text-stone-200">{p.goal}</p>
+                    <h3 className="text-[32px] leading-tight font-bold">{p.name}</h3>
+                    <p className="max-w-[340px] text-stone-200">{p.goal}</p>
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-4">
-                  <ul className="grid flex-1 gap-4 sm:grid-cols-2">
+                <div className="flex flex-col gap-7">
+                  <ul className="flex flex-col gap-5">
                     {p.points.map((pt, k) => (
-                      <li
-                        key={pt.title}
-                        className="map-card flex flex-col gap-2 rounded-[20px] border border-line bg-white p-5 transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_16px_36px_-24px_rgb(43_37_35/0.45)] sm:p-6"
-                        style={{ "--k": k } as React.CSSProperties}
-                      >
-                        <span className="font-display text-sm font-bold text-accent-strong tabular-nums">
-                          {String(k + 1).padStart(2, "0")}
-                        </span>
-                        <strong className="text-[17px] leading-snug font-semibold">{pt.title}</strong>
-                        <span className="text-[15px] leading-relaxed text-muted">{pt.text}</span>
+                      <li key={pt.title} className="map-item flex gap-4" style={{ "--k": k } as React.CSSProperties}>
+                        <span aria-hidden="true" className="mt-2 size-2.5 shrink-0 rounded-full bg-accent ring-4 ring-pink" />
+                        <p className="text-[17px] leading-relaxed text-muted">
+                          <strong className="font-semibold text-ink">{pt.title}.</strong> {pt.text}
+                        </p>
                       </li>
                     ))}
                   </ul>
-                  <p className="flex items-center gap-3 rounded-[20px] bg-pink-soft px-5 py-4 text-[15px]">
-                    <span className="grid size-9 shrink-0 place-items-center rounded-full bg-white">
-                      <User className="size-4.5 text-accent" aria-hidden="true" />
-                    </span>
+                  <p className="flex items-start gap-3 border-t border-line pt-5 text-[15px]">
+                    <User className="mt-0.5 size-4.5 shrink-0 text-accent" aria-hidden="true" />
                     <span>
-                      <strong className="font-semibold">Ce qui reste humain : </strong>
+                      <strong className="font-semibold">Ce qui reste humain : </strong>
                       <span className="text-muted">{p.human}</span>
                     </span>
                   </p>
@@ -314,21 +306,16 @@ export function CompanyMap({ photos = {} }: { photos?: Photos }) {
           })}
         </div>
 
-        <ol className="flex flex-col items-stretch gap-2 sm:flex-row sm:items-center sm:justify-center" data-reveal>
-          {method.map((m, i) => (
-            <li key={m} className="flex items-center gap-2 sm:contents">
-              <span className="flex flex-1 items-center gap-3 rounded-full border border-line bg-white py-2 pr-5 pl-2 text-[15px] font-medium sm:flex-none">
-                <span className="grid size-7 shrink-0 place-items-center rounded-full bg-ink text-xs font-bold text-white">
-                  {i + 1}
-                </span>
-                {m}
-              </span>
-              {i < method.length - 1 ? (
-                <ArrowRight className="hidden size-4 shrink-0 text-stone-400 sm:block" aria-hidden="true" />
-              ) : null}
-            </li>
-          ))}
-        </ol>
+        <div className="flex flex-col items-center gap-6 text-center" data-reveal>
+          <p className="max-w-[760px] text-lg">
+            On ne vous propose pas de tout automatiser d&apos;un coup. On commence par un seul pôle, on pose un socle
+            qui connaît vos données, puis on ajoute des modules quand le premier rapporte.
+          </p>
+          <a href="#rdv" className="btn" data-cta="map">
+            Trouver mon premier pôle
+            <ArrowRight className="size-4" aria-hidden="true" />
+          </a>
+        </div>
       </div>
     </section>
   );

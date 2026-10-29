@@ -369,7 +369,8 @@ summary::-webkit-details-marker {
     right: 50%;
   }
   .map-leaf:has([aria-selected="true"])::before {
-    background: var(--color-accent);
+    background-color: var(--color-accent);
+    box-shadow: 0 0 10px 1px rgb(217 54 62 / 0.55);
   }
   .map-leaf .map-node {
     height: 100%;
@@ -381,9 +382,9 @@ summary::-webkit-details-marker {
   .map-panel:not([hidden]) {
     animation: map-in 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
   }
-  .map-panel:not([hidden]) .map-card {
+  .map-panel:not([hidden]) .map-item {
     animation: map-in 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
-    animation-delay: calc(var(--k) * 60ms + 80ms);
+    animation-delay: calc(var(--k) * 70ms + 100ms);
   }
 }
 @keyframes map-in {
@@ -391,4 +392,57 @@ summary::-webkit-details-marker {
     opacity: 0;
     transform: translateY(10px);
   }
+}
+
+/* L'arbre est vivant : une pulsation part de la direction, descend le tronc,
+   longe le bus vers les côtés puis entre dans chaque pôle. Boucle de 3,2 s. */
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  .map-root::after,
+  .map-leaf::before,
+  .map-leaf::after {
+    background-image: linear-gradient(var(--pulse-dir, to bottom), transparent, var(--color-accent), transparent);
+    background-repeat: no-repeat;
+    animation: map-pulse-y 3.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  .map-root::after,
+  .map-leaf::before {
+    background-size: 100% 60%;
+  }
+  .map-leaf::before {
+    animation-delay: calc(0.75s + var(--d) * 0.22s);
+  }
+  .map-leaf::after {
+    --pulse-dir: to right;
+    background-size: 70% 100%;
+    animation-name: map-pulse-right;
+    animation-delay: calc(0.45s + var(--d) * 0.22s);
+  }
+  .map-leaf[data-side="left"]::after {
+    --pulse-dir: to left;
+    animation-name: map-pulse-left;
+  }
+  .map-leaf[data-side="center"]::after {
+    animation: none;
+    background-image: none;
+  }
+  /* Le pôle sélectionné respire doucement. */
+  .map-node[aria-selected="true"] {
+    animation: map-breathe 2.4s ease-in-out infinite;
+  }
+}
+@keyframes map-pulse-y {
+  0% { background-position: 0 -150%; }
+  30%, 100% { background-position: 0 250%; }
+}
+@keyframes map-pulse-right {
+  0% { background-position: -250% 0; }
+  30%, 100% { background-position: 350% 0; }
+}
+@keyframes map-pulse-left {
+  0% { background-position: 350% 0; }
+  30%, 100% { background-position: -250% 0; }
+}
+@keyframes map-breathe {
+  0%, 100% { box-shadow: 0 16px 36px -16px rgb(28 25 23 / 0.6), 0 0 0 0 rgb(217 54 62 / 0); }
+  50% { box-shadow: 0 16px 36px -16px rgb(28 25 23 / 0.6), 0 0 0 6px rgb(217 54 62 / 0.15); }
 }
