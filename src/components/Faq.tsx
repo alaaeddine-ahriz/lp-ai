@@ -3,23 +3,27 @@ import { Plus } from "lucide-react";
 export const faqs = [
   {
     q: "Je n'ai pas d'équipe technique. C'est un problème ?",
-    a: "Non, c'est même le cas de la plupart des PME. On s'occupe de toute la partie technique. Votre rôle : nous expliquer comment vous travaillez et valider le résultat.",
+    a: "Non, c'est le cas de la plupart des PME. On s'occupe de toute la partie technique. De votre côté, il suffit de nous montrer comment vous travaillez, puis de valider le résultat.",
+  },
+  {
+    q: "Et si l'IA ne sert à rien chez moi ?",
+    a: "On vous le dit pendant l'appel. Si on ne voit aucun processus où l'IA vous fait gagner plusieurs heures par semaine, on ne vous propose rien. Vous repartez quand même avec le diagnostic.",
   },
   {
     q: "Combien ça coûte ?",
-    a: "Le diagnostic est gratuit. Ensuite, chaque cas d'usage a un prix fixe annoncé avant de signer, calculé pour être remboursé par le temps gagné en quelques mois. Pas de TJM, pas de mauvaise surprise.",
+    a: "Le diagnostic est gratuit. Ensuite, chaque outil a un prix fixe, annoncé avant de signer et calculé pour être remboursé en quelques mois par le temps gagné. Pas de facturation au jour, pas de dépassement.",
   },
   {
     q: "Mes données sont-elles en sécurité ?",
-    a: "On choisit avec vous des outils conformes au RGPD, on limite les accès au strict nécessaire et on documente où vont vos données. Les informations sensibles ne partent pas dans un outil public.",
+    a: "On choisit avec vous des outils conformes au RGPD, on limite les accès au strict nécessaire et on vous écrit noir sur blanc où vont vos données. Rien de sensible ne part dans un outil public.",
   },
   {
     q: "Et si mes équipes ne s'en servent pas ?",
-    a: "C'est pour ça qu'on part de leur travail réel et qu'on les forme sur leurs propres dossiers. Un outil que personne n'utilise ne rapporte rien, on le mesure à J+30.",
+    a: "C'est le vrai risque, alors on le traite dès le départ : on part de leur travail réel et on les forme sur leurs propres dossiers. À J+30, on mesure aussi l'usage. Un outil que personne n'ouvre ne rapporte rien.",
   },
   {
     q: "Pourquoi seulement 3 diagnostics par mois ?",
-    a: "Parce que chaque diagnostic est préparé à la main, sur votre entreprise. Au-delà, on ne pourrait plus tenir le délai de 30 jours pour les clients en cours.",
+    a: "Parce que chaque diagnostic est préparé à la main, à partir de votre entreprise. Au-delà de trois, on ne pourrait plus tenir les 30 jours pour les clients en cours.",
   },
 ];
 

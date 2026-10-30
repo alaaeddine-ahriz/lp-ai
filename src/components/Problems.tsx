@@ -6,7 +6,7 @@ type Notif = { logo: string; app: string; children: ReactNode; alert?: boolean }
 const problems: { title: string; text: string; notifs: [Notif, Notif] }[] = [
   {
     title: "Les ressaisies",
-    text: "Un devis arrive par mail, quelqu'un le recopie dans l'outil de facturation. Puis dans le tableau de suivi. Puis dans le CRM.",
+    text: "Un devis arrive par mail. Quelqu'un le recopie dans la facturation, puis dans le tableur de suivi, puis dans le CRM. La même information trois fois, et trois occasions de se tromper.",
     notifs: [
       {
         logo: "gmail",
@@ -22,7 +22,7 @@ const problems: { title: string; text: string; notifs: [Notif, Notif] }[] = [
   },
   {
     title: "La boîte mail qui déborde",
-    text: "Les demandes clients s'empilent, les relances partent en retard, et certaines opportunités ne reçoivent jamais de réponse.",
+    text: "Les demandes arrivent dans une boîte partagée. Personne ne sait qui doit répondre, la relance part avec trois jours de retard, et le client a signé ailleurs entre-temps.",
     notifs: [
       {
         logo: "outlook",
@@ -38,7 +38,7 @@ const problems: { title: string; text: string; notifs: [Notif, Notif] }[] = [
   },
   {
     title: "L'info introuvable",
-    text: "La bonne version du document est quelque part sur un drive. Il faut demander à la seule personne qui sait où elle est.",
+    text: "La bonne version du document existe, quelque part sur le drive. Pour la retrouver, il faut demander à la seule personne qui sait, et attendre qu'elle soit libre.",
     notifs: [
       { logo: "google-drive", app: "Google Drive", children: "Procedure_v3_FINAL_bis.docx" },
       { logo: "microsoft-teams", app: "Teams", children: "« Tu sais où est la dernière version ? »" },
@@ -80,8 +80,8 @@ export function Problems() {
           ))}
         </div>
         <p className="max-w-[680px] text-xl leading-relaxed" data-reveal>
-          Vous avez déjà testé ChatGPT. Vos équipes aussi, chacun dans son coin. Mais rien n&apos;a changé dans la façon
-          dont l&apos;entreprise tourne.
+          Vous avez sûrement déjà testé ChatGPT, et vos équipes aussi, chacun de son côté. C&apos;est pratique pour
+          écrire un mail. Mais ça ne change rien à la façon dont l&apos;entreprise tourne.
         </p>
       </div>
     </section>

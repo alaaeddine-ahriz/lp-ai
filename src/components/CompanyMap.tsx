@@ -27,11 +27,11 @@ const poles: Pole[] = [
     points: [
       {
         title: "Le cockpit du dirigeant",
-        text: "Chiffre d'affaires, trésorerie, devis en cours : tout sur votre téléphone, branché sur votre compta et votre CRM. Et vous pouvez lui poser vos questions.",
+        text: "Le chiffre du mois, la trésorerie, les devis en attente : sur votre téléphone, branché sur votre compta et votre CRM. Vous lui posez une question, il vous répond avec vos chiffres.",
       },
       {
         title: "L'assistant email",
-        text: "Votre boîte triée, un résumé chaque matin, des brouillons de réponse dans votre ton. Rien ne part sans vous.",
+        text: "Votre boîte triée chaque matin, un résumé de ce qui compte, et des brouillons de réponse écrits comme vous écrivez. Rien ne part sans que vous l'ayez relu.",
       },
     ],
     human: "Le management de vos équipes et vos relations.",
@@ -44,15 +44,15 @@ const poles: Pole[] = [
     points: [
       {
         title: "Veille concurrentielle",
-        text: "Les publicités de vos concurrents surveillées en continu, avec chaque semaine les angles qui marchent.",
+        text: "On surveille les publicités de vos concurrents et, chaque semaine, vous recevez les angles qui fonctionnent chez eux.",
       },
       {
         title: "Production de contenu",
-        text: "Posts, articles, pages : un outil qui connaît votre offre et votre ton, pas du texte générique.",
+        text: "Posts, articles, pages de vente, écrits par un outil qui connaît votre offre, vos clients et votre façon de parler.",
       },
       {
         title: "Reporting des campagnes",
-        text: "Dépenses, clics, conversions réunis dans un seul tableau de bord.",
+        text: "Dépenses, clics et conversions réunis au même endroit, sans attendre le rapport de l'agence.",
       },
     ],
     human: "Le tournage, votre image, les relations presse.",
@@ -65,19 +65,19 @@ const poles: Pole[] = [
     points: [
       {
         title: "Fichier de prospects",
-        text: "Trouvés, enrichis (nom, poste, taille, actualités) et segmentés comme vous le souhaitez.",
+        text: "Les bonnes entreprises, le bon interlocuteur, ses coordonnées et l'actualité de sa boîte, triés comme vous le voulez.",
       },
       {
         title: "Messages personnalisés",
-        text: "Chaque prospect reçoit un message écrit pour lui, même à grande échelle.",
+        text: "Chaque prospect reçoit un message écrit pour lui, même quand vous en contactez des centaines.",
       },
       {
         title: "Réponse immédiate",
-        text: "Un prospect intéressé reçoit une proposition de rendez-vous tant qu'il est chaud. Tout est rangé dans le CRM.",
+        text: "Quand un prospect répond qu'il est intéressé, il reçoit tout de suite une proposition de rendez-vous. Le CRM se met à jour tout seul.",
       },
       {
         title: "Standard pour les appels entrants",
-        text: "Il répond, qualifie la demande et prend rendez-vous quand personne n'est disponible.",
+        text: "Quand personne ne peut décrocher, il répond, comprend la demande et prend rendez-vous.",
       },
     ],
     human: "Les appels de prospection : pas de voix robot qui démarche vos prospects.",
@@ -90,19 +90,19 @@ const poles: Pole[] = [
     points: [
       {
         title: "Préparation des rendez-vous",
-        text: "Une fiche prête avant chaque rendez-vous : chiffres, équipe, actualités, questions à poser.",
+        text: "Avant chaque rendez-vous, une fiche sur l'entreprise : ses chiffres, son équipe, ses actualités et les questions à poser.",
       },
       {
         title: "Chiffrage assisté",
-        text: "L'outil lit le dossier de consultation et prépare l'estimation. Vous répondez avant vos concurrents.",
+        text: "L'outil lit le dossier de consultation et prépare l'estimation. Vous pouvez répondre avant vos concurrents.",
       },
       {
         title: "Comptes rendus automatiques",
-        text: "Après chaque appel, le compte rendu arrive dans le CRM et le récapitulatif part au client.",
+        text: "Après chaque appel, le compte rendu est dans le CRM et le client a reçu le récapitulatif avec les prochaines étapes.",
       },
       {
         title: "Relances et démarrage client",
-        text: "Relance des devis non signés ; contrat, signature et appel de lancement pour ceux qui signent.",
+        text: "Les devis non signés sont relancés au bon moment. Pour ceux qui signent, le contrat, la signature et l'appel de lancement s'enchaînent.",
       },
     ],
     human: "La relation et la négociation.",
@@ -115,15 +115,15 @@ const poles: Pole[] = [
     points: [
       {
         title: "Planification",
-        text: "Le cahier des charges découpé en tâches, réparties dans l'équipe, avec un planning.",
+        text: "Le cahier des charges découpé en tâches, réparties dans l'équipe, avec un planning que tout le monde voit.",
       },
       {
         title: "Client tenu informé",
-        text: "Chaque étape validée prévient le client. Moins d'allers-retours, un client qui se sent suivi.",
+        text: "À chaque étape validée, le client reçoit un mot. Il sait où en est son projet sans avoir à appeler.",
       },
       {
         title: "Outils métier sur mesure",
-        text: "Fiches de mesure, briefs atelier, plannings, suivi du stock : faits pour votre façon de travailler.",
+        text: "Fiches de mesure, briefs pour l'atelier, plannings, suivi du stock : des outils faits pour votre métier, pas pour un autre.",
       },
     ],
     human: "Votre savoir-faire et la livraison.",
@@ -132,15 +132,15 @@ const poles: Pole[] = [
     id: "rh",
     name: "RH",
     icon: Users,
-    goal: "Recruter et intégrer sans y passer vos semaines.",
+    goal: "Recruter et accueillir sans y passer vos semaines.",
     points: [
       {
         title: "Recrutement",
-        text: "Fiches de poste, annonces, tri des CV, préparation des entretiens et comptes rendus.",
+        text: "Fiches de poste, annonces, premier tri des CV, préparation des entretiens et comptes rendus.",
       },
       {
         title: "Assistant interne",
-        text: "Les nouveaux posent leurs questions à un assistant qui connaît vos procédures, pas à leur manager toutes les 5 minutes.",
+        text: "Un nouvel arrivant pose ses questions à un assistant qui connaît vos procédures, plutôt qu'à son manager toutes les cinq minutes.",
       },
     ],
     human: "Le choix des personnes.",
@@ -153,15 +153,15 @@ const poles: Pole[] = [
     points: [
       {
         title: "Relances de factures",
-        text: "Les impayés relancés au bon moment, sans que vous ayez à y penser.",
+        text: "Les impayés sont relancés au bon moment, avec le bon ton, sans que vous ayez à y penser.",
       },
       {
         title: "Lien avec le comptable",
-        text: "Pièces et données préparées et transmises, archivage en règle.",
+        text: "Les pièces et les données sont préparées et envoyées au cabinet, et tout est archivé comme il faut.",
       },
       {
         title: "Suivi budgétaire",
-        text: "Ce qui rentre, ce qui sort, ce qui est rentable : directement dans votre cockpit.",
+        text: "Ce qui rentre, ce qui sort et ce qui rapporte vraiment : directement dans votre cockpit.",
       },
     ],
     human: "Les décisions financières.",
@@ -230,8 +230,8 @@ export function CompanyMap({ photos = {} }: { photos?: Photos }) {
             Où l&apos;IA peut intervenir <span className="tone">dans votre entreprise.</span>
           </h2>
           <p className="max-w-[520px] text-lg leading-relaxed text-muted">
-            On n&apos;invente rien : chaque point est une tâche que quelqu&apos;un fait déjà chez vous, souvent à la
-            main. Et que vous payez déjà.{" "}
+            On n&apos;invente rien. Chaque point de cette carte est une tâche que quelqu&apos;un fait déjà chez vous,
+            souvent à la main, et que vous payez déjà.{" "}
             <span className="hidden lg:inline">Cliquez sur votre pôle.</span>
             <span className="lg:hidden">Faites glisser pour voir chaque pôle.</span>
           </p>
@@ -352,8 +352,9 @@ export function CompanyMap({ photos = {} }: { photos?: Photos }) {
 
         <div className="flex flex-col items-start gap-6 border-t border-line pt-10 lg:flex-row lg:items-center lg:justify-between" data-reveal>
           <p className="max-w-[680px] text-lg leading-relaxed">
-            On ne vous propose pas de tout automatiser d&apos;un coup. On commence par un seul pôle, on pose un socle
-            qui connaît vos données, puis on ajoute des modules quand le premier rapporte.
+            On ne vous propose pas de tout automatiser d&apos;un coup. On choisit un seul pôle, celui qui vous coûte le
+            plus. On y pose un socle qui connaît vos données, et on n&apos;ajoute la suite que quand ce premier outil a fait
+            ses preuves.
           </p>
           <a href="#rdv" className="btn" data-cta="map">
             Trouver mon premier pôle

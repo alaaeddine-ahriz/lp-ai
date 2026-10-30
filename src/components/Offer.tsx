@@ -6,31 +6,31 @@ const steps = [
     when: "Jour 0",
     icon: ScanSearch,
     title: "Diagnostic de vos processus",
-    text: "On cartographie ce qui prend du temps, qui le fait, et combien ça coûte chaque mois.",
+    text: "On passe en revue ce qui prend du temps, qui s'en charge, et ce que ça vous coûte chaque mois.",
   },
   {
     when: "Jour 7",
     icon: Route,
     title: "Feuille de route chiffrée",
-    text: "Vos cas d'usage classés par gain, délai et risque. Vous savez ce que chacun rapporte avant de dépenser un euro.",
+    text: "Les chantiers possibles, classés par gain, délai et risque. Vous savez ce que chacun rapporte avant de dépenser un euro.",
   },
   {
     when: "Jour 7 → 30",
     icon: PlugZap,
     title: "Déploiement clé en main",
-    text: "On construit l'outil, on le branche sur vos logiciels actuels, on le teste avec vous.",
+    text: "On construit l'outil, on le branche sur vos logiciels et on le teste avec les personnes qui vont s'en servir.",
   },
   {
     when: "Jour 30",
     icon: GraduationCap,
     title: "Formation de l'équipe concernée",
-    text: "Une session pratique sur leur vrai travail, pas un cours théorique sur l'IA.",
+    text: "Une session de travail sur leurs propres dossiers. Le lendemain, ils savent s'en servir.",
   },
   {
     when: "J+30",
     icon: Gauge,
     title: "Mesure du gain à J+30",
-    text: "On compare avant et après. Le chiffre est le vôtre, pas une estimation de brochure.",
+    text: "On compare avant et après, en heures et en euros. Le chiffre est mesuré chez vous, avec vous.",
   },
 ];
 
@@ -41,7 +41,7 @@ export function Offer() {
         <div className="mx-auto flex max-w-[1180px] flex-col gap-14">
           <h2 className="h2" data-reveal>
             Le Programme Premier Gain.{" "}
-            <span className="tone">Un outil IA qui tourne dans votre entreprise, mesuré, en 30&nbsp;jours.</span>
+            <span className="tone">Un premier outil qui tourne chez vous en 30&nbsp;jours, et le gain mesuré.</span>
           </h2>
 
           <ol className="flow" data-flow aria-label="Les étapes du programme">
@@ -66,7 +66,7 @@ export function Offer() {
             <a href="#rdv" className="btn" data-cta="offer">
               Voir ce que ça donne chez moi
             </a>
-            <span className="text-sm text-muted">Gratuit, sans engagement · 3 places par mois</span>
+            <span className="text-sm text-muted">Gratuit, sans engagement · 3 créneaux par mois</span>
           </div>
         </div>
       </div>

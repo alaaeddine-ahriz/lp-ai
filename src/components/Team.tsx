@@ -53,12 +53,12 @@ export function Team({ photo }: { photo?: Photo }) {
   const text = (
     <>
       <h2 className="h2">
-        Des ingénieurs qui construisent, <span className="tone">pas des formateurs qui conseillent.</span>
+        Des ingénieurs qui construisent. <span className="tone">Pas des formateurs qui conseillent.</span>
       </h2>
       <p className="max-w-[640px] text-lg leading-relaxed text-muted">
-        Une équipe d&apos;ingénieurs issus des meilleures écoles, qui a mis en production des infrastructures et des
-        chaînes d&apos;automatisation pour de grands groupes. On applique la même rigueur aux PME : des systèmes qui
-        tournent, mesurés, maintenus.
+        Nous sommes ingénieurs. Avant Socle, on a mis en production des infrastructures et des chaînes
+        d&apos;automatisation pour de grands groupes. On apporte la même exigence aux PME : des outils qui tournent,
+        qu&apos;on mesure et qu&apos;on maintient.
       </p>
     </>
   );

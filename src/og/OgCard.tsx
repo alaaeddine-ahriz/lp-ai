@@ -13,7 +13,7 @@ export function OgCard() {
         padding: 72,
         background: "radial-gradient(60% 80% at 75% 15%, #3b3b39, #0b0b0b 70%)",
         color: "#fff",
-        fontFamily: "Onest",
+        fontFamily: "Familjen",
       }}
     >
       <div style={{ display: "flex", fontSize: 40, fontWeight: 600, letterSpacing: -1.5 }}>
@@ -24,7 +24,7 @@ export function OgCard() {
         <div style={{ display: "flex", flexWrap: "wrap", fontSize: 78, fontWeight: 600, lineHeight: 1.0, letterSpacing: -3, maxWidth: 1040 }}>
           Vos équipes perdent des heures.&nbsp;<span style={{ color: "#8b8a86" }}>Vous perdez des marchés.</span>
         </div>
-        <div style={{ display: "flex", fontSize: 28, color: "#a8a7a3" }}>Diagnostic gratuit · 30 minutes · 3 places par mois</div>
+        <div style={{ display: "flex", fontSize: 28, color: "#a8a7a3" }}>Diagnostic gratuit · 30 minutes · 3 créneaux par mois</div>
       </div>
     </div>
   );

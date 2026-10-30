@@ -10,15 +10,15 @@ export function FinalCta() {
             30 minutes pour savoir <span className="text-stone-500">combien l&apos;IA peut vous rapporter.</span>
           </h2>
           <p className="max-w-[600px] text-lg leading-relaxed text-stone-300">
-            Vous repartez avec 3 processus à fort potentiel et une estimation du temps qu&apos;ils vous coûtent chaque
-            mois. Même si on ne travaille pas ensemble.
+            Vous repartez avec les trois tâches qui vous coûtent le plus, et ce qu&apos;elles vous coûtent chaque mois.
+            Même si on ne travaille pas ensemble ensuite.
           </p>
           {site.calLink ? null : (
             <a href={bookingUrl} className="btn btn-light" data-cta="final">
-              Réserver mon diagnostic gratuit
+              Réserver un diagnostic gratuit
             </a>
           )}
-          <small className="text-sm text-stone-400">Gratuit, sans engagement · 3 places par mois</small>
+          <small className="text-sm text-stone-400">Gratuit, sans engagement · 3 créneaux par mois</small>
         </div>
 
         {site.calLink ? (
@@ -28,7 +28,7 @@ export function FinalCta() {
             </div>
             <p className="mt-4 text-center text-sm text-stone-300">
               <a href={bookingUrl} target="_blank" rel="noopener" className="underline underline-offset-4 hover:text-white" data-cta="final_newtab">
-                Réserver mon diagnostic gratuit
+                Réserver un diagnostic gratuit
               </a>
             </p>
           </div>

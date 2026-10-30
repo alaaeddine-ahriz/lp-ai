@@ -4,10 +4,10 @@ import { site } from "@/config/site";
 /* Une ligne = une promesse habituelle et ce qu'on fait à la place. Notre colonne est celle qu'on lit en premier. */
 const rows = [
   ["« L'IA va transformer votre entreprise »", "Un gain chiffré en heures et en euros, avant de commencer"],
-  ["Un projet de 6 mois au périmètre flou", "Un premier outil en production en 30 jours"],
-  ["Une formation, puis débrouillez-vous", "On construit, on branche, on forme. Vous validez."],
-  ["Des automatisations bricolées qui cassent", "Un outil fait pour votre façon de travailler, et maintenu"],
-  ["Un TJM qui dérape", "Un prix fixe, annoncé avant de signer"],
+  ["Un projet de six mois dont personne ne connaît le périmètre", "Un premier outil utilisé par votre équipe au bout de 30 jours"],
+  ["Une formation, puis débrouillez-vous", "On construit, on installe, et on forme vos équipes sur leurs vrais dossiers"],
+  ["Des automatisations bricolées qui cassent au premier changement", "Un outil fait pour votre façon de travailler, et qu'on maintient"],
+  ["Un TJM qui dérape", "Un prix fixe, connu avant de signer"],
 ];
 
 const lowerFirst = (t: string) => t.charAt(0).toLowerCase() + t.slice(1);

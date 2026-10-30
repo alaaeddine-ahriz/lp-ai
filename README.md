@@ -61,7 +61,7 @@ Il faut déclarer ces deux objectifs (« Custom event goals ») dans Plausible.
 
 Construite sur les principes de Hormozi (*$100M Offers*) : une seule action possible (réserver le diagnostic), pas de menu, et un enchaînement qui monte la valeur perçue.
 
-1. **Hero** : la douleur (« Vos équipes perdent des heures. Vous perdez des marchés. », la fin de phrase défile : marchés, clients, devis, marge), puis le délai (30 jours), l'effort nul et la rareté (3 places par mois).
+1. **Hero** : la douleur (« Vos équipes perdent des heures. Vous perdez des marchés. », la fin de phrase défile : marchés, clients, devis, marge), illustrée par des situations concrètes, puis le délai (30 jours) et la rareté (3 créneaux par mois).
 2. **Outils** : logos des outils qu'on sait brancher (API publique ou export).
 3. **Le constat** : le problème n'est pas l'IA, c'est de savoir par où commencer.
 4. **La carte** : un organigramme cliquable et animé (la direction en haut, 7 pôles en dessous). Pour chaque pôle : une carte visuelle, les leviers en liste et ce qui reste humain. Se termine sur la méthode (un seul pôle, un socle, puis des modules) et un bouton.
@@ -115,11 +115,15 @@ public/logos/             logos des outils
 
 ## Direction artistique
 
-Inspirée de Qonto : presque monochrome, pour que la page ait l'air faite à la main plutôt que générée.
+Inspirée de Qonto : sobre, pour que la page ait l'air pensée plutôt que générée.
 
-- **Une seule police**, Onest (titres et texte), auto-hébergée depuis Fontsource et préchargée.
+- **Polices** : Familjen Grotesk pour les titres (préchargée), Inter pour le texte, auto-hébergées depuis Fontsource.
 - **Couleurs** : noir (`--color-dark`), gris chauds (`--color-sand`, `--color-sand-soft`) et blanc. Le rouge de la marque n'apparaît que dans le point du logo (« Socle. »).
 - **Titres en deux tons** : la seconde moitié en gris, avec `<span className="tone">`.
 - **Boutons** rectangulaires (coins de 8 px) : noirs sur fond clair, blancs ou en contour sur fond sombre.
 - **Grain** : classe `grain` (et `grain-dark` sur fond sombre), posée sur le hero, le panneau de l'offre, les visuels des pôles, les vignettes du constat et l'appel final.
 - **En-tête** sombre au-dessus du hero, clair ensuite.
+
+## Ton
+
+Le texte décrit des situations concrètes (« un devis recopié trois fois ») plutôt que des promesses générales, parle comme on parlerait à un dirigeant au téléphone, et évite les slogans. Un même libellé pour toutes les actions : « Réserver un diagnostic gratuit ».

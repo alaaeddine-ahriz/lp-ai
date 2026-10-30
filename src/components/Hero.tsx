@@ -29,7 +29,7 @@ export function Hero({ image }: { image?: Photo }) {
       </div>
 
       <div className="wrap relative flex min-h-[calc(100svh-4rem)] max-h-[860px] flex-col justify-end gap-8 pt-24 pb-14 sm:pb-20 lg:min-h-[640px]">
-        <p className="text-sm text-stone-400">Diagnostic gratuit · 30 minutes · 3 places par mois</p>
+        <p className="text-sm text-stone-400">Pour les PME de 5 à 50 personnes</p>
         <h1 className="max-w-[980px] text-[clamp(2.5rem,6.2vw,5.25rem)] leading-[1.0]">
           Vos équipes perdent des heures. <span className="tone">Vous perdez </span>
           <span className="sr-only">des marchés.</span>
@@ -43,17 +43,20 @@ export function Hero({ image }: { image?: Photo }) {
           </span>
         </h1>
         <p className="max-w-[600px] text-lg leading-relaxed text-stone-300">
-          On récupère ces heures avec l&apos;IA en 30&nbsp;jours. On repère vos 3 processus les plus coûteux, on
-          construit l&apos;outil qui les règle, et on vous montre le gain en euros. Vous ne touchez pas une ligne de
-          code.
+          Un devis recopié trois fois. Une relance qui n&apos;est jamais partie. Un fichier que seule Sophie sait
+          retrouver. On part de là&nbsp;: on trouve les trois tâches qui vous coûtent le plus, on construit l&apos;outil
+          qui s&apos;en charge, et au bout de 30&nbsp;jours on compte ensemble les heures récupérées.
         </p>
-        <div className="flex flex-wrap gap-3">
-          <a href="#rdv" className="btn btn-light" data-cta="hero">
-            Réserver mon diagnostic gratuit
-          </a>
-          <a href="#carte" className="btn btn-outline" data-cta="hero_map">
-            Voir où l&apos;IA intervient
-          </a>
+        <div className="flex flex-col gap-4">
+          <div className="flex flex-wrap gap-3">
+            <a href="#rdv" className="btn btn-light" data-cta="hero">
+              Réserver un diagnostic gratuit
+            </a>
+            <a href="#carte" className="btn btn-outline" data-cta="hero_map">
+              Voir où l&apos;IA intervient
+            </a>
+          </div>
+          <p className="text-sm text-stone-400">30 minutes en visio. 3 créneaux par mois.</p>
         </div>
       </div>
     </section>

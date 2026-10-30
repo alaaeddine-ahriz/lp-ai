@@ -13,8 +13,8 @@
   --color-dark: #0b0b0b;
   --color-darker: #050505;
 
-  --font-sans: var(--font-onest), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-onest), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-familjen), var(--font-inter), ui-sans-serif, sans-serif;
 
   --radius-card: 1.25rem;
   --radius-panel: 1.75rem;
