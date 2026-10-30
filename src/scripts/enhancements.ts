@@ -70,30 +70,79 @@ if (calEl) {
   calObserver.observe(calEl);
 }
 
-/* La carte des pôles (ordinateur) : onglets verticaux, clic ou flèches haut/bas, Début/Fin. */
+/* La carte des pôles (ordinateur).
+   Mode défilement : la carte s'élargit en approchant du haut de l'écran, se fige, et chaque palier de défilement
+   (45 % de la hauteur d'écran, comme dans global.css) affiche le pôle suivant. Les onglets font défiler jusqu'au pôle.
+   Sans ce mode (mouvement réduit), les onglets fonctionnent comme des onglets classiques. */
 document.querySelectorAll<HTMLElement>("[data-map]").forEach((root) => {
   const tabs = [...root.querySelectorAll<HTMLButtonElement>('[role="tab"]')];
-  const select = (tab: HTMLButtonElement, focus = false) => {
-    for (const t of tabs) {
-      const on = t === tab;
+  const photos = [...root.querySelectorAll<HTMLElement>("[data-photo]")];
+  const count = root.querySelector<HTMLElement>("[data-map-count]");
+  const stage = root.querySelector<HTMLElement>(".map-stage")!;
+  const scrollMode = window.matchMedia("(min-width: 1024px) and (prefers-reduced-motion: no-preference)");
+  let current = 0;
+
+  const show = (i: number) => {
+    if (i === current && tabs[i].getAttribute("aria-selected") === "true") return;
+    current = i;
+    tabs.forEach((t, k) => {
+      const on = k === i;
       t.setAttribute("aria-selected", String(on));
       t.tabIndex = on ? 0 : -1;
       document.getElementById(t.getAttribute("aria-controls")!)!.hidden = !on;
-    }
-    if (focus) tab.focus();
+    });
+    photos.forEach((p) => (p.hidden = p.dataset.photo !== tabs[i].getAttribute("aria-controls")));
+    if (count) count.textContent = String(i + 1).padStart(2, "0");
   };
+
+  const step = () => window.innerHeight * 0.45;
+  const stickyTop = () => parseFloat(getComputedStyle(stage).top) || 0;
+
+  // Défile jusqu'au palier du pôle i (au milieu du palier, pour ne pas tomber sur une frontière).
+  const goTo = (i: number) => {
+    if (!scrollMode.matches) return show(i);
+    const top = root.getBoundingClientRect().top + window.scrollY - stickyTop();
+    window.scrollTo({ top: top + (i + 0.5) * step(), behavior: "smooth" });
+  };
+
+  let ticking = false;
+  const update = () => {
+    ticking = false;
+    if (!scrollMode.matches) return;
+    const rect = root.getBoundingClientRect();
+    const past = stickyTop() - rect.top; // distance parcourue depuis que la carte est figée
+    const approach = window.innerHeight * 0.5;
+    root.style.setProperty("--e", String(Math.min(1, Math.max(0, (past + approach) / approach))));
+    show(Math.min(tabs.length - 1, Math.max(0, Math.floor(past / step()))));
+  };
+  const onScroll = () => {
+    if (!ticking) requestAnimationFrame(update);
+    ticking = true;
+  };
+
+  const setMode = () => {
+    root.toggleAttribute("data-scroll", scrollMode.matches);
+    if (!scrollMode.matches) root.style.setProperty("--e", "0");
+    update();
+  };
+  scrollMode.addEventListener("change", setMode);
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll);
+  setMode();
+
   tabs.forEach((tab, i) => {
-    tab.addEventListener("click", () => select(tab));
+    tab.addEventListener("click", () => goTo(i));
     tab.addEventListener("keydown", (e) => {
       const next =
-        e.key === "ArrowDown" ? tabs[(i + 1) % tabs.length]
-        : e.key === "ArrowUp" ? tabs[(i - 1 + tabs.length) % tabs.length]
-        : e.key === "Home" ? tabs[0]
-        : e.key === "End" ? tabs[tabs.length - 1]
+        e.key === "ArrowDown" ? (i + 1) % tabs.length
+        : e.key === "ArrowUp" ? (i - 1 + tabs.length) % tabs.length
+        : e.key === "Home" ? 0
+        : e.key === "End" ? tabs.length - 1
         : null;
-      if (!next) return;
+      if (next === null) return;
       e.preventDefault();
-      select(next, true);
+      goTo(next);
+      tabs[next].focus({ preventScroll: true });
     });
   });
 });

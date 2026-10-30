@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import { Check } from "lucide-react";
 import { Logo } from "./Logo";
 
 type Notif = { logo: string; app: string; children: ReactNode; alert?: boolean };
@@ -61,18 +60,13 @@ function Notification({ logo, app, children, alert, className }: Notif & { class
   );
 }
 
-const chatgptSteps = [
-  "Retrouver les devis sans réponse dans le tableur",
-  "Ouvrir ChatGPT et demander une relance",
-  "Copier le texte dans Outlook, joindre le devis",
-  "Envoyer",
-  "Noter la relance dans le tableur",
-];
-
-const toolSteps = [
-  "Chaque matin, l'outil repère les devis sans réponse depuis 7 jours",
-  "La relance est déjà prête dans Outlook, devis joint, dans votre ton",
-  "Julie relit et clique sur Envoyer",
+/* Exemple chiffré : une PME qui envoie une dizaine de devis par semaine. Chaque étape faite à la main, et ce qu'elle coûte. */
+const ledger = [
+  ["Retrouver les devis sans réponse dans le tableur", "20 min par semaine, quand quelqu'un y pense"],
+  ["Écrire la relance avec ChatGPT, la copier dans Outlook", "5 min par devis"],
+  ["Relancer avec une semaine de retard", "Le client a eu le temps de signer ailleurs"],
+  ["Oublier de relancer, la semaine où Julie est en congé", "Un devis perdu, sans que personne ne le sache"],
+  ["Noter la relance dans le tableur", "Un suivi faux dès qu'on saute une ligne"],
 ];
 
 export function Problems() {
@@ -94,55 +88,46 @@ export function Problems() {
             </article>
           ))}
         </div>
-        {/* ChatGPT : la même tâche, faite deux fois. À gauche à la main avec ChatGPT, à droite avec un outil construit. */}
+        {/* ChatGPT : une tâche courante, découpée en étapes, avec ce que chaque étape coûte vraiment. */}
         <div className="grain flex flex-col gap-8 overflow-hidden rounded-[24px] bg-clay p-6 sm:p-10" data-reveal>
-          <div className="grid gap-4 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] lg:items-end lg:gap-14">
-            <p className="text-[clamp(1.5rem,2.6vw,2rem)] leading-[1.15] font-medium tracking-[-0.02em] [font-family:var(--font-display)]">
-              «&nbsp;On utilise déjà ChatGPT.&nbsp;» C&apos;est un bon début. Mais ChatGPT écrit le mail. Il ne l&apos;envoie pas, et il
-              ne sait pas qu&apos;il fallait l&apos;envoyer.
+          <div className="flex flex-col gap-3">
+            <p className="max-w-[820px] text-[clamp(1.5rem,2.6vw,2rem)] leading-[1.15] font-medium tracking-[-0.02em] [font-family:var(--font-display)]">
+              «&nbsp;On utilise déjà ChatGPT.&nbsp;» C&apos;est un bon début. Mais ChatGPT écrit le mail. Il ne
+              l&apos;envoie pas, et il ne sait pas qu&apos;il fallait l&apos;envoyer.
             </p>
-            <p className="text-[17px] leading-relaxed text-muted">
-              Exemple avec une tâche que toutes les PME connaissent&nbsp;: relancer un devis resté sans réponse.
+            <p className="text-[17px] text-muted">
+              Exemple&nbsp;: relancer les devis restés sans réponse, pour une dizaine de devis par semaine.
             </p>
           </div>
 
-          <div className="grid gap-4 md:grid-cols-2">
-            <div className="flex flex-col gap-5 rounded-2xl bg-paper/80 p-6 sm:p-7">
-              <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
-                <h3 className="text-xl">Avec ChatGPT</h3>
-                <span className="text-sm text-muted">5 étapes, à la main</span>
-              </div>
-              <ol className="flex flex-col gap-3 text-[15px] text-muted">
-                {chatgptSteps.map((step, i) => (
-                  <li key={step} className="flex gap-3">
-                    <span className="w-4 shrink-0 text-soft tabular-nums">{i + 1}</span>
-                    {step}
-                  </li>
-                ))}
-              </ol>
-              <p className="mt-auto text-[15px]">
-                Pour chaque devis. Et la semaine où Julie est en congé, personne ne relance.
-              </p>
+          <div className="overflow-hidden rounded-2xl bg-paper/85">
+            <div className="hidden grid-cols-[minmax(0,1fr)_minmax(0,1fr)] gap-8 px-6 pt-5 pb-3 text-sm text-soft sm:grid">
+              <span>À la main, avec ChatGPT</span>
+              <span>Ce que ça vous coûte</span>
             </div>
-
-            <div className="grain-dark grain on-dark flex flex-col gap-5 rounded-2xl bg-dark p-6 text-white sm:p-7">
-              <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
-                <h3 className="text-xl">Avec un outil construit pour vous</h3>
-                <span className="text-sm text-on-dark-soft">1 clic</span>
-              </div>
-              <ol className="flex flex-col gap-3 text-[15px] text-[#ebe3d9]">
-                {toolSteps.map((step) => (
-                  <li key={step} className="flex gap-3">
-                    <Check className="mt-0.5 size-4 shrink-0 text-white" strokeWidth={2.5} aria-hidden="true" />
-                    {step}
-                  </li>
-                ))}
-              </ol>
-              <p className="mt-auto text-[15px] text-white">
-                Le suivi se met à jour tout seul. Aucun devis ne passe entre les mailles.
-              </p>
-            </div>
+            <ul>
+              {ledger.map(([step, loss]) => (
+                <li
+                  key={step}
+                  className="grid gap-1 border-t border-line px-6 py-4 first:border-t-0 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] sm:gap-8 sm:first:border-t"
+                >
+                  <span className="text-[15px] text-muted">{step}</span>
+                  <span className="text-[16px] font-medium">{loss}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="border-t border-line bg-sand px-6 py-4 text-[16px]">
+              <strong className="font-medium">Au total</strong>&nbsp;: plus d&apos;une heure par semaine de travail à la
+              main, et des devis qui partent chez un concurrent. C&apos;est ce chiffre-là qu&apos;on calcule avec vous
+              pendant l&apos;audit.
+            </p>
           </div>
+
+          <p className="grain grain-dark on-dark rounded-2xl bg-dark px-6 py-5 text-[16px] leading-relaxed text-[#ebe3d9]">
+            <strong className="font-medium text-white">Avec un outil construit pour vous&nbsp;:</strong> chaque matin, les
+            relances sont prêtes dans Outlook, devis joint. Julie relit, clique sur Envoyer, et le suivi se met à jour
+            tout seul. Dix minutes par semaine, et plus aucun devis oublié.
+          </p>
         </div>
       </div>
     </section>

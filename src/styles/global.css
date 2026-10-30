@@ -316,12 +316,34 @@ summary::-webkit-details-marker {
   25%, 100% { opacity: 0; }
 }
 
-/* ---------- La carte : panneau du pôle choisi ---------- */
+/* ---------- La carte (ordinateur) ----------
+   --e (0 → 1) : la carte s'élargit du conteneur jusqu'aux bords. Posé par src/scripts/enhancements.ts.
+   Le rognage (clip-path) évite de recalculer la mise en page à chaque image. */
+.map-scroll {
+  --h: clamp(580px, calc(100svh - 7rem), 740px);
+  --e: 0;
+}
+.map-card {
+  height: var(--h);
+  clip-path: inset(
+    0 calc((100% - min(1180px, 100% - 48px)) / 2 * (1 - var(--e))) round calc(28px * (1 - var(--e)))
+  );
+}
+/* Mode défilement : la section s'allonge (un palier de 45svh par pôle, comme dans le script) et la carte se fige. */
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  .map-scroll[data-scroll] {
+    height: calc(var(--h) + 8 * 45svh);
+  }
+  .map-scroll[data-scroll] .map-stage {
+    position: sticky;
+    top: calc(4rem + (100svh - 4rem - var(--h)) / 2);
+  }
+}
 @media (prefers-reduced-motion: no-preference) {
-  .map-panel:not([hidden]) > :not(.map-photo) {
+  .map-panel:not([hidden]) {
     animation: map-in 0.35s ease-out;
   }
-  .map-panel:not([hidden]) .map-photo {
+  .map-photo:not([hidden]) {
     animation: map-fade 0.5s ease-out;
   }
 }
