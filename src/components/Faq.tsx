@@ -31,9 +31,17 @@ export function Faq() {
   return (
     <section id="faq" className="px-5 py-14 sm:px-6 sm:py-20">
       <div className="mx-auto grid max-w-[1180px] gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)] lg:gap-16">
-        <h2 className="h2 lg:sticky lg:top-28 lg:self-start" data-reveal>
-          Vos questions, <span className="tone">nos réponses.</span>
-        </h2>
+        <div className="flex flex-col gap-6 lg:sticky lg:top-28 lg:self-start" data-reveal>
+          <h2 className="h2">
+            Vos questions, <span className="tone">nos réponses.</span>
+          </h2>
+          <p className="max-w-[360px] text-[17px] leading-relaxed text-muted">
+            Une question qui n&apos;est pas ici ? Posez-la pendant l&apos;audit, c&apos;est fait pour ça.
+          </p>
+          <a href="#rdv" className="btn self-start" data-cta="faq">
+            Réserver un audit gratuit
+          </a>
+        </div>
         <div className="border-t border-line">
           {faqs.map((f) => (
             <details key={f.q} name="faq" className="group border-b border-line">

@@ -318,8 +318,16 @@ summary::-webkit-details-marker {
 
 /* ---------- La carte : panneau du pôle choisi ---------- */
 @media (prefers-reduced-motion: no-preference) {
-  .map-panel:not([hidden]) {
-    animation: map-in 0.3s ease-out;
+  .map-panel:not([hidden]) > :not(.map-photo) {
+    animation: map-in 0.35s ease-out;
+  }
+  .map-panel:not([hidden]) .map-photo {
+    animation: map-fade 0.5s ease-out;
+  }
+}
+@keyframes map-fade {
+  from {
+    opacity: 0;
   }
 }
 @keyframes map-in {

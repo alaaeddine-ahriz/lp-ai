@@ -21,7 +21,7 @@ export function Header() {
           className="btn btn-sm group-data-[theme=dark]/header:border-white group-data-[theme=dark]/header:bg-white group-data-[theme=dark]/header:text-ink"
           data-cta="header"
         >
-          Réserver un diagnostic
+          Réserver un audit
         </a>
       </div>
     </header>

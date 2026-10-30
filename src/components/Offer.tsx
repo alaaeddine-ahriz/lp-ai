@@ -29,7 +29,7 @@ const steps = [
   {
     when: "J+30",
     icon: Gauge,
-    title: "Mesure du gain à J+30",
+    title: "Mesure du gain",
     text: "On compare avant et après, en heures et en euros. Le chiffre est mesuré chez vous, avec vous.",
   },
 ];

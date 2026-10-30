@@ -53,12 +53,12 @@ export function Team({ photo }: { photo?: Photo }) {
   const text = (
     <>
       <h2 className="h2">
-        Des ingénieurs qui construisent. <span className="tone">Pas des formateurs qui conseillent.</span>
+        Des ingénieurs qui vous conseillent, <span className="tone">puis qui construisent.</span>
       </h2>
       <p className="max-w-[640px] text-lg leading-relaxed text-muted">
-        Nous sommes ingénieurs. Avant Socle, on a mis en production des infrastructures et des chaînes
-        d&apos;automatisation pour de grands groupes. On apporte la même exigence aux PME : des outils qui tournent,
-        qu&apos;on mesure et qu&apos;on maintient.
+        Avant Socle, on a mis en production des infrastructures et des chaînes d&apos;automatisation pour de grands
+        groupes. Notre conseil vient de là : on ne vous recommande que ce qu&apos;on sait construire, faire tourner et
+        maintenir chez vous.
       </p>
     </>
   );

@@ -52,7 +52,7 @@ Tous les boutons de la page pointent vers la section `#rdv`.
 
 Avec Plausible activé :
 
-- `cta_click` avec la propriété `location` (`header`, `hero`, `map`, `offer`, `mobile_sticky`, `final`) ;
+- `cta_click` avec la propriété `location` (`header`, `hero`, `hero_map`, `map`, `offer`, `faq`, `mobile_sticky`, `final`) ;
 - `booking_completed` quand une réservation Cal.com aboutit.
 
 Il faut déclarer ces deux objectifs (« Custom event goals ») dans Plausible.
@@ -127,4 +127,4 @@ Inspirée de Qonto : sobre, pour que la page ait l'air pensée plutôt que gén�
 
 ## Ton
 
-Le texte décrit des situations concrètes (« un devis recopié trois fois ») plutôt que des promesses générales, parle comme on parlerait à un dirigeant au téléphone, et évite les slogans. Un même libellé pour toutes les actions : « Réserver un diagnostic gratuit ».
+Le texte décrit des situations concrètes (« un devis recopié trois fois ») plutôt que des promesses générales, parle comme on parlerait à un dirigeant au téléphone, et évite les slogans. Un même libellé pour toutes les actions : « Réserver un audit gratuit ».

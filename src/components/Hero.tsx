@@ -50,7 +50,7 @@ export function Hero({ image }: { image?: Photo }) {
         <div className="flex flex-col gap-4">
           <div className="flex flex-wrap gap-3">
             <a href="#rdv" className="btn btn-light" data-cta="hero">
-              Réserver un diagnostic gratuit
+              Réserver un audit gratuit
             </a>
             <a href="#carte" className="btn btn-outline" data-cta="hero_map">
               Voir où l&apos;IA intervient

@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { Check } from "lucide-react";
 import { Logo } from "./Logo";
 
 type Notif = { logo: string; app: string; children: ReactNode; alert?: boolean };
@@ -60,6 +61,20 @@ function Notification({ logo, app, children, alert, className }: Notif & { class
   );
 }
 
+const chatgptSteps = [
+  "Retrouver les devis sans réponse dans le tableur",
+  "Ouvrir ChatGPT et demander une relance",
+  "Copier le texte dans Outlook, joindre le devis",
+  "Envoyer",
+  "Noter la relance dans le tableur",
+];
+
+const toolSteps = [
+  "Chaque matin, l'outil repère les devis sans réponse depuis 7 jours",
+  "La relance est déjà prête dans Outlook, devis joint, dans votre ton",
+  "Julie relit et clique sur Envoyer",
+];
+
 export function Problems() {
   return (
     <section className="px-5 py-14 sm:px-6 sm:py-20">
@@ -79,33 +94,54 @@ export function Problems() {
             </article>
           ))}
         </div>
-        {/* ChatGPT : une conversation type à gauche, le constat à droite. */}
-        <div
-          className="grain grid items-center gap-8 overflow-hidden rounded-[24px] bg-clay p-6 sm:p-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-14"
-          data-reveal
-        >
-          <div aria-hidden="true" className="flex flex-col gap-3 rounded-2xl bg-white p-4 text-[14px] leading-snug shadow-[0_1px_0_rgb(28_24_20/0.04),0_12px_32px_-20px_rgb(28_24_20/0.35)] sm:p-5">
-            <span className="text-xs text-soft">ChatGPT · onglet ouvert par Julie, mardi&nbsp;16&nbsp;h&nbsp;42</span>
-            <p className="self-end rounded-2xl rounded-br-md bg-sand-soft px-4 py-2.5">
-              Écris une relance polie pour le devis Martin, envoyé il y a 10 jours.
+        {/* ChatGPT : la même tâche, faite deux fois. À gauche à la main avec ChatGPT, à droite avec un outil construit. */}
+        <div className="grain flex flex-col gap-8 overflow-hidden rounded-[24px] bg-clay p-6 sm:p-10" data-reveal>
+          <div className="grid gap-4 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] lg:items-end lg:gap-14">
+            <p className="text-[clamp(1.5rem,2.6vw,2rem)] leading-[1.15] font-medium tracking-[-0.02em] [font-family:var(--font-display)]">
+              «&nbsp;On utilise déjà ChatGPT.&nbsp;» C&apos;est un bon début. Mais ChatGPT écrit le mail. Il ne l&apos;envoie pas, et il
+              ne sait pas qu&apos;il fallait l&apos;envoyer.
             </p>
-            <p className="max-w-[92%] rounded-2xl rounded-bl-md border border-line px-4 py-2.5 text-muted">
-              Bonjour Monsieur Martin, je me permets de revenir vers vous au sujet du devis que nous vous avons transmis
-              le…
-            </p>
-            <p className="pt-1 text-xs text-soft">
-              Puis Julie copie le texte, l&apos;envoie depuis Outlook, et note la relance dans le tableur. Pour chaque
-              devis.
+            <p className="text-[17px] leading-relaxed text-muted">
+              Exemple avec une tâche que toutes les PME connaissent&nbsp;: relancer un devis resté sans réponse.
             </p>
           </div>
-          <div className="flex flex-col gap-4">
-            <p className="text-[clamp(1.375rem,2.4vw,1.75rem)] leading-snug font-medium tracking-[-0.02em] [font-family:var(--font-display)]">
-              Vous avez sûrement déjà testé ChatGPT, et vos équipes aussi, chacun de son côté. C&apos;est pratique pour
-              écrire un mail.
-            </p>
-            <p className="text-lg leading-relaxed text-muted">
-              Mais ça ne change rien à la façon dont l&apos;entreprise tourne&nbsp;: le travail autour reste à la main.
-            </p>
+
+          <div className="grid gap-4 md:grid-cols-2">
+            <div className="flex flex-col gap-5 rounded-2xl bg-paper/80 p-6 sm:p-7">
+              <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
+                <h3 className="text-xl">Avec ChatGPT</h3>
+                <span className="text-sm text-muted">5 étapes, à la main</span>
+              </div>
+              <ol className="flex flex-col gap-3 text-[15px] text-muted">
+                {chatgptSteps.map((step, i) => (
+                  <li key={step} className="flex gap-3">
+                    <span className="w-4 shrink-0 text-soft tabular-nums">{i + 1}</span>
+                    {step}
+                  </li>
+                ))}
+              </ol>
+              <p className="mt-auto text-[15px]">
+                Pour chaque devis. Et la semaine où Julie est en congé, personne ne relance.
+              </p>
+            </div>
+
+            <div className="grain-dark grain on-dark flex flex-col gap-5 rounded-2xl bg-dark p-6 text-white sm:p-7">
+              <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
+                <h3 className="text-xl">Avec un outil construit pour vous</h3>
+                <span className="text-sm text-on-dark-soft">1 clic</span>
+              </div>
+              <ol className="flex flex-col gap-3 text-[15px] text-[#ebe3d9]">
+                {toolSteps.map((step) => (
+                  <li key={step} className="flex gap-3">
+                    <Check className="mt-0.5 size-4 shrink-0 text-white" strokeWidth={2.5} aria-hidden="true" />
+                    {step}
+                  </li>
+                ))}
+              </ol>
+              <p className="mt-auto text-[15px] text-white">
+                Le suivi se met à jour tout seul. Aucun devis ne passe entre les mailles.
+              </p>
+            </div>
           </div>
         </div>
       </div>

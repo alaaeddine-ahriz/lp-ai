@@ -10,7 +10,7 @@ export function MobileCta() {
       className="fixed inset-x-0 bottom-0 z-40 translate-y-full border-t border-line bg-paper/90 px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur-md transition-transform duration-300 data-shown:translate-y-0 md:hidden"
     >
       <a href="#rdv" className="btn w-full" data-cta="mobile_sticky">
-        Réserver un diagnostic gratuit
+        Réserver un audit gratuit
       </a>
     </div>
   );

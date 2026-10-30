@@ -3,7 +3,7 @@ import type { Photos } from "@/lib/photos";
 
 /*
  * La carte des pôles : le visiteur choisit le sien et voit où l'IA peut intervenir, et ce qui reste humain.
- * Ordinateur : liste des pôles à gauche (onglets verticaux), contenu du pôle à droite.
+ * Ordinateur : une grande carte avec la photo du pôle en fond, la liste à gauche (onglets verticaux) et le contenu à droite.
  * Mobile : accordéon natif (<details>), un pôle ouvert à la fois, sans JS.
  * Les onglets sont activés par src/scripts/enhancements.ts.
  * Photo facultative par pôle : src/assets/photos/pole-<id>.jpg (ex. pole-vente.jpg).
@@ -234,85 +234,132 @@ function PoleDetails({ pole }: { pole: Pole }) {
   );
 }
 
+const closing = (
+  <>
+    On n&apos;invente rien&nbsp;: chaque point est une tâche que quelqu&apos;un fait déjà chez vous, souvent à la main.
+    Et on ne touche pas à tout&nbsp;: on commence par le pôle qui vous coûte le plus, et on n&apos;ajoute la suite que
+    quand ce premier outil a fait ses preuves.
+  </>
+);
+
 export function CompanyMap({ photos = {} }: { photos?: Photos }) {
   return (
     <section id="carte" className="px-5 py-14 sm:px-6 sm:py-20">
       <div className="mx-auto flex max-w-[1180px] flex-col gap-10 sm:gap-12">
-        <div className="grid gap-6 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] lg:items-end lg:gap-16" data-reveal>
-          <h2 className="h2">
-            Où l&apos;IA peut intervenir <span className="tone">dans votre entreprise.</span>
-          </h2>
-          <p className="max-w-[520px] text-lg leading-relaxed text-muted">
-            On n&apos;invente rien. Chaque point est une tâche que quelqu&apos;un fait déjà chez vous, souvent à la
-            main, et que vous payez déjà. Choisissez le pôle qui vous parle.
-          </p>
-        </div>
+        <h2 className="h2" data-reveal>
+          Où l&apos;IA peut intervenir <span className="tone">dans votre entreprise.</span>
+        </h2>
 
-        {/* Ordinateur : liste à gauche, contenu à droite */}
-        <div data-map className="hidden gap-14 lg:grid lg:grid-cols-[260px_minmax(0,1fr)]" data-reveal>
-          <div role="tablist" aria-label="Pôles de l'entreprise" aria-orientation="vertical" className="flex flex-col">
-            {poles.map((p, i) => (
-              <button
-                key={p.id}
-                type="button"
-                role="tab"
-                id={`tab-${p.id}`}
-                aria-controls={`panel-${p.id}`}
-                aria-selected={i === 0}
-                tabIndex={i === 0 ? 0 : -1}
-                className="group/tab flex flex-col gap-0.5 border-l-2 border-line py-3 pl-5 text-left transition-colors hover:border-soft aria-selected:border-ink"
-              >
-                <span className="text-lg leading-tight font-medium text-soft transition-colors group-hover/tab:text-ink group-aria-selected/tab:text-ink [font-family:var(--font-display)]">
-                  {p.name}
-                </span>
-                <span className="hidden text-sm text-muted group-aria-selected/tab:block">{p.goal}</span>
-              </button>
-            ))}
+        {/* Ordinateur : une seule grande carte. La photo du pôle choisi en fond, la liste à gauche, le contenu à droite. */}
+        <div
+          data-map
+          className="grain grain-dark on-dark relative hidden overflow-hidden rounded-[28px] bg-dark text-white lg:block"
+          data-reveal
+        >
+          <div className="grid min-h-[600px] grid-cols-[250px_minmax(0,1fr)] gap-14 p-10 pb-12">
+            <div className="relative z-[1] flex flex-col gap-4">
+              <span className="text-sm text-on-dark-soft">Choisissez votre pôle</span>
+              <div role="tablist" aria-label="Pôles de l'entreprise" aria-orientation="vertical" className="flex flex-col">
+                {poles.map((p, i) => (
+                  <button
+                    key={p.id}
+                    type="button"
+                    role="tab"
+                    id={`tab-${p.id}`}
+                    aria-controls={`panel-${p.id}`}
+                    aria-selected={i === 0}
+                    tabIndex={i === 0 ? 0 : -1}
+                    className="group/tab border-l-2 border-white/15 py-2.5 pl-5 text-left text-lg leading-tight font-medium text-white/55 transition-colors [font-family:var(--font-display)] hover:border-white/40 hover:text-white aria-selected:border-white aria-selected:text-white"
+                  >
+                    {p.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {poles.map((p, i) => {
+              const photo = photos[`pole-${p.id}`];
+              return (
+                <div
+                  key={p.id}
+                  role="tabpanel"
+                  id={`panel-${p.id}`}
+                  aria-labelledby={`tab-${p.id}`}
+                  hidden={i !== 0}
+                  className="map-panel flex flex-col justify-end gap-8 [&>*:not(.map-photo)]:relative"
+                >
+                  {/* La photo appartient au panneau : elle change avec lui, mais couvre toute la carte. */}
+                  <div aria-hidden="true" className="map-photo pointer-events-none absolute inset-0">
+                    {photo ? (
+                      <img
+                        src={photo.src}
+                        srcSet={photo.srcSet}
+                        sizes="1180px"
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                        className="size-full object-cover saturate-[0.8]"
+                      />
+                    ) : null}
+                    <div className="absolute inset-0 bg-[linear-gradient(to_right,rgb(29_25_21/0.94),rgb(29_25_21/0.72)_40%,rgb(29_25_21/0.82)),linear-gradient(to_top,rgb(29_25_21/0.85),transparent_70%)]" />
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <h3 className="text-[40px] leading-none">{p.name}</h3>
+                    <p className="text-lg text-[#ebe3d9]">{p.goal}</p>
+                  </div>
+                  <ul className="grid grid-cols-2 gap-x-10 gap-y-5">
+                    {p.points.map((pt) => (
+                      <li key={pt.title} className="flex flex-col gap-1">
+                        <strong className="text-[17px] font-medium text-white">{pt.title}</strong>
+                        <span className="text-[15px] leading-relaxed text-[#e2d9ce]">{pt.text}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="flex items-center gap-2.5 text-[15px] text-[#e2d9ce]">
+                    <User className="size-4 shrink-0" aria-hidden="true" />
+                    <span>
+                      <strong className="font-medium text-white">Ce qui reste humain : </strong>
+                      {p.human}
+                    </span>
+                  </p>
+                </div>
+              );
+            })}
           </div>
 
-          {poles.map((p, i) => (
-            <div
-              key={p.id}
-              role="tabpanel"
-              id={`panel-${p.id}`}
-              aria-labelledby={`tab-${p.id}`}
-              hidden={i !== 0}
-              className="map-panel flex flex-col gap-8"
-            >
-              <PoleVisual pole={p} photos={photos} sizes="840px" />
-              <PoleDetails pole={p} />
-            </div>
-          ))}
+          <div className="relative z-[2] flex items-center justify-between gap-10 border-t border-white/15 bg-[rgb(20_17_14/0.6)] px-10 py-7 backdrop-blur-sm">
+            <p className="max-w-[720px] text-[15px] leading-relaxed text-[#ebe3d9]">{closing}</p>
+            <a href="#rdv" className="btn btn-light shrink-0" data-cta="map">
+              Trouver mon premier pôle
+            </a>
+          </div>
         </div>
 
-        {/* Mobile : accordéon, un pôle ouvert à la fois */}
-        <div className="flex flex-col lg:hidden">
-          {poles.map((p, i) => (
-            <details key={p.id} name="poles" open={i === 0} className="group border-b border-line">
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4">
-                <span className="flex items-center gap-3">
-                  <p.icon className="size-5 text-muted" strokeWidth={1.75} aria-hidden="true" />
-                  <span className="text-lg font-medium [font-family:var(--font-display)]">{p.name}</span>
-                </span>
-                <Plus className="size-4.5 shrink-0 transition-transform duration-300 group-open:rotate-45" aria-hidden="true" />
-              </summary>
-              <div className="flex flex-col gap-6 pb-6">
-                <PoleVisual pole={p} photos={photos} sizes="100vw" />
-                <PoleDetails pole={p} />
-              </div>
-            </details>
-          ))}
-        </div>
-
-        <div className="flex flex-col items-start gap-6 lg:flex-row lg:items-center lg:justify-between" data-reveal>
-          <p className="max-w-[680px] text-lg leading-relaxed">
-            On ne vous propose pas de tout automatiser d&apos;un coup. On choisit un seul pôle, celui qui vous coûte le
-            plus. On y pose un socle qui connaît vos données, et on n&apos;ajoute la suite que quand ce premier outil a
-            fait ses preuves.
-          </p>
-          <a href="#rdv" className="btn shrink-0" data-cta="map">
-            Trouver mon premier pôle
-          </a>
+        {/* Mobile : accordéon, un pôle ouvert à la fois, puis la conclusion */}
+        <div className="flex flex-col gap-8 lg:hidden">
+          <div className="flex flex-col">
+            {poles.map((p, i) => (
+              <details key={p.id} name="poles" open={i === 0} className="group border-b border-line">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4">
+                  <span className="flex items-center gap-3">
+                    <p.icon className="size-5 text-muted" strokeWidth={1.75} aria-hidden="true" />
+                    <span className="text-lg font-medium [font-family:var(--font-display)]">{p.name}</span>
+                  </span>
+                  <Plus className="size-4.5 shrink-0 transition-transform duration-300 group-open:rotate-45" aria-hidden="true" />
+                </summary>
+                <div className="flex flex-col gap-6 pb-6">
+                  <PoleVisual pole={p} photos={photos} sizes="100vw" />
+                  <PoleDetails pole={p} />
+                </div>
+              </details>
+            ))}
+          </div>
+          <div className="grain grain-dark on-dark flex flex-col items-start gap-5 rounded-[20px] bg-dark p-6 text-white">
+            <p className="text-[15px] leading-relaxed text-[#ebe3d9]">{closing}</p>
+            <a href="#rdv" className="btn btn-light" data-cta="map">
+              Trouver mon premier pôle
+            </a>
+          </div>
         </div>
       </div>
     </section>
