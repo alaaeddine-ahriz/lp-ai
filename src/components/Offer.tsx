@@ -5,7 +5,7 @@ const steps = [
   {
     when: "Jour 0",
     icon: ScanSearch,
-    title: "Diagnostic de vos processus",
+    title: "Audit de vos processus",
     text: "On passe en revue ce qui prend du temps, qui s'en charge, et ce que ça vous coûte chaque mois.",
   },
   {
@@ -37,11 +37,10 @@ const steps = [
 export function Offer() {
   return (
     <section id="offre" className="px-3 sm:px-6">
-      <div className="grain mx-auto max-w-[1440px] rounded-[24px] bg-sand-soft px-5 py-20 sm:px-6 sm:py-24">
+      <div className="grain mx-auto max-w-[1440px] rounded-[24px] bg-sand px-5 py-16 sm:px-6 sm:py-20">
         <div className="mx-auto flex max-w-[1180px] flex-col gap-14">
           <h2 className="h2" data-reveal>
-            Le Programme Premier Gain.{" "}
-            <span className="tone">Un premier outil qui tourne chez vous en 30&nbsp;jours, et le gain mesuré.</span>
+            Un premier outil qui tourne chez vous en 30&nbsp;jours, <span className="tone">et le gain mesuré.</span>
           </h2>
 
           <ol className="flow" data-flow aria-label="Les étapes du programme">
@@ -66,7 +65,7 @@ export function Offer() {
             <a href="#rdv" className="btn" data-cta="offer">
               Voir ce que ça donne chez moi
             </a>
-            <span className="text-sm text-muted">Gratuit, sans engagement · 3 créneaux par mois</span>
+            <span className="text-sm text-muted">L&apos;audit est gratuit et sans engagement.</span>
           </div>
         </div>
       </div>

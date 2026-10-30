@@ -61,10 +61,10 @@ Il faut déclarer ces deux objectifs (« Custom event goals ») dans Plausible.
 
 Construite sur les principes de Hormozi (*$100M Offers*) : une seule action possible (réserver le diagnostic), pas de menu, et un enchaînement qui monte la valeur perçue.
 
-1. **Hero** : la douleur (« Vos équipes perdent des heures. Vous perdez des marchés. », la fin de phrase défile : marchés, clients, devis, marge), illustrée par des situations concrètes, puis le délai (30 jours) et la rareté (3 créneaux par mois).
+1. **Hero** : la douleur (« Vos équipes perdent des heures. Vous perdez des marchés. », la fin de phrase défile : marchés, clients, devis, marge), illustrée par des situations concrètes, puis le délai (30 jours).
 2. **Outils** : logos des outils qu'on sait brancher (API publique ou export).
 3. **Le constat** : le problème n'est pas l'IA, c'est de savoir par où commencer.
-4. **La carte** : un organigramme cliquable et animé (la direction en haut, 7 pôles en dessous). Pour chaque pôle : une carte visuelle, les leviers en liste et ce qui reste humain. Se termine sur la méthode (un seul pôle, un socle, puis des modules) et un bouton.
+4. **La carte** : sur ordinateur, la liste des 8 pôles à gauche et le pôle choisi à droite (photo, leviers, ce qui reste humain) ; sur mobile, un accordéon. Se termine sur la méthode (un seul pôle, un socle, puis des modules) et un bouton.
 5. **La différence** : ce qu'on vous vend d'habitude face à ce que fait Socle, ligne par ligne.
 6. **L'offre** : les 5 étapes avec leur délai.
 7. **Qui est derrière** (avec un bandeau défilant des écoles des ingénieurs : ESSEC, Institut Polytechnique de Paris, Groupe INSA), **FAQ** (lève les objections), **CTA final**.
@@ -118,10 +118,11 @@ public/logos/             logos des outils
 Inspirée de Qonto : sobre, pour que la page ait l'air pensée plutôt que générée.
 
 - **Polices** : Familjen Grotesk pour les titres (préchargée), Inter pour le texte, auto-hébergées depuis Fontsource.
-- **Couleurs** : noir (`--color-dark`), gris chauds (`--color-sand`, `--color-sand-soft`) et blanc. Le rouge de la marque n'apparaît que dans le point du logo (« Socle. »).
+- **Couleurs** : papier chaud en fond de page (`--color-paper`), panneaux sable et argile (`--color-sand`, `--color-clay`), brun très foncé pour les blocs sombres (`--color-dark`). Le rouge de la marque reste un détail (le point du logo).
 - **Titres en deux tons** : la seconde moitié en gris, avec `<span className="tone">`.
 - **Boutons** rectangulaires (coins de 8 px) : noirs sur fond clair, blancs ou en contour sur fond sombre.
-- **Grain** : classe `grain` (et `grain-dark` sur fond sombre), posée sur le hero, le panneau de l'offre, les visuels des pôles, les vignettes du constat et l'appel final.
+- **Grain** : un grain léger sur toute la page (fond du `body`), plus marqué sur les panneaux avec la classe `grain` (`grain-dark` sur fond sombre).
+- **Sur fond sombre**, ajouter la classe `on-dark` à la section pour que les textes gris restent lisibles.
 - **En-tête** sombre au-dessus du hero, clair ensuite.
 
 ## Ton

@@ -4,7 +4,7 @@ export function Footer() {
   return (
     <footer className="px-5 pt-8 pb-28 sm:px-6 md:pb-10">
       <div className="mx-auto flex max-w-[1180px] flex-wrap justify-between gap-4 text-sm text-muted">
-        <span>{site.name} · Intégration IA pour PME</span>
+        <span>{site.name} · Audit et conseil en IA pour les PME</span>
         <span>
           {site.email.includes("@") ? (
             <a href={`mailto:${site.email}`} className="hover:text-ink">

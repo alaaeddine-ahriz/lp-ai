@@ -9,7 +9,7 @@ export function Header() {
     <header
       data-header
       data-theme="dark"
-      className="group/header sticky top-0 z-40 border-b border-line/80 bg-white/90 text-ink backdrop-blur-md transition-colors duration-300 data-[theme=dark]:border-white/10 data-[theme=dark]:bg-dark/90 data-[theme=dark]:text-white"
+      className="group/header sticky top-0 z-40 border-b border-line/80 bg-paper/90 text-ink backdrop-blur-md transition-colors duration-300 data-[theme=dark]:border-white/10 data-[theme=dark]:bg-dark/90 data-[theme=dark]:text-white"
     >
       <div className="wrap flex h-16 items-center justify-between gap-6">
         <a href="#" className="text-[24px] font-semibold tracking-[-0.04em]">

@@ -11,7 +11,7 @@ export function OgCard() {
         flexDirection: "column",
         justifyContent: "space-between",
         padding: 72,
-        background: "radial-gradient(60% 80% at 75% 15%, #3b3b39, #0b0b0b 70%)",
+        background: "radial-gradient(60% 80% at 75% 15%, #4a3a2f, #1d1915 70%)",
         color: "#fff",
         fontFamily: "Familjen",
       }}
@@ -22,9 +22,9 @@ export function OgCard() {
       </div>
       <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
         <div style={{ display: "flex", flexWrap: "wrap", fontSize: 78, fontWeight: 600, lineHeight: 1.0, letterSpacing: -3, maxWidth: 1040 }}>
-          Vos équipes perdent des heures.&nbsp;<span style={{ color: "#8b8a86" }}>Vous perdez des marchés.</span>
+          Vos équipes perdent des heures.&nbsp;<span style={{ color: "#c9beb1" }}>Vous perdez des marchés.</span>
         </div>
-        <div style={{ display: "flex", fontSize: 28, color: "#a8a7a3" }}>Diagnostic gratuit · 30 minutes · 3 créneaux par mois</div>
+        <div style={{ display: "flex", fontSize: 28, color: "#d8cec2" }}>Audit et conseil en IA pour les PME</div>
       </div>
     </div>
   );

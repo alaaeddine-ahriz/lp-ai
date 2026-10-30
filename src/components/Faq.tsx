@@ -2,6 +2,10 @@ import { Plus } from "lucide-react";
 
 export const faqs = [
   {
+    q: "Concrètement, vous faites quoi ?",
+    a: "De l'audit et du conseil, puis de la mise en œuvre. On commence par auditer votre façon de travailler pour trouver où l'IA vous fait gagner du temps, on vous conseille sur ce qui vaut le coup, et si vous le souhaitez on construit et on installe les outils.",
+  },
+  {
     q: "Je n'ai pas d'équipe technique. C'est un problème ?",
     a: "Non, c'est le cas de la plupart des PME. On s'occupe de toute la partie technique. De votre côté, il suffit de nous montrer comment vous travaillez, puis de valider le résultat.",
   },
@@ -11,7 +15,7 @@ export const faqs = [
   },
   {
     q: "Combien ça coûte ?",
-    a: "Le diagnostic est gratuit. Ensuite, chaque outil a un prix fixe, annoncé avant de signer et calculé pour être remboursé en quelques mois par le temps gagné. Pas de facturation au jour, pas de dépassement.",
+    a: "L'audit de départ est gratuit. Ensuite, chaque outil a un prix fixe, annoncé avant de signer et calculé pour être remboursé en quelques mois par le temps gagné. Pas de facturation au jour, pas de dépassement.",
   },
   {
     q: "Mes données sont-elles en sécurité ?",
@@ -21,15 +25,11 @@ export const faqs = [
     q: "Et si mes équipes ne s'en servent pas ?",
     a: "C'est le vrai risque, alors on le traite dès le départ : on part de leur travail réel et on les forme sur leurs propres dossiers. À J+30, on mesure aussi l'usage. Un outil que personne n'ouvre ne rapporte rien.",
   },
-  {
-    q: "Pourquoi seulement 3 diagnostics par mois ?",
-    a: "Parce que chaque diagnostic est préparé à la main, à partir de votre entreprise. Au-delà de trois, on ne pourrait plus tenir les 30 jours pour les clients en cours.",
-  },
 ];
 
 export function Faq() {
   return (
-    <section id="faq" className="px-5 pb-20 sm:px-6 sm:pb-28">
+    <section id="faq" className="px-5 py-14 sm:px-6 sm:py-20">
       <div className="mx-auto grid max-w-[1180px] gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)] lg:gap-16">
         <h2 className="h2 lg:sticky lg:top-28 lg:self-start" data-reveal>
           Vos questions, <span className="tone">nos réponses.</span>

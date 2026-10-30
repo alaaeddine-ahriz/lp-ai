@@ -36,7 +36,7 @@ function SchoolLogos({ hidden }: { hidden?: boolean }) {
 
 function Schools() {
   return (
-    <div className="flex w-full flex-col gap-6 border-t border-line pt-8">
+    <div className="flex w-full flex-col gap-6 pt-4">
       <p className="text-sm text-muted">Les ingénieurs qui construisent vos outils sont passés par</p>
       <div className="group w-full overflow-hidden mask-[linear-gradient(to_right,transparent,#000_12%,#000_88%,transparent)]">
         <div className="flex w-max animate-marquee [animation-duration:40s] group-hover:[animation-play-state:paused] motion-reduce:mx-auto motion-reduce:animate-none">
@@ -64,7 +64,7 @@ export function Team({ photo }: { photo?: Photo }) {
   );
 
   return (
-    <section className="px-5 py-20 sm:px-6 sm:py-28">
+    <section className="px-5 py-14 sm:px-6 sm:py-20">
       {photo ? (
         <div className="mx-auto grid max-w-[1180px] items-center gap-10 lg:grid-cols-2 lg:gap-16" data-reveal>
           <img

@@ -8,7 +8,7 @@ const losses = ["des marchés.", "des clients.", "des devis.", "de la marge."];
  */
 export function Hero({ image }: { image?: Photo }) {
   return (
-    <section data-hero className="grain grain-dark relative overflow-hidden bg-dark text-white">
+    <section data-hero className="grain grain-dark on-dark relative overflow-hidden bg-dark text-white">
       <div aria-hidden="true" className="absolute inset-0">
         {image ? (
           <>
@@ -21,15 +21,15 @@ export function Hero({ image }: { image?: Photo }) {
               decoding="async"
               className="absolute inset-0 size-full object-cover opacity-60"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/60 to-dark/20" />
+            <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/70 to-dark/30" />
           </>
         ) : (
-          <div className="absolute inset-0 bg-[radial-gradient(55%_70%_at_72%_18%,#3b3b39,transparent_70%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(55%_70%_at_74%_16%,#4a3a2f,transparent_70%),radial-gradient(40%_50%_at_95%_0%,rgb(217_54_62/0.18),transparent_70%)]" />
         )}
       </div>
 
       <div className="wrap relative flex min-h-[calc(100svh-4rem)] max-h-[860px] flex-col justify-end gap-8 pt-24 pb-14 sm:pb-20 lg:min-h-[640px]">
-        <p className="text-sm text-stone-400">Pour les PME de 5 à 50 personnes</p>
+        <p className="text-[15px] text-[#e6ddd2]">Audit et conseil en IA pour les PME de 5 à 50 personnes</p>
         <h1 className="max-w-[980px] text-[clamp(2.5rem,6.2vw,5.25rem)] leading-[1.0]">
           Vos équipes perdent des heures. <span className="tone">Vous perdez </span>
           <span className="sr-only">des marchés.</span>
@@ -42,7 +42,7 @@ export function Hero({ image }: { image?: Photo }) {
             ))}
           </span>
         </h1>
-        <p className="max-w-[600px] text-lg leading-relaxed text-stone-300">
+        <p className="max-w-[600px] text-lg leading-relaxed text-[#ebe3d9]">
           Un devis recopié trois fois. Une relance qui n&apos;est jamais partie. Un fichier que seule Sophie sait
           retrouver. On part de là&nbsp;: on trouve les trois tâches qui vous coûtent le plus, on construit l&apos;outil
           qui s&apos;en charge, et au bout de 30&nbsp;jours on compte ensemble les heures récupérées.
@@ -56,7 +56,7 @@ export function Hero({ image }: { image?: Photo }) {
               Voir où l&apos;IA intervient
             </a>
           </div>
-          <p className="text-sm text-stone-400">30 minutes en visio. 3 créneaux par mois.</p>
+          <p className="text-sm text-[#d8cec2]">30 minutes en visio, gratuit et sans engagement.</p>
         </div>
       </div>
     </section>

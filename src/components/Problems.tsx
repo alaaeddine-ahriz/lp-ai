@@ -62,7 +62,7 @@ function Notification({ logo, app, children, alert, className }: Notif & { class
 
 export function Problems() {
   return (
-    <section className="px-5 py-20 sm:px-6 sm:py-28">
+    <section className="px-5 py-14 sm:px-6 sm:py-20">
       <div className="mx-auto flex max-w-[1180px] flex-col gap-12 sm:gap-14">
         <h2 className="h2" data-reveal>
           Le problème n&apos;est pas l&apos;IA. <span className="tone">C&apos;est de savoir par où commencer.</span>
@@ -70,7 +70,7 @@ export function Problems() {
         <div className="grid gap-10 md:grid-cols-3 md:gap-8 lg:gap-10">
           {problems.map((p, i) => (
             <article key={p.title} className="group flex flex-col gap-4" data-reveal style={{ "--i": i } as React.CSSProperties}>
-              <div aria-hidden="true" className="grain relative mb-2 flex h-[200px] flex-col items-center justify-center gap-2.5 overflow-hidden rounded-[20px] bg-sand-soft">
+              <div aria-hidden="true" className="grain relative mb-2 flex h-[200px] flex-col items-center justify-center gap-2.5 overflow-hidden rounded-[20px] bg-sand">
                 <Notification {...p.notifs[0]} className="-rotate-[1.5deg] group-hover:-translate-y-1 group-hover:rotate-0" />
                 <Notification {...p.notifs[1]} className="translate-x-3 rotate-[1deg] group-hover:translate-x-1 group-hover:rotate-0" />
               </div>
@@ -79,10 +79,35 @@ export function Problems() {
             </article>
           ))}
         </div>
-        <p className="max-w-[680px] text-xl leading-relaxed" data-reveal>
-          Vous avez sûrement déjà testé ChatGPT, et vos équipes aussi, chacun de son côté. C&apos;est pratique pour
-          écrire un mail. Mais ça ne change rien à la façon dont l&apos;entreprise tourne.
-        </p>
+        {/* ChatGPT : une conversation type à gauche, le constat à droite. */}
+        <div
+          className="grain grid items-center gap-8 overflow-hidden rounded-[24px] bg-clay p-6 sm:p-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-14"
+          data-reveal
+        >
+          <div aria-hidden="true" className="flex flex-col gap-3 rounded-2xl bg-white p-4 text-[14px] leading-snug shadow-[0_1px_0_rgb(28_24_20/0.04),0_12px_32px_-20px_rgb(28_24_20/0.35)] sm:p-5">
+            <span className="text-xs text-soft">ChatGPT · onglet ouvert par Julie, mardi&nbsp;16&nbsp;h&nbsp;42</span>
+            <p className="self-end rounded-2xl rounded-br-md bg-sand-soft px-4 py-2.5">
+              Écris une relance polie pour le devis Martin, envoyé il y a 10 jours.
+            </p>
+            <p className="max-w-[92%] rounded-2xl rounded-bl-md border border-line px-4 py-2.5 text-muted">
+              Bonjour Monsieur Martin, je me permets de revenir vers vous au sujet du devis que nous vous avons transmis
+              le…
+            </p>
+            <p className="pt-1 text-xs text-soft">
+              Puis Julie copie le texte, l&apos;envoie depuis Outlook, et note la relance dans le tableur. Pour chaque
+              devis.
+            </p>
+          </div>
+          <div className="flex flex-col gap-4">
+            <p className="text-[clamp(1.375rem,2.4vw,1.75rem)] leading-snug font-medium tracking-[-0.02em] [font-family:var(--font-display)]">
+              Vous avez sûrement déjà testé ChatGPT, et vos équipes aussi, chacun de son côté. C&apos;est pratique pour
+              écrire un mail.
+            </p>
+            <p className="text-lg leading-relaxed text-muted">
+              Mais ça ne change rien à la façon dont l&apos;entreprise tourne&nbsp;: le travail autour reste à la main.
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   );

@@ -14,8 +14,8 @@ const lowerFirst = (t: string) => t.charAt(0).toLowerCase() + t.slice(1);
 
 export function Comparison() {
   return (
-    <section className="px-5 pb-20 sm:px-6 sm:pb-28">
-      <div className="mx-auto flex max-w-[1180px] flex-col gap-10 border-t border-line pt-20 sm:gap-14 sm:pt-24">
+    <section className="px-5 py-14 sm:px-6 sm:py-20">
+      <div className="mx-auto flex max-w-[1180px] flex-col gap-10 sm:gap-12">
         <h2 className="h2" data-reveal>
           Pourquoi la plupart des projets IA en PME <span className="tone">ne rapportent rien.</span>
         </h2>
