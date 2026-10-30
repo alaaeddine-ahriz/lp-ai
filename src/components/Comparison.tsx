@@ -16,19 +16,18 @@ export function Comparison() {
   return (
     <section className="px-5 pb-20 sm:px-6 sm:pb-28">
       <div className="mx-auto flex max-w-[1180px] flex-col gap-10 border-t border-line pt-20 sm:gap-14 sm:pt-24">
-        <div className="flex flex-col items-center gap-4 text-center" data-reveal>
-          <span className="pill bg-pink!">La différence</span>
-          <h2 className="h2">Pourquoi la plupart des projets IA en PME ne rapportent rien</h2>
-        </div>
+        <h2 className="h2" data-reveal>
+          Pourquoi la plupart des projets IA en PME <span className="tone">ne rapportent rien.</span>
+        </h2>
 
-        <div className="mx-auto w-full max-w-[960px]" data-reveal>
+        <div className="w-full" data-reveal>
           {/* Tablette et ordinateur : deux colonnes */}
           <table className="hidden w-full border-collapse text-left md:table">
             <caption className="sr-only">Ce qu&apos;on vous vend d&apos;habitude, et ce que fait {site.name}</caption>
             <thead>
-              <tr className="text-sm font-semibold tracking-wide uppercase">
+              <tr className="text-sm font-medium">
                 <th scope="col" className="w-[42%] pb-4 text-muted">D&apos;habitude</th>
-                <th scope="col" className="pb-4 text-accent-strong">Avec {site.name}</th>
+                <th scope="col" className="pb-4 text-ink">Avec {site.name}</th>
               </tr>
             </thead>
             <tbody>
@@ -36,8 +35,8 @@ export function Comparison() {
                 <tr key={them} className="border-t border-line">
                   <td className="py-5 pr-8 text-muted">{them}</td>
                   <td className="py-5">
-                    <span className="flex items-start gap-3 text-lg font-semibold">
-                      <Check className="mt-1 size-5 shrink-0 text-accent" strokeWidth={2.5} aria-hidden="true" />
+                    <span className="flex items-start gap-3 text-lg font-medium">
+                      <Check className="mt-1 size-5 shrink-0 text-ink" strokeWidth={2.5} aria-hidden="true" />
                       {us}
                     </span>
                   </td>
@@ -50,9 +49,9 @@ export function Comparison() {
           <ul className="flex flex-col md:hidden">
             {rows.map(([them, us]) => (
               <li key={them} className="flex gap-3 border-t border-line py-5 first:border-t-0 first:pt-0">
-                <Check className="mt-1 size-5 shrink-0 text-accent" strokeWidth={2.5} aria-hidden="true" />
+                <Check className="mt-1 size-5 shrink-0 text-ink" strokeWidth={2.5} aria-hidden="true" />
                 <span className="flex flex-col gap-1">
-                  <strong className="text-[17px] font-semibold">{us}</strong>
+                  <strong className="text-[17px] font-medium">{us}</strong>
                   <span className="text-[15px] text-muted">Au lieu de : {lowerFirst(them)}</span>
                 </span>
               </li>

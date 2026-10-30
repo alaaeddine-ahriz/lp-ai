@@ -51,7 +51,7 @@ function Notification({ logo, app, children, alert, className }: Notif & { class
     <div
       className={`flex w-[84%] items-center gap-3 rounded-xl bg-white px-3.5 py-3 text-left text-[13px] leading-snug text-muted shadow-[0_8px_24px_-12px_rgb(43_37_35/0.35)] ring-1 ring-black/[0.03] transition-transform duration-500 ${className}`}
     >
-      <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-pink-soft">
+      <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-sand-soft">
         <Logo name={app} logo={logo} size={18} />
       </span>
       <span className="min-w-0 flex-1">{children}</span>
@@ -64,23 +64,22 @@ export function Problems() {
   return (
     <section className="px-5 py-20 sm:px-6 sm:py-28">
       <div className="mx-auto flex max-w-[1180px] flex-col gap-12 sm:gap-14">
-        <div className="flex flex-col items-center gap-4 text-center" data-reveal>
-          <span className="pill bg-pink!">Le constat</span>
-          <h2 className="h2">Le problème n&apos;est pas l&apos;IA. C&apos;est de savoir par où commencer.</h2>
-        </div>
+        <h2 className="h2" data-reveal>
+          Le problème n&apos;est pas l&apos;IA. <span className="tone">C&apos;est de savoir par où commencer.</span>
+        </h2>
         <div className="grid gap-10 md:grid-cols-3 md:gap-8 lg:gap-10">
           {problems.map((p, i) => (
             <article key={p.title} className="group flex flex-col gap-4" data-reveal style={{ "--i": i } as React.CSSProperties}>
-              <div aria-hidden="true" className="relative mb-2 flex h-[188px] flex-col items-center justify-center gap-2.5 overflow-hidden rounded-[20px] bg-pink">
+              <div aria-hidden="true" className="grain relative mb-2 flex h-[200px] flex-col items-center justify-center gap-2.5 overflow-hidden rounded-[20px] bg-sand-soft">
                 <Notification {...p.notifs[0]} className="-rotate-[1.5deg] group-hover:-translate-y-1 group-hover:rotate-0" />
                 <Notification {...p.notifs[1]} className="translate-x-3 rotate-[1deg] group-hover:translate-x-1 group-hover:rotate-0" />
               </div>
-              <h3 className="text-2xl leading-tight font-bold">{p.title}</h3>
+              <h3 className="text-2xl leading-tight">{p.title}</h3>
               <p className="text-muted">{p.text}</p>
             </article>
           ))}
         </div>
-        <p className="mx-auto max-w-[760px] text-center text-lg" data-reveal>
+        <p className="max-w-[680px] text-xl leading-relaxed" data-reveal>
           Vous avez déjà testé ChatGPT. Vos équipes aussi, chacun dans son coin. Mais rien n&apos;a changé dans la façon
           dont l&apos;entreprise tourne.
         </p>

@@ -1,4 +1,4 @@
-import { ArrowRight, Gauge, GraduationCap, PlugZap, Route, ScanSearch } from "lucide-react";
+import { Gauge, GraduationCap, PlugZap, Route, ScanSearch } from "lucide-react";
 
 /* L'offre en un seul bloc : ce qu'on fait et quand. */
 const steps = [
@@ -37,20 +37,16 @@ const steps = [
 export function Offer() {
   return (
     <section id="offre" className="px-3 sm:px-6">
-      <div className="mx-auto max-w-[1440px] rounded-[22px] bg-pink-soft px-5 py-20 sm:rounded-[28px] sm:px-6 sm:py-24">
+      <div className="grain mx-auto max-w-[1440px] rounded-[24px] bg-sand-soft px-5 py-20 sm:px-6 sm:py-24">
         <div className="mx-auto flex max-w-[1180px] flex-col gap-14">
-          <div className="flex flex-col items-center gap-4 text-center" data-reveal>
-            <span className="pill">L&apos;offre</span>
-            <h2 className="text-[clamp(2.125rem,4.6vw,3.375rem)] leading-[1.04] font-bold">Le Programme Premier Gain</h2>
-            <p className="max-w-[620px] text-lg text-muted">
-              Un outil IA qui tourne dans votre entreprise, mesuré, en 30 jours.
-            </p>
-          </div>
+          <h2 className="h2" data-reveal>
+            Le Programme Premier Gain.{" "}
+            <span className="tone">Un outil IA qui tourne dans votre entreprise, mesuré, en 30&nbsp;jours.</span>
+          </h2>
 
           <ol className="flow" data-flow aria-label="Les étapes du programme">
             <span aria-hidden="true" className="flow-track">
               <span className="flow-fill" />
-              <span className="flow-dot" />
             </span>
             {steps.map(({ when, icon: Icon, title, text }, i) => (
               <li key={title} className="flow-step" style={{ "--k": i } as React.CSSProperties}>
@@ -58,18 +54,17 @@ export function Offer() {
                   <Icon className="size-6" strokeWidth={1.75} />
                 </span>
                 <div className="flex flex-col gap-1.5 pt-1 lg:pt-6">
-                  <span className="text-xs font-bold tracking-[0.08em] text-accent-strong uppercase">{when}</span>
-                  <h3 className="text-[19px] leading-snug font-semibold tracking-[-0.015em]">{title}</h3>
+                  <span className="text-sm font-medium text-soft">{when}</span>
+                  <h3 className="text-[19px] leading-snug tracking-[-0.02em]">{title}</h3>
                   <p className="text-[15px] leading-relaxed text-muted">{text}</p>
                 </div>
               </li>
             ))}
           </ol>
 
-          <div className="flex flex-col items-center gap-3 text-center">
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
             <a href="#rdv" className="btn" data-cta="offer">
               Voir ce que ça donne chez moi
-              <ArrowRight className="size-4" aria-hidden="true" />
             </a>
             <span className="text-sm text-muted">Gratuit, sans engagement · 3 places par mois</span>
           </div>

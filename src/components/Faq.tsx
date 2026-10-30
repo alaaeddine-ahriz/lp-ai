@@ -26,17 +26,16 @@ export const faqs = [
 export function Faq() {
   return (
     <section id="faq" className="px-5 pb-20 sm:px-6 sm:pb-28">
-      <div className="mx-auto max-w-[860px]">
-        <div className="mb-8 flex flex-col items-center gap-4 text-center" data-reveal>
-          <span className="pill bg-pink!">Questions</span>
-          <h2 className="h2">Vos questions</h2>
-        </div>
+      <div className="mx-auto grid max-w-[1180px] gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)] lg:gap-16">
+        <h2 className="h2 lg:sticky lg:top-28 lg:self-start" data-reveal>
+          Vos questions, <span className="tone">nos réponses.</span>
+        </h2>
         <div className="border-t border-line">
           {faqs.map((f) => (
             <details key={f.q} name="faq" className="group border-b border-line">
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-6 text-lg font-semibold transition-colors hover:text-accent">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-6 text-lg font-medium transition-colors hover:text-muted">
                 {f.q}
-                <span className="grid size-8 shrink-0 place-items-center rounded-full bg-pink-soft text-accent transition-transform duration-300 group-open:rotate-45">
+                <span className="grid size-8 shrink-0 place-items-center text-ink transition-transform duration-300 group-open:rotate-45">
                   <Plus className="size-4.5" aria-hidden="true" />
                 </span>
               </summary>

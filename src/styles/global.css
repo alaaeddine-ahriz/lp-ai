@@ -3,16 +3,18 @@
 @theme {
   --color-accent: #d9363e;
   --color-accent-strong: #b8242c;
-  --color-ink: #1c1917;
-  --color-muted: #57534e;
-  --color-line: #ece7e5;
-  --color-pink: #fde7e5;
-  --color-pink-soft: #fff4f2;
-  --color-dark: #2b2523;
-  --color-darker: #1f1a19;
+  --color-ink: #111110;
+  --color-muted: #5c5b58;
+  --color-soft: #8b8a86;
+  --color-line: #e7e6e3;
+  /* Neutres chauds : la page est presque monochrome, le rouge reste un détail de marque. */
+  --color-sand: #ecebe8;
+  --color-sand-soft: #f4f4f2;
+  --color-dark: #0b0b0b;
+  --color-darker: #050505;
 
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-bricolage), var(--font-inter), ui-sans-serif, sans-serif;
+  --font-sans: var(--font-onest), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-onest), ui-sans-serif, system-ui, sans-serif;
 
   --radius-card: 1.25rem;
   --radius-panel: 1.75rem;
@@ -35,24 +37,22 @@
   }
   body {
     @apply bg-white font-sans text-ink antialiased;
-    font-feature-settings: "cv11", "ss01";
     text-rendering: optimizeLegibility;
   }
   h1,
   h2,
   h3 {
-    @apply font-display text-balance;
-    font-optical-sizing: auto;
-    letter-spacing: -0.025em;
+    @apply font-display font-semibold text-balance;
+    letter-spacing: -0.03em;
   }
   p {
     text-wrap: pretty;
   }
   ::selection {
-    @apply bg-pink text-ink;
+    @apply bg-sand text-ink;
   }
   :focus-visible {
-    @apply outline-2 outline-offset-2 outline-accent;
+    @apply outline-2 outline-offset-2 outline-ink;
   }
 }
 
@@ -61,42 +61,65 @@
     @apply mx-auto w-full max-w-[1180px] px-5 sm:px-6;
   }
 
+  /* Boutons : rectangles aux coins légèrement arrondis, sans ombre ni flèche. */
   .btn {
-    @apply inline-flex min-h-13 items-center justify-center gap-2 rounded-full bg-accent px-6 text-[15px] sm:px-7 sm:text-base font-semibold text-white transition duration-200 hover:bg-accent-strong active:scale-[0.98];
-    box-shadow:
-      0 1px 0 rgb(255 255 255 / 0.25) inset,
-      0 8px 20px -8px rgb(217 54 62 / 0.6);
-  }
-  .btn svg {
-    @apply hidden transition-transform duration-200 min-[400px]:block;
-  }
-  .btn:hover svg {
-    transform: translateX(3px);
+    @apply inline-flex min-h-13 items-center justify-center rounded-lg border border-ink bg-ink px-6 text-base font-medium text-white transition-colors duration-200 hover:border-black hover:bg-black;
   }
   .btn-sm {
-    @apply min-h-11 px-5 text-sm;
+    @apply min-h-11 px-4 text-[15px];
   }
-
-  .pill {
-    @apply inline-flex items-center gap-1.5 rounded-full bg-white px-3.5 py-1.5 text-[13px] font-semibold text-ink;
+  /* Sur fond sombre : bouton blanc, et variante contour. */
+  .btn-light {
+    @apply border-white bg-white text-ink hover:border-sand hover:bg-sand;
+  }
+  .btn-outline {
+    @apply border-white/40 bg-transparent text-white hover:border-white hover:bg-white/10;
   }
 
   .h2 {
-    @apply mx-auto max-w-[820px] text-center text-[clamp(2rem,4vw,2.875rem)] leading-[1.06] font-bold;
+    @apply max-w-[860px] text-[clamp(2rem,4.2vw,3.25rem)] leading-[1.04];
   }
+  /* Seconde moitié d'un titre, en gris. */
+  .tone {
+    color: var(--color-soft);
+  }
+
+  /* Grain léger, posé par-dessus tout le bloc (photo comprise) ; n'intercepte pas les clics. */
+  .grain {
+    position: relative;
+    isolation: isolate;
+  }
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+    border-radius: inherit;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.13;
+    mix-blend-mode: multiply;
+  }
+  /* Sur fond sombre, le grain est inversé (points clairs). */
+  .grain-dark::after {
+    filter: invert(1);
+    opacity: 0.22;
+    mix-blend-mode: soft-light;
+  }
+
 }
 
 /* Apparition au scroll : le contenu reste visible sans JS ou si l'animation est désactivée. */
 @media (prefers-reduced-motion: no-preference) {
   .js [data-reveal] {
     transition:
-      opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
-      transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
-    transition-delay: calc(var(--i, 0) * 90ms);
+      opacity 0.6s ease-out,
+      transform 0.6s ease-out;
+    transition-delay: calc(var(--i, 0) * 80ms);
   }
   .js [data-reveal]:not([data-in]) {
     opacity: 0;
-    transform: translateY(18px);
+    transform: translateY(10px);
   }
 }
 
@@ -147,11 +170,9 @@ summary::-webkit-details-marker {
   width: var(--node);
   height: var(--node);
   border-radius: 999px;
-  background: var(--color-accent);
+  background: var(--color-ink);
   color: #fff;
-  box-shadow:
-    0 0 0 6px var(--color-pink-soft),
-    0 12px 24px -10px rgb(217 54 62 / 0.7);
+  box-shadow: 0 0 0 6px var(--color-sand-soft);
 }
 .flow-track {
   position: absolute;
@@ -160,13 +181,13 @@ summary::-webkit-details-marker {
   left: calc(var(--node) / 2 - 1px);
   width: 2px;
   overflow: hidden;
-  background: linear-gradient(to bottom, #e7cdc9 55%, transparent 0) 0 0 / 2px 9px;
+  background: linear-gradient(to bottom, #d6d4cf 55%, transparent 0) 0 0 / 2px 9px;
   mask-image: linear-gradient(to bottom, #000 82%, transparent);
 }
 .flow-fill {
   position: absolute;
   inset: 0;
-  background: var(--color-accent);
+  background: var(--color-ink);
   transform-origin: top;
 }
 .flow-dot {
@@ -245,8 +266,8 @@ summary::-webkit-details-marker {
     color: var(--color-muted);
     transform: scale(0.88);
     box-shadow:
-      0 0 0 6px var(--color-pink-soft),
-      inset 0 0 0 1.5px var(--color-line);
+      0 0 0 6px var(--color-sand-soft),
+      inset 0 0 0 1.5px #d6d4cf;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -279,14 +300,14 @@ summary::-webkit-details-marker {
   }
 }
 @keyframes rotator {
-  0% { opacity: 0; transform: translateY(0.3em); filter: blur(4px); }
-  3%, 22% { opacity: 1; transform: none; filter: none; }
-  25%, 100% { opacity: 0; transform: translateY(-0.3em); filter: blur(4px); }
+  0% { opacity: 0; transform: translateY(0.15em); }
+  3%, 22% { opacity: 1; transform: none; }
+  25%, 100% { opacity: 0; }
 }
 
 /* ---------- La carte : organigramme (ordinateur) ---------- */
 .map-chart {
-  --wire: var(--color-line);
+  --wire: #dcdad5;
   flex-direction: column;
 }
 .map-root {
@@ -350,15 +371,14 @@ summary::-webkit-details-marker {
   position: absolute;
   inset: 0;
   opacity: 0;
-  background: linear-gradient(to bottom, transparent, var(--color-accent) 40%, #ff8a8f 50%, var(--color-accent) 60%, transparent);
+  background: linear-gradient(to bottom, transparent, var(--color-ink), transparent);
 }
 .map-wire--bus > i {
-  background: linear-gradient(to right, transparent, var(--color-accent) 40%, #ff8a8f 50%, var(--color-accent) 60%, transparent);
+  background: linear-gradient(to right, transparent, var(--color-ink), transparent);
 }
 /* Le lien du pôle sélectionné reste allumé. */
 .map-leaf:has([aria-selected="true"]) .map-wire--stub {
-  background-color: var(--color-accent);
-  box-shadow: 0 0 10px 1px rgb(217 54 62 / 0.55);
+  background-color: var(--color-ink);
 }
 
 /* Pulsations : direction, puis le bus vers les côtés, puis chaque pôle. Cycle court (1,6 s). */
@@ -377,9 +397,6 @@ summary::-webkit-details-marker {
   .map-wire--stub > i {
     animation-delay: calc(0.3s + var(--d) * 0.1s);
   }
-  .map-node[aria-selected="true"] {
-    animation: map-breathe 2s ease-in-out infinite;
-  }
 }
 @keyframes wire-y {
   0% { transform: translateY(-100%); opacity: 1; }
@@ -395,10 +412,6 @@ summary::-webkit-details-marker {
   0% { transform: translateX(100%); opacity: 1; }
   30% { transform: translateX(-100%); opacity: 1; }
   30.1%, 100% { opacity: 0; }
-}
-@keyframes map-breathe {
-  0%, 100% { box-shadow: 0 16px 36px -16px rgb(28 25 23 / 0.6), 0 0 0 0 rgb(217 54 62 / 0); }
-  50% { box-shadow: 0 16px 36px -16px rgb(28 25 23 / 0.6), 0 0 0 6px rgb(217 54 62 / 0.15); }
 }
 
 /* ---------- La carte : panneaux ---------- */

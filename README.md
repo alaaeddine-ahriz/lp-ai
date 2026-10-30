@@ -113,4 +113,13 @@ src/
 public/logos/             logos des outils
 ```
 
-Polices : Bricolage Grotesque (titres, avec l'axe de taille optique) et Inter (texte), auto-hébergées depuis les paquets Fontsource. Seule la police des titres est préchargée.
+## Direction artistique
+
+Inspirée de Qonto : presque monochrome, pour que la page ait l'air faite à la main plutôt que générée.
+
+- **Une seule police**, Onest (titres et texte), auto-hébergée depuis Fontsource et préchargée.
+- **Couleurs** : noir (`--color-dark`), gris chauds (`--color-sand`, `--color-sand-soft`) et blanc. Le rouge de la marque n'apparaît que dans le point du logo (« Socle. »).
+- **Titres en deux tons** : la seconde moitié en gris, avec `<span className="tone">`.
+- **Boutons** rectangulaires (coins de 8 px) : noirs sur fond clair, blancs ou en contour sur fond sombre.
+- **Grain** : classe `grain` (et `grain-dark` sur fond sombre), posée sur le hero, le panneau de l'offre, les visuels des pôles, les vignettes du constat et l'appel final.
+- **En-tête** sombre au-dessus du hero, clair ensuite.

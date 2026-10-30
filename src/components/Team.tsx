@@ -36,8 +36,8 @@ function SchoolLogos({ hidden }: { hidden?: boolean }) {
 
 function Schools() {
   return (
-    <div className="flex w-full flex-col items-center gap-6">
-      <p className="text-center text-sm font-semibold text-muted">Les ingénieurs qui construisent vos outils sont passés par</p>
+    <div className="flex w-full flex-col gap-6 border-t border-line pt-8">
+      <p className="text-sm text-muted">Les ingénieurs qui construisent vos outils sont passés par</p>
       <div className="group w-full overflow-hidden mask-[linear-gradient(to_right,transparent,#000_12%,#000_88%,transparent)]">
         <div className="flex w-max animate-marquee [animation-duration:40s] group-hover:[animation-play-state:paused] motion-reduce:mx-auto motion-reduce:animate-none">
           <SchoolLogos />
@@ -52,11 +52,10 @@ function Schools() {
 export function Team({ photo }: { photo?: Photo }) {
   const text = (
     <>
-      <span className="pill bg-pink!">Qui est derrière</span>
-      <h2 className="text-[clamp(1.875rem,3.6vw,2.625rem)] leading-[1.08] font-bold">
-        Des ingénieurs qui construisent, pas des formateurs qui conseillent.
+      <h2 className="h2">
+        Des ingénieurs qui construisent, <span className="tone">pas des formateurs qui conseillent.</span>
       </h2>
-      <p className="max-w-[680px] text-lg text-muted">
+      <p className="max-w-[640px] text-lg leading-relaxed text-muted">
         Une équipe d&apos;ingénieurs issus des meilleures écoles, qui a mis en production des infrastructures et des
         chaînes d&apos;automatisation pour de grands groupes. On applique la même rigueur aux PME : des systèmes qui
         tournent, mesurés, maintenus.
@@ -83,8 +82,8 @@ export function Team({ photo }: { photo?: Photo }) {
           </div>
         </div>
       ) : (
-        <div className="mx-auto flex max-w-[1180px] flex-col items-center gap-12" data-reveal>
-          <div className="flex max-w-[860px] flex-col items-center gap-5 text-center">{text}</div>
+        <div className="mx-auto flex max-w-[1180px] flex-col gap-12" data-reveal>
+          <div className="grid gap-6 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] lg:items-end lg:gap-16">{text}</div>
           <Schools />
         </div>
       )}

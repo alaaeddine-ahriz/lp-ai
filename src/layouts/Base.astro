@@ -26,7 +26,7 @@ const ogImage = new URL("/og.png", Astro.site);
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="sitemap" href="/sitemap-index.xml" />
-    <meta name="theme-color" content="#ffffff" />
+    <meta name="theme-color" content="#0b0b0b" />
 
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="fr_FR" />
@@ -42,9 +42,7 @@ const ogImage = new URL("/og.png", Astro.site);
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
 
-    <!-- Seule la police des titres (élément LCP) est préchargée. -->
-    <Font cssVariable="--font-bricolage" preload />
-    <Font cssVariable="--font-inter" />
+    <Font cssVariable="--font-onest" preload />
     <slot name="head" />
 
     <!-- Active les animations d'apparition seulement quand le JS tourne. -->

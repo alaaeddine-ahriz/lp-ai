@@ -13,6 +13,15 @@ const io = new IntersectionObserver(
 );
 document.querySelectorAll("[data-reveal], [data-flow]").forEach((el) => io.observe(el));
 
+/* En-tête sombre tant que le hero est sous lui, clair ensuite. */
+const header = document.querySelector<HTMLElement>("[data-header]");
+const hero = document.querySelector<HTMLElement>("[data-hero]");
+if (header && hero) {
+  new IntersectionObserver(([entry]) => header.setAttribute("data-theme", entry.isIntersecting ? "dark" : "light"), {
+    rootMargin: `-${header.offsetHeight}px 0px 0px 0px`,
+  }).observe(hero);
+}
+
 /* Suivi des clics sur les CTA, avec leur emplacement. */
 document.addEventListener("click", (e) => {
   const cta = (e.target as Element | null)?.closest<HTMLElement>("[data-cta]");

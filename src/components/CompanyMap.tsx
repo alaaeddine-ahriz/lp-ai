@@ -1,4 +1,4 @@
-import { ArrowRight, Banknote, Compass, Factory, Handshake, Megaphone, Scale, Target, User, Users } from "lucide-react";
+import { Banknote, Compass, Factory, Handshake, Megaphone, Scale, Target, User, Users } from "lucide-react";
 import type { Photos } from "@/lib/photos";
 
 /*
@@ -185,7 +185,6 @@ const poles: Pole[] = [
   },
 ];
 
-const total = poles.reduce((n, p) => n + p.points.length, 0);
 const center = 3; // index du pôle sous la direction : les pulsations partent de là vers les côtés
 
 function Node({ pole, selected, root }: { pole: Pole; selected: boolean; root?: boolean }) {
@@ -197,14 +196,14 @@ function Node({ pole, selected, root }: { pole: Pole; selected: boolean; root?: 
       aria-controls={`panel-${pole.id}`}
       aria-selected={selected}
       tabIndex={selected ? 0 : -1}
-      className={`map-node group/node relative z-[1] flex items-center gap-3 rounded-2xl border border-line bg-white p-3 text-left transition duration-200 hover:-translate-y-0.5 hover:border-ink/15 hover:shadow-[0_12px_28px_-16px_rgb(43_37_35/0.35)] aria-selected:border-ink aria-selected:bg-ink aria-selected:text-white aria-selected:shadow-[0_16px_36px_-16px_rgb(28_25_23/0.6)] ${root ? "w-[260px]" : "w-full flex-col items-start"}`}
+      className={`map-node group/node relative z-[1] flex items-center gap-3 rounded-xl border border-line bg-white p-3 text-left transition-colors duration-200 hover:border-ink/30 aria-selected:border-ink aria-selected:bg-ink aria-selected:text-white ${root ? "w-[260px]" : "w-full flex-col items-start"}`}
     >
-      <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-pink text-accent transition-colors group-aria-selected/node:bg-accent group-aria-selected/node:text-white">
+      <span className="grid size-10 shrink-0 place-items-center rounded-lg bg-sand-soft text-ink transition-colors group-aria-selected/node:bg-white/10 group-aria-selected/node:text-white">
         <pole.icon className="size-5" strokeWidth={1.75} aria-hidden="true" />
       </span>
       <span className="flex min-w-0 flex-col">
-        <span className="text-[15px] leading-tight font-semibold">{pole.name}</span>
-        <span className="text-[13px] text-muted transition-colors group-aria-selected/node:text-stone-300">
+        <span className="text-[15px] leading-tight font-medium">{pole.name}</span>
+        <span className="text-[13px] text-soft transition-colors group-aria-selected/node:text-stone-400">
           {pole.points.length} leviers
         </span>
       </span>
@@ -224,12 +223,13 @@ function Wire({ kind }: { kind: "trunk" | "bus" | "stub" }) {
 export function CompanyMap({ photos = {} }: { photos?: Photos }) {
   const [root, ...branches] = poles;
   return (
-    <section className="px-5 pb-20 sm:px-6 sm:pb-28">
+    <section id="carte" className="px-5 pb-20 sm:px-6 sm:pb-28">
       <div className="mx-auto flex max-w-[1180px] flex-col gap-10 border-t border-line pt-20 sm:gap-14 sm:pt-24">
-        <div className="flex flex-col items-center gap-4 text-center" data-reveal>
-          <span className="pill bg-pink!">La carte · {total} leviers</span>
-          <h2 className="h2">Où l&apos;IA peut intervenir dans votre entreprise</h2>
-          <p className="max-w-[680px] text-lg text-muted">
+        <div className="grid gap-6 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] lg:items-end lg:gap-16" data-reveal>
+          <h2 className="h2">
+            Où l&apos;IA peut intervenir <span className="tone">dans votre entreprise.</span>
+          </h2>
+          <p className="max-w-[520px] text-lg leading-relaxed text-muted">
             On n&apos;invente rien : chaque point est une tâche que quelqu&apos;un fait déjà chez vous, souvent à la
             main. Et que vous payez déjà.{" "}
             <span className="hidden lg:inline">Cliquez sur votre pôle.</span>
@@ -272,7 +272,7 @@ export function CompanyMap({ photos = {} }: { photos?: Photos }) {
                     type="button"
                     data-target={`panel-${p.id}`}
                     aria-current={i === 0 ? "true" : undefined}
-                    className="inline-flex items-center gap-2 rounded-full border border-line bg-white px-3.5 py-2 text-sm font-semibold text-muted transition-colors aria-[current=true]:border-ink aria-[current=true]:bg-ink aria-[current=true]:text-white"
+                    className="inline-flex items-center gap-2 rounded-lg border border-line bg-white px-3.5 py-2 text-sm font-medium text-muted transition-colors aria-[current=true]:border-ink aria-[current=true]:bg-ink aria-[current=true]:text-white"
                   >
                     <p.icon className="size-4" strokeWidth={2} aria-hidden="true" />
                     {p.name}
@@ -298,7 +298,7 @@ export function CompanyMap({ photos = {} }: { photos?: Photos }) {
                   className="map-panel flex w-[86%] shrink-0 snap-center flex-col overflow-hidden rounded-[24px] border border-line bg-white sm:w-[70%] lg:grid lg:w-auto lg:grid-cols-[minmax(0,420px)_minmax(0,1fr)] lg:items-center lg:gap-14 lg:overflow-visible lg:rounded-none lg:border-0 lg:bg-transparent"
                 >
                   {/* Photo et visuel par défaut reçoivent le même traitement (halo rouge, dégradé sombre). */}
-                  <div className="relative flex min-h-[220px] flex-col justify-end overflow-hidden bg-dark p-5 text-white sm:p-8 lg:min-h-[420px] lg:rounded-[24px]">
+                  <div className="grain grain-dark relative flex min-h-[220px] flex-col justify-end overflow-hidden bg-dark p-5 text-white sm:p-8 lg:min-h-[420px] lg:rounded-[24px]">
                     {photo ? (
                       <img
                         src={photo.src}
@@ -307,7 +307,7 @@ export function CompanyMap({ photos = {} }: { photos?: Photos }) {
                         alt=""
                         loading="lazy"
                         decoding="async"
-                        className="absolute inset-0 size-full object-cover saturate-[0.75]"
+                        className="absolute inset-0 size-full object-cover saturate-[0.6]"
                       />
                     ) : (
                       <div aria-hidden="true" className="absolute inset-0">
@@ -315,12 +315,12 @@ export function CompanyMap({ photos = {} }: { photos?: Photos }) {
                         <p.icon className="absolute -top-6 -right-6 size-52 text-white/[0.07]" strokeWidth={1} />
                       </div>
                     )}
-                    <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(80%_60%_at_100%_0%,rgb(217_54_62/0.45),transparent_70%),linear-gradient(to_top,rgb(20_16_15/0.92),rgb(20_16_15/0.35)_55%,rgb(20_16_15/0.1))]" />
+                    <div aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(to_top,rgb(11_11_11/0.9),rgb(11_11_11/0.35)_55%,rgb(11_11_11/0.05))]" />
                     <div className="relative flex flex-col gap-2 lg:gap-3">
-                      <span className="grid size-10 place-items-center rounded-xl bg-accent text-white shadow-[0_8px_24px_-8px_rgb(217_54_62/0.8)] lg:size-12 lg:rounded-2xl">
+                      <span className="grid size-10 place-items-center rounded-lg bg-white/15 text-white backdrop-blur-sm lg:size-11">
                         <p.icon className="size-5 lg:size-6" strokeWidth={1.75} aria-hidden="true" />
                       </span>
-                      <h3 className="text-[26px] leading-tight font-bold lg:text-[32px]">{p.name}</h3>
+                      <h3 className="text-[26px] leading-tight lg:text-[32px]">{p.name}</h3>
                       <p className="max-w-[340px] text-[15px] text-stone-200 lg:text-base">{p.goal}</p>
                     </div>
                   </div>
@@ -329,17 +329,17 @@ export function CompanyMap({ photos = {} }: { photos?: Photos }) {
                     <ul className="flex flex-col gap-4 lg:gap-5">
                       {p.points.map((pt, k) => (
                         <li key={pt.title} className="map-item flex gap-3 lg:gap-4" style={{ "--k": k } as React.CSSProperties}>
-                          <span aria-hidden="true" className="mt-2 size-2 shrink-0 rounded-full bg-accent ring-4 ring-pink lg:size-2.5" />
+                          <span aria-hidden="true" className="mt-[0.6em] size-1.5 shrink-0 rounded-full bg-ink" />
                           <p className="text-[15px] leading-relaxed text-muted lg:text-[17px]">
-                            <strong className="font-semibold text-ink">{pt.title}.</strong> {pt.text}
+                            <strong className="font-medium text-ink">{pt.title}.</strong> {pt.text}
                           </p>
                         </li>
                       ))}
                     </ul>
                     <p className="mt-auto flex items-start gap-3 border-t border-line pt-4 text-sm lg:mt-0 lg:pt-5 lg:text-[15px]">
-                      <User className="mt-0.5 size-4 shrink-0 text-accent lg:size-4.5" aria-hidden="true" />
+                      <User className="mt-0.5 size-4 shrink-0 text-soft lg:size-4.5" aria-hidden="true" />
                       <span>
-                        <strong className="font-semibold">Ce qui reste humain : </strong>
+                        <strong className="font-medium">Ce qui reste humain : </strong>
                         <span className="text-muted">{p.human}</span>
                       </span>
                     </p>
@@ -350,14 +350,13 @@ export function CompanyMap({ photos = {} }: { photos?: Photos }) {
           </div>
         </div>
 
-        <div className="flex flex-col items-center gap-6 text-center" data-reveal>
-          <p className="max-w-[760px] text-lg">
+        <div className="flex flex-col items-start gap-6 border-t border-line pt-10 lg:flex-row lg:items-center lg:justify-between" data-reveal>
+          <p className="max-w-[680px] text-lg leading-relaxed">
             On ne vous propose pas de tout automatiser d&apos;un coup. On commence par un seul pôle, on pose un socle
             qui connaît vos données, puis on ajoute des modules quand le premier rapporte.
           </p>
           <a href="#rdv" className="btn" data-cta="map">
             Trouver mon premier pôle
-            <ArrowRight className="size-4" aria-hidden="true" />
           </a>
         </div>
       </div>
