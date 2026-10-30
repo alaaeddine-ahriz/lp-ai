@@ -273,8 +273,11 @@ export function CompanyMap({ photos = {} }: { photos?: Photos }) {
             })}
             <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgb(29_25_21/0.95),rgb(29_25_21/0.74)_45%,rgb(29_25_21/0.84)),linear-gradient(to_top,rgb(29_25_21/0.9),transparent_70%)]" />
 
-            <div data-map-inner className="relative mx-auto w-[min(1180px,100%-48px)]">
-              <div className="grid grid-cols-[230px_minmax(0,1fr)] gap-14 px-10 py-10">
+            <div aria-hidden="true" className="absolute inset-x-0 bottom-0 z-[4] h-0.5 bg-white/10">
+              <div className="map-progress h-full origin-left bg-white/70" />
+            </div>
+            <div className="map-inner relative mx-auto w-[min(1180px,100%-48px)]">
+              <div className="grid w-full grid-cols-[230px_minmax(0,1fr)] items-start gap-14 px-10 py-12">
                 <div className="flex flex-col gap-4">
                   <span className="text-sm text-on-dark-soft">
                     <span data-map-count>01</span> / {String(poles.length).padStart(2, "0")}
@@ -297,7 +300,8 @@ export function CompanyMap({ photos = {} }: { photos?: Photos }) {
                   </div>
                 </div>
 
-                <div className="flex flex-col">
+                {/* Tous les panneaux dans la même case : la colonne garde la hauteur du plus long, rien ne saute. */}
+                <div className="map-stack grid">
                   {poles.map((p, i) => (
                     <div
                       key={p.id}
@@ -305,10 +309,10 @@ export function CompanyMap({ photos = {} }: { photos?: Photos }) {
                       id={`panel-${p.id}`}
                       aria-labelledby={`tab-${p.id}`}
                       hidden={i !== 0}
-                      className="map-panel flex flex-col gap-8 pt-9"
+                      className="map-panel flex flex-col gap-8 pt-9 [grid-area:1/1]"
                     >
                       <div className="flex flex-col gap-2">
-                        <h3 className="text-[40px] leading-none">{p.name}</h3>
+                        <h3 className="text-[44px] leading-none">{p.name}</h3>
                         <p className="text-lg text-[#ebe3d9]">{p.goal}</p>
                       </div>
                       <PoleDetails pole={p} dark />

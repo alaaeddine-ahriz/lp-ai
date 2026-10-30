@@ -317,19 +317,27 @@ summary::-webkit-details-marker {
 }
 
 /* ---------- La carte (ordinateur) ----------
-   --e (0 → 1) : la carte s'élargit du conteneur jusqu'aux bords. Posé par src/scripts/enhancements.ts.
-   Le rognage (clip-path) évite de recalculer la mise en page à chaque image.
-   La hauteur de la carte suit le pôle affiché (fixée en px par le script, pour pouvoir l'animer). */
+   --e (0 → 1) : la carte s'élargit du conteneur jusqu'aux bords ; --p (0 → 1) : avancée dans les pôles.
+   Les deux sont posés par src/scripts/enhancements.ts. Le rognage (clip-path) évite de recalculer la mise en page. */
 .map-scroll {
   --e: 0;
+  --p: 0;
 }
 .map-card {
   clip-path: inset(
     0 calc((100% - min(1180px, 100% - 48px)) / 2 * (1 - var(--e))) round calc(28px * (1 - var(--e)))
   );
 }
-/* Mode défilement : la section s'allonge (un palier de 45svh par pôle, comme dans le script),
-   et la carte reste centrée dans l'écran pendant qu'on passe les pôles. */
+.map-progress {
+  transform: scaleX(var(--p));
+  transition: transform 0.2s linear;
+}
+/* Les panneaux masqués gardent leur place (visibility) pour que la hauteur ne change pas d'un pôle à l'autre. */
+.map-stack > [role="tabpanel"][hidden] {
+  display: flex;
+  visibility: hidden;
+}
+/* Mode défilement : la carte occupe tout l'écran sous l'en-tête, et un palier de 45svh fait passer au pôle suivant. */
 @media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
   .map-scroll[data-scroll] {
     height: calc(100svh - 4rem + 8 * 45svh);
@@ -337,15 +345,15 @@ summary::-webkit-details-marker {
   .map-scroll[data-scroll] .map-stage {
     position: sticky;
     top: 4rem;
-    display: flex;
-    align-items: center;
     height: calc(100svh - 4rem);
   }
-  .map-scroll[data-scroll] .map-stage > * {
-    flex: 1;
+  .map-scroll[data-scroll] .map-card {
+    height: 100%;
   }
-  .map-card {
-    transition: height 0.4s cubic-bezier(0.3, 0.7, 0.2, 1);
+  .map-scroll[data-scroll] .map-inner {
+    display: flex;
+    align-items: center;
+    height: 100%;
   }
 }
 @media (prefers-reduced-motion: no-preference) {
