@@ -79,6 +79,10 @@ document.querySelectorAll<HTMLElement>("[data-map]").forEach((root) => {
   const photos = [...root.querySelectorAll<HTMLElement>("[data-photo]")];
   const count = root.querySelector<HTMLElement>("[data-map-count]");
   const stage = root.querySelector<HTMLElement>(".map-stage")!;
+  const card = root.querySelector<HTMLElement>(".map-card")!;
+  const inner = root.querySelector<HTMLElement>("[data-map-inner]")!;
+  // La carte prend la hauteur du pôle affiché (en px, pour que la transition CSS fonctionne).
+  const fit = () => (card.style.height = `${inner.offsetHeight}px`);
   const scrollMode = window.matchMedia("(min-width: 1024px) and (prefers-reduced-motion: no-preference)");
   let current = 0;
 
@@ -93,6 +97,7 @@ document.querySelectorAll<HTMLElement>("[data-map]").forEach((root) => {
     });
     photos.forEach((p) => (p.hidden = p.dataset.photo !== tabs[i].getAttribute("aria-controls")));
     if (count) count.textContent = String(i + 1).padStart(2, "0");
+    fit();
   };
 
   const step = () => window.innerHeight * 0.45;
@@ -127,8 +132,13 @@ document.querySelectorAll<HTMLElement>("[data-map]").forEach((root) => {
   };
   scrollMode.addEventListener("change", setMode);
   window.addEventListener("scroll", onScroll, { passive: true });
-  window.addEventListener("resize", onScroll);
+  window.addEventListener("resize", () => {
+    fit();
+    onScroll();
+  });
   setMode();
+  fit();
+  document.fonts?.ready.then(fit); // les polices changent la hauteur du texte une fois chargées
 
   tabs.forEach((tab, i) => {
     tab.addEventListener("click", () => goTo(i));

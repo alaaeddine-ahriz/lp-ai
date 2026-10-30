@@ -273,8 +273,8 @@ export function CompanyMap({ photos = {} }: { photos?: Photos }) {
             })}
             <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgb(29_25_21/0.95),rgb(29_25_21/0.74)_45%,rgb(29_25_21/0.84)),linear-gradient(to_top,rgb(29_25_21/0.9),transparent_70%)]" />
 
-            <div className="relative mx-auto flex h-full w-[min(1180px,100%-48px)] flex-col">
-              <div className="grid flex-1 grid-cols-[230px_minmax(0,1fr)] gap-14 px-10 py-10">
+            <div data-map-inner className="relative mx-auto w-[min(1180px,100%-48px)]">
+              <div className="grid grid-cols-[230px_minmax(0,1fr)] gap-14 px-10 py-10">
                 <div className="flex flex-col gap-4">
                   <span className="text-sm text-on-dark-soft">
                     <span data-map-count>01</span> / {String(poles.length).padStart(2, "0")}
@@ -312,11 +312,11 @@ export function CompanyMap({ photos = {} }: { photos?: Photos }) {
                         <p className="text-lg text-[#ebe3d9]">{p.goal}</p>
                       </div>
                       <PoleDetails pole={p} dark />
+                      <a href="#rdv" className="btn btn-light self-start" data-cta="map">
+                        Réserver un audit gratuit
+                      </a>
                     </div>
                   ))}
-                  <a href="#rdv" className="btn btn-light mt-auto self-start" data-cta="map">
-                    Réserver un audit gratuit
-                  </a>
                 </div>
               </div>
             </div>
