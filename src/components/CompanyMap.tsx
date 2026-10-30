@@ -1,4 +1,4 @@
-import { Banknote, Compass, Factory, Handshake, Megaphone, Plus, Scale, Target, User, Users } from "lucide-react";
+import { Banknote, Compass, Factory, Handshake, Megaphone, Plus, Scale, Target, Users } from "lucide-react";
 import type { Photos } from "@/lib/photos";
 
 /*
@@ -79,7 +79,7 @@ const poles: Pole[] = [
         text: "Quand personne ne peut décrocher, il répond, comprend la demande et prend rendez-vous.",
       },
     ],
-    human: "Les appels de prospection : pas de voix robot qui démarche vos prospects.",
+    human: "Les appels de prospection. Pas de voix robot qui démarche vos prospects.",
   },
   {
     id: "vente",
@@ -211,35 +211,25 @@ function PoleVisual({ pole, photos, sizes }: { pole: Pole; photos: Photos; sizes
   );
 }
 
-/** Les leviers du pôle, et en dernier ce qui reste humain (même typographie, marqué d'une icône). */
+/** Les leviers du pôle, puis une phrase simple sur ce qui reste humain. */
 function PoleDetails({ pole, dark }: { pole: Pole; dark?: boolean }) {
   const text = dark ? "text-[#e2d9ce]" : "text-muted";
   return (
-    <ul className="grid gap-x-10 gap-y-5 sm:grid-cols-2">
-      {pole.points.map((pt) => (
-        <li key={pt.title} className="flex flex-col gap-1">
-          <strong className="text-[17px] font-medium">{pt.title}</strong>
-          <span className={`text-[15px] leading-relaxed ${text}`}>{pt.text}</span>
-        </li>
-      ))}
-      <li className={`flex flex-col gap-1 border-l-2 pl-4 ${dark ? "border-white/30" : "border-line"}`}>
-        <strong className="flex items-center gap-2 text-[17px] font-medium">
-          <User className="size-4" aria-hidden="true" />
-          Ce qui reste humain
-        </strong>
-        <span className={`text-[15px] leading-relaxed ${text}`}>{pole.human}</span>
-      </li>
-    </ul>
+    <div className="flex flex-col gap-6">
+      <ul className="grid gap-x-10 gap-y-5 sm:grid-cols-2">
+        {pole.points.map((pt) => (
+          <li key={pt.title} className="flex flex-col gap-1">
+            <strong className="text-[17px] font-medium">{pt.title}</strong>
+            <span className={`text-[15px] leading-relaxed ${text}`}>{pt.text}</span>
+          </li>
+        ))}
+      </ul>
+      <p className={`text-[15px] ${text}`}>Ce qui reste humain : {lowerFirst(pole.human)}</p>
+    </div>
   );
 }
 
-const closing = (
-  <>
-    On n&apos;invente rien&nbsp;: chaque point est une tâche que quelqu&apos;un fait déjà chez vous, souvent à la main.
-    Et on ne touche pas à tout&nbsp;: on commence par le pôle qui vous coûte le plus, et on n&apos;ajoute la suite que
-    quand ce premier outil a fait ses preuves.
-  </>
-);
+const lowerFirst = (t: string) => t.charAt(0).toLowerCase() + t.slice(1);
 
 export function CompanyMap({ photos = {} }: { photos?: Photos }) {
   return (
@@ -284,7 +274,7 @@ export function CompanyMap({ photos = {} }: { photos?: Photos }) {
             <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgb(29_25_21/0.95),rgb(29_25_21/0.74)_45%,rgb(29_25_21/0.84)),linear-gradient(to_top,rgb(29_25_21/0.9),transparent_70%)]" />
 
             <div className="relative mx-auto flex h-full w-[min(1180px,100%-48px)] flex-col">
-              <div className="grid flex-1 grid-cols-[230px_minmax(0,1fr)] gap-14 px-10 pt-10 pb-8">
+              <div className="grid flex-1 grid-cols-[230px_minmax(0,1fr)] gap-14 px-10 py-10">
                 <div className="flex flex-col gap-4">
                   <span className="text-sm text-on-dark-soft">
                     <span data-map-count>01</span> / {String(poles.length).padStart(2, "0")}
@@ -307,29 +297,27 @@ export function CompanyMap({ photos = {} }: { photos?: Photos }) {
                   </div>
                 </div>
 
-                {poles.map((p, i) => (
-                  <div
-                    key={p.id}
-                    role="tabpanel"
-                    id={`panel-${p.id}`}
-                    aria-labelledby={`tab-${p.id}`}
-                    hidden={i !== 0}
-                    className="map-panel flex flex-col justify-end gap-8"
-                  >
-                    <div className="flex flex-col gap-2">
-                      <h3 className="text-[40px] leading-none">{p.name}</h3>
-                      <p className="text-lg text-[#ebe3d9]">{p.goal}</p>
+                <div className="flex flex-col">
+                  {poles.map((p, i) => (
+                    <div
+                      key={p.id}
+                      role="tabpanel"
+                      id={`panel-${p.id}`}
+                      aria-labelledby={`tab-${p.id}`}
+                      hidden={i !== 0}
+                      className="map-panel flex flex-col gap-8 pt-9"
+                    >
+                      <div className="flex flex-col gap-2">
+                        <h3 className="text-[40px] leading-none">{p.name}</h3>
+                        <p className="text-lg text-[#ebe3d9]">{p.goal}</p>
+                      </div>
+                      <PoleDetails pole={p} dark />
                     </div>
-                    <PoleDetails pole={p} dark />
-                  </div>
-                ))}
-              </div>
-
-              <div className="flex items-center justify-between gap-10 border-t border-white/15 px-10 py-6">
-                <p className="max-w-[700px] text-[15px] leading-relaxed text-[#ebe3d9]">{closing}</p>
-                <a href="#rdv" className="btn btn-light shrink-0" data-cta="map">
-                  Trouver mon premier pôle
-                </a>
+                  ))}
+                  <a href="#rdv" className="btn btn-light mt-auto self-start" data-cta="map">
+                    Réserver un audit gratuit
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -356,12 +344,9 @@ export function CompanyMap({ photos = {} }: { photos?: Photos }) {
               </details>
             ))}
           </div>
-          <div className="grain grain-dark on-dark flex flex-col items-start gap-5 rounded-[20px] bg-dark p-6 text-white">
-            <p className="text-[15px] leading-relaxed text-[#ebe3d9]">{closing}</p>
-            <a href="#rdv" className="btn btn-light" data-cta="map">
-              Trouver mon premier pôle
-            </a>
-          </div>
+          <a href="#rdv" className="btn self-start" data-cta="map">
+            Réserver un audit gratuit
+          </a>
         </div>
       </div>
     </section>
